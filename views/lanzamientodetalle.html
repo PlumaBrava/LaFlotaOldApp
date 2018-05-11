@@ -2,7 +2,7 @@
  <form  name='lanzamientoDetalleForm' class='needs-validation' novalidate>
 
 
-  <div class='d-flex flex-row''>
+  <div class='d-flex flex-row'>
      <p class='form-group' >
       <label for='NombreDelAlbum' translate>NombreDelAlbum_ <div class='consulta'>
         <i class='fa fa-question-circle consulta' aria-hidden='true'  ng-click="openModal('sm', 'ModalTituloNombreDelAlbum_','ModalMensajeNombreDelAlbum_')"></i>
@@ -260,6 +260,7 @@
 
 
 </div>
+</div>
 
 
  <hr class='mb-4'>
@@ -272,9 +273,9 @@
       <i class='fa fa-question-circle consulta' aria-hidden='true'  ng-click="openModal('gm', 'ModalTituloTrack_','ModalMensajeTack_')"></i>
       </div>
 <ul>
-    <li ng-repeat='i in tracks track by $index''><h3>track {{$index+1}} </h3>
+    <li ng-repeat='i in tracks track by $index'><h3>track {{$index+1}} </h3>
      <p class='form-group'>
-    <label for='NombreDelTema' {{$index+1}}</label>
+    <label for='NombreDelTema'> {{$index+1}}</label>
     <input id='NombreDelTema' required name='>NombreDelTema' type='text' ng-model='tracks[$index].nombre' class='form-control' />
   </p>
   </li>
