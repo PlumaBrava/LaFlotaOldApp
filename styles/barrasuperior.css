@@ -1,0 +1,38 @@
+.barrasuperior{
+  background-color: black;
+  margin-bottom: 0px;
+  /*color: red;*/
+}
+
+.logoLaflota{
+  margin-top: 0px;
+  padding-top: 0px;
+ background-color: black;
+  color: white;
+}
+
+.logoDistribuidoraDigital{
+ background-color: black;
+    color: white;
+    font-size: 80%;
+}
+/*.navbar-default{
+  background: red;
+}*/
+
+
+.navbar-brand{
+/*background-color:yellow;*/
+margin-top: 0px;
+ padding-top: 5px;
+}
+
+.navbar-header{
+  /*background-color: green;*/
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+/*.dropdown{
+    background-color: green;
+}*/

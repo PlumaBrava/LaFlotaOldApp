@@ -1,0 +1,42 @@
+{
+ "_comentario0":"Textos pagina Inicio",
+
+ "LANG_ES_AR":"Spanish",
+"LANG_EN_US":"english",
+"LANG_DE_DE":"Germany",
+"logoLaflota":"The Flota",
+"logoDistribuidoraDigital":"Digital Distribuidora xx",
+"footerDerechos":"© LA FLOTA 2017, ARGENTINA - All rights reserved",
+"Informacion":"Information",
+"quienessomos":"About us",
+"preguntasfrecuentes":"Frequent questions",
+"consultas":"questions",
+"Ingresar":"Log In",
+"Idioma":"Language",
+
+
+
+ "_comentario1":"Textos Carrousel",
+
+
+"TitloFotPortada1":"Follow us on FaceBook",
+"SubtituloFotoPortada1":"La Flota is much fun!!!",
+"TitloFotPortada2":"Distribución Digital of Musica",
+"SubtituloFotoPortada2":"SPOTIFY, ITUNES, APPLE MUSIC, GOOGLE PLAY, AMAZON, DEEZER, TIDAL, PANDORA, MICROSOFT GROOVE",
+"TitloFotPortada3":"ONLY ONE ALBUM (NEW !!)",
+"SubtituloFotoPortada3":"LAUNCH AN ALBUM PERMANENTLY, WITH A SINGLE PAYMENT. THE FOLLOWING ARE REDUCED TO NEARLY HALF PRICE",
+
+
+
+ "_comentario2":"Textos login.html",
+
+"LOGIN_TITULO":"Log In!",
+"email":"email",
+"password":"password",
+"LogIn":"Log In",
+"confirmpassword":"Confirm your password",
+"Register":"Register",
+"OlvidoSuClave":"Forgot your password",
+"CreateAccount":"New User",
+"Cancel":"cancel"
+}

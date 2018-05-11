@@ -1,0 +1,34 @@
+<p>This is the productosListado view.</p>
+ <div> <h3 translate>{{error}}</h3>
+</div>
+
+
+<uib-accordion close-others="oneAtATime">
+
+    <div uib-accordion-group class="panel-primary class" ng-class="{'panel-danger': producto.status==='pendiente'}"  is-open="isopen" ng-repeat="producto in listaProductos | orderBy:orderBy  | filter:searchText" >
+      <uib-accordion-heading >
+        {{producto.NombredelProducto}}<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
+        <p class=" pull-right">{{producto.MontodelProducto}}</p>
+      </uib-accordion-heading>
+
+      <div class="row">
+        <div class="col-sm-6">
+           <span translate>SeleccioneFuncionesHabilitadas</span>
+        </div>
+        <div class="col-sm-6" >
+            <button class="btn btn-danger btn-xs pull-right " data-title="Delete" ng-click="crearProducto()" ng-show="producto.pais" ><span class="glyphicon glyphicon-trash"></span></button>
+             <button class="btn btn-success btn-xs pull-right " data-title="Play"   ng-click="modificarProducto(producto)" ><span class="glyphicon glyphicon-save"></span></button>
+        </div>
+    </div>
+
+<div class="row">
+ {{producto.DescripciondelProducto}}
+
+
+
+ </div>
+
+
+</div>
+
+  </uib-accordion>

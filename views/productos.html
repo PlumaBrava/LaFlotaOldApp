@@ -1,0 +1,168 @@
+  <div>
+ <form  name="productoForm" class="needs-validation" novalidate>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+
+                <label for="NombreProducto"  translate="NombredelProducto" ng-click="muestraProducto()"></label>
+                <input type="text" class="form-control" ng-model="producto.NombredelProducto" id="NombredelProducto" placeholder="" value="" required >
+                <div class="invalid-feedback">
+                  Valid first name is required.
+                </div>
+                <div class="form-group">
+                    <label for="DescripciondelProducto" translate>DescripciondelProducto</label>
+                    <textarea class="form-control" ng-model="producto.DescripciondelProducto" id="DescripciondelProducto" rows="8"></textarea>
+                </div>
+        </div>
+        <div class="col-md-6 mb-3">
+<!--                 <img ng-src="{{imageSrc}}" class="rounded float-right" alt="imagen del producto" ng-hide="imageSrc">
+                     <div class="form-group">
+                        <label for="fotoLinkdelProducto">Example file input</label>
+                        <input type="file" class="form-control-file" ng-model="producto.fotoLinkdelProducto" id="fotoLinkdelProducto" name="fotoLinkdelProducto">
+                      </div>
+ -->
+                     <!-- <input type="file" ng-file-select="onFileSelect($files)" > -->
+
+<!-- <label   class="btn btn-default">
+  <input   type="file" ng-file-select="onFileSelect($files)" multiple hidden>
+
+                <b>Preview:</b><br />
+                <i ng-hide="imageSrc"> No image choosed</i>
+                <img  ng-hide="imageSrc"> ng-src="{{imageSrc}}" alt="Sin Imagen"/><br/>
+                <b>Progress:</b>
+                <progress value="{{progress}}"></progress>
+</label> -->
+
+
+
+<label class="btn btn-primary" for="my-file-selector" >
+    <input id="my-file-selector" type="file" style="display:none;"  ng-file-select="onFileSelect($files)">
+    Seleccione Imagen
+
+</label>
+      <div class=" pull-right text-right" style="background-color:red ;">
+        {{producto.fotoNameLinkdelProducto}}
+      </div>
+      <div>
+
+                <img class="rounded float-right fotoLinkdelProducto" ng-src="{{producto.fotoLinkdelProducto}}" alt="Sin Imagen"/><br/>
+                <b  ng-hide="progress==0 || progress==100">Progress:</b>
+                <progress ng-hide="progress==0 || progress==100 "  value="{{progress}}"></progress>
+
+        </div>
+        </div>
+    </div>
+
+
+
+
+   <hr class="mb-4">
+    <div class="row">
+<div class="form-group col-md-4">
+      <label for="PaisdelProducto" translate>PaisdelProducto</label>
+      <select id="PaisdelProducto" ng-model="producto.PaisdelProducto" class="form-control"  >
+        <option selected translate ng-repeat="pais in paises">{{pais}}</option>
+
+
+      </select>
+</div>
+
+<div class="form-group col-md-4">
+        <label for="MonedadelProducto" translate>MonedadelProducto</label>
+          <select id="MonedadelProducto" ng-model="producto.MonedadelProducto"   class="form-control">
+             <option selected translate ng-repeat="moneda in monedas">{{moneda}}</option>
+
+        </select>
+</div>
+
+<div class="form-group col-md-4">
+    <label for="MontodelProducto" >MontodelProducto</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="MontodelProducto"  ng-model="producto.MontodelProducto"  placeholder="35,00" required>
+            <div class="invalid-feedback" style="width: 100%;">
+             Your username is required.
+              </div>
+        </div>
+</div>
+</div>
+
+
+
+         <hr class="mb-4">
+
+    <div class="row">
+
+
+<div class="form-group col-md-4">
+    <label for="CanitidadAlbumsdelProducto" translate >CanitidadAlbumsdelProducto</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="CanitidadAlbumsdelProducto"  ng-model="producto.CanitidadAlbumsdelProducto"  placeholder="1" required>
+            <div class="invalid-feedback" style="width: 100%;">
+             Your username is required.
+              </div>
+        </div>
+</div>
+
+<div class="form-group col-md-4">
+    <label for="CandidDeArtistasIncluidosdelProducto" translate >CandidDeArtistasIncluidosdelProducto</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="CandidDeArtistasIncluidosdelProducto"
+            ng-model="producto.CandidDeArtistasIncluidosdelProducto"   placeholder="1" required>
+            <div class="invalid-feedback" style="width: 100%;">
+             Your username is required.
+              </div>
+        </div>
+</div>
+
+<div class="form-group col-md-4">
+      <label for="DuraciondelProducto" translate>DuraciondelProducto</label>
+      <select id="DuraciondelProducto" ng-model="producto.DuraciondelProducto" class="form-control">
+        <option selected translate>VigenciaAnualdelProducto</option>
+        <option  translate>VigenciaVitaliciadelProducto</option>
+
+
+      </select>
+</div>
+
+
+</div>
+ <div class="row">
+         <hr class="mb-4">
+         <div class="form-group col-md-4">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="LandingdelProducto" ng-model="producto.LandingdelProducto">
+              <label class="custom-control-label" for="LandingdelProducto" translate >LandingdelProducto</label>
+            </div>
+            </div>
+
+         <div class="form-group col-md-4">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="AceptaBonificacionesdelProducto" ng-model="producto.AceptaBonificacionesdelProducto">
+              <label class="custom-control-label" for="AceptaBonificacionesdelProducto" translate >AceptaBonificacionesdelProducto</label>
+            </div>
+
+
+            </div>
+
+            <div class="form-group col-md-4">
+      <label for="PlanSugeridodelProducto" translate>PlanSugeridodelProducto</label>
+      <select id="PlanSugeridodelProducto" ng-model="producto.PlanSugeridodelProducto" class="form-control">
+        <option selected translate>xx</option>
+        <option  translate>yy</option>
+
+
+      </select>
+</div>
+</div>
+
+
+
+    <hr class="mb-4">
+
+
+            <button class="btn btn-primary btn-lg btn-block" type="submit" ng-click="grabarProducto()" translate>GrabarProducto</button>
+          </form>
+
+<hr class="mb-4">
+
+</div>
+

@@ -1,0 +1,72 @@
+<p>This is the consultas view.</p>
+
+  <h1  translate>TituloConsultas</h1>
+
+<!--   <form ng-submit="addMessage()">
+    <input type="text" ng-model="message">
+    <input type="submit" value="Add Message">
+  </form>
+ -->
+<div class="row">
+    <form class="form-horizontal"  role="form">
+
+          <div class="form-group">
+            <label for="subjet" translate="SubjetConsulta" class="control-label"></label>
+            <input id="subjet" required  type="text" ng-model="subjet" class="form-control" />
+
+            <label for="mensaje" translate="mensajeConsulta"></label>
+            <textarea type="text" required rows="5" id="mensaje"  ng-model="mensaje" class="form-control"></textarea>
+</div>
+
+
+            <button type="submit" class="col-sm-2 btn btn-primary pull-right" ng-click="crearUsuarioConsulta(subjet,mensaje,'')" translate>NuevaConsulta</button>
+    </form>
+</div>
+
+ <div> <h3 translate>{{error}}</h3>
+
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" ng-model="oneAtATime">
+      Open only one at a time
+    </label>
+  </div>
+   <p>
+    Sort by:
+    <select ng-model="orderBy">
+      <option>titulo</option>
+      <option>mensaje</option>
+      <option>timestamp</option>
+    </select>
+  </p>
+
+  <p>Search: <input ng-model="searchText"></p>
+  <uib-accordion close-others="oneAtATime">
+
+    <div uib-accordion-group class="panel-primary class" ng-class="{'panel-danger': consulta.status==='pendiente'}"  is-open="isopen" ng-repeat="consulta in listaConsultas | orderBy:orderBy  | filter:searchText" >
+      <uib-accordion-heading >
+        {{consulta.titulo}}<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
+        <p class=" pull-right">{{consulta.timestamp | date:'dd-MM-yyyy hh-mm-ss'}}</p>
+      </uib-accordion-heading>
+
+      <div class="row">
+        <div class="col-sm-6">
+           <span translate>SeleccioneFuncionesHabilitadas</span>
+        </div>
+        <div class="col-sm-6" >
+            <button class="btn btn-danger btn-xs pull-right " data-title="Delete" ng-click="crearUsuarioConsulta('jj','mensaje jj','-L8nHv1v2g4hGfwJ2H-3')" ng-show="usuario.habilitado" ><span class="glyphicon glyphicon-trash"></span></button>
+             <button class="btn btn-success btn-xs pull-right " data-title="Play"   ng-click="crearUsuarioConsulta('jj','mensaje jj','-L8nKEBnKQFEXX1o6SsA')" ><span class="glyphicon glyphicon-save"></span></button>
+        </div>
+    </div>
+
+<div class="row">
+ {{consulta.mensaje}}
+
+
+
+ </div>
+
+
+</div>
+
+  </uib-accordion>

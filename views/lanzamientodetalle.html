@@ -1,0 +1,296 @@
+  <div>
+ <form  name='lanzamientoDetalleForm' class='needs-validation' novalidate>
+
+
+  <div class='d-flex flex-row''>
+     <p class='form-group' >
+      <label for='NombreDelAlbum' translate>NombreDelAlbum_ <div class='consulta'>
+        <i class='fa fa-question-circle consulta' aria-hidden='true'  ng-click="openModal('sm', 'ModalTituloNombreDelAlbum_','ModalMensajeNombreDelAlbum_')"></i>
+        </div></label>
+
+      <input id='NombreDelAlbum' required name='album.Nombre' type='text' ng-model='album.Nombre' class='form-control' />
+    </p>
+
+  </div>
+ <h2 translate>Tiendas_</h2>
+
+      <div class=' consulta'>
+      <i class='fa fa-question-circle consulta' aria-hidden='true'  ng-click="openModal('sm', 'ModalTituloTiendas_','ModalMensajeTiendas_')"></i>
+      </div>
+
+
+            <div class='custom-control custom-checkbox checkbox-inline'>
+              <input type='checkbox' class='custom-control-input' id='albumtiendasSpotify' ng-model='album.tiendas.Spotify'>
+              <label class='custom-control-label' for='albumtiendasSpotify' translate >Spotify_</label>
+            </div>
+            <div class='custom-control custom-checkbox checkbox-inline'>
+              <input type='checkbox' class='custom-control-input' id='albumtiendasiTunes' ng-model='album.tiendas.iTunes'>
+              <label class='custom-control-label' for='albumtiendasiTunes' translate >iTunes_</label>
+            </div>
+
+            <div class='custom-control custom-checkbox checkbox-inline'>
+              <input type='checkbox' class='custom-control-input' id='albumtiendasAppleMusic' ng-model='album.tiendas.AppleMusic' >
+              <label class='custom-control-label' for='albumtiendasAppleMusic' translate >AppleMusic_</label>
+            </div>
+
+            <div class='custom-control custom-checkbox checkbox-inline'>
+              <input type='checkbox' class='custom-control-input' id='albumtiendasGooglePlay' ng-model='album.tiendas.GooglePlay' >
+              <label class='custom-control-label' for='albumtiendasGooglePlay' translate >GooglePlay_</label>
+            </div>
+
+
+            <div class='custom-control custom-checkbox checkbox-inline'>
+              <input type='checkbox' class='custom-control-input' id='albumtiendasAmazon' ng-model='album.tiendas.Amazon' >
+              <label class='custom-control-label' for='albumtiendasAmazon' translate >Amazon_</label>
+            </div>
+
+
+            <div class='custom-control custom-checkbox checkbox-inline'>
+              <input type='checkbox' class='custom-control-input' id='albumtiendasPandora' ng-model='album.tiendas.Pandora' >
+              <label class='custom-control-label' for='albumtiendasPandora' translate >Pandora_</label>
+            </div>
+
+            <div class='custom-control custom-checkbox checkbox-inline'>
+              <input type='checkbox' class='custom-control-input' id='albumtiendasDeezer' ng-model='album.tiendas.Deezer' >
+              <label class='custom-control-label' for='albumtiendasDeezer' translate >Deezer_</label>
+            </div>
+
+            <div class='custom-control custom-checkbox checkbox-inline'>
+              <input type='checkbox' class='custom-control-input' id='albumtiendasTidal' ng-model='album.tiendas.Tidal' >
+              <label class='custom-control-label' for='albumtiendasTidal' translate >Tidal_</label>
+            </div>
+
+            <div class='custom-control custom-checkbox checkbox-inline'>
+              <input type='checkbox' class='custom-control-input' id='albumtiendasYouTubeMusic' ng-model='album.tiendas.YouTubeMusic' >
+              <label class='custom-control-label' for='albumtiendasYouTubeMusic' translate >YouTubeMusic_</label>
+            </div>
+
+            <div class='custom-control custom-checkbox checkbox-inline'>
+              <input type='checkbox' class='custom-control-input' id='albumtiendasTMicrosoftGroove' ng-model='album.tiendas.MicrosoftGroove' >
+              <label class='custom-control-label' for='albumtiendasMicrosoftGroove' translate >MicrosoftGroove_</label>
+            </div>
+
+
+            <div class='custom-control custom-checkbox checkbox-inline'>
+              <input type='checkbox' class='custom-control-input' id='albumtiendasClaroMusica' ng-model='album.tiendas.ClaroMusica' >
+              <label class='custom-control-label' for='albumtiendasClaroMusica' translate >ClaroMusica_</label>
+            </div>
+
+            <div class='custom-control custom-checkbox checkbox-inline'>
+              <input type='checkbox' class='custom-control-input' id='albumtiendasSaavn' ng-model='album.tiendas.Saavn' >
+              <label class='custom-control-label' for='albumtiendasSaavn' translate >Saavn_</label>
+            </div>
+
+            <div class='custom-control custom-checkbox checkbox-inline'>
+              <input type='checkbox' class='custom-control-input' id='albumtiendasClaroMúsica' ng-model='album.tiendas.MediaNet' >
+              <label class='custom-control-label' for='albumtiendasMediaNet' translate >MediaNet_</label>
+            </div>
+
+
+
+
+
+   <hr class='mb-4'>
+    <div class='row'>
+
+<!-- Número de canciones! -->
+
+<div class='form-group col-md-4 ' >
+      <label for='NumeroDeCanciones' translate>NumeroDeCanciones_</label>
+      <div class=' consulta' >
+        <select id='NumeroDeCanciones' ng-model='album.NumeroDeCanciones' class='form-control ' ng-change='updateNumeroCanciones(album.NumeroDeCanciones)' >
+          <option selected translate ng-repeat='numero in numeroDeCanciones'  >{{numero}}</option>
+        </select>
+     </div>
+      <div class=' consulta'>
+      <i class='fa fa-question-circle consulta' aria-hidden='true'  ng-click="openModal('sm', 'ModalTituloNumeroDeCanciones_','ModalMensajeNumeroDeCanciones_')"></i>
+      </div>
+
+</div>
+
+
+<!-- Número de canciones! -->
+
+<div class='form-group col-md-4 ' >
+      <label for='Idioma' translate>Idioma_</label>
+      <div class=' consulta' >
+      <select id='Idioma' ng-model='album.Idioma' class='form-control '  >
+        <option selected translate ng-repeat='idioma in Idiomas'>{{idioma}}</option>
+
+
+      </select>
+    </div>
+      <div class=' consulta'>
+      <i class='fa fa-question-circle consulta' aria-hidden='true'  ng-click="openModal('sm', 'ModalTituloIdioma_','ModalMensajeIdioma_')"></i>
+      </div>
+
+</div>
+
+
+<!-- Genero Principal! -->
+
+<div class='form-group col-md-4 ' >
+      <label for='GeneroPrincipal' translate>GeneroPrincipal_</label>
+      <div class=' consulta' >
+      <select id='GeneroPrincipal' ng-model='album.GeneroPrincipal' class='form-control '  >
+        <option selected translate ng-repeat='generoPrincipal in Generos'>{{generoPrincipal}}</option>
+
+
+      </select>
+    </div>
+      <div class=' consulta'>
+      <i class='fa fa-question-circle consulta' aria-hidden='true'  ng-click="openModal('sm', 'ModalTituloGeneroPrincipal_','ModalMensajeGeneroPrincipal_')"></i>
+      </div>
+
+</div>
+
+
+
+<!-- Genero Secundario! -->
+
+<div class='form-group col-md-4 ' >
+      <label for='GeneroSecundario' translate>GeneroSecundario_</label>
+      <div class=' consulta' >
+      <select id='GeneroSecundario' ng-model='album.GeneroSecundarios' class='form-control '  >
+        <option selected translate ng-repeat='generoSecundario in Generos'>{{generoSecundario}}</option>
+
+
+      </select>
+    </div>
+      <div class=' consulta'>
+      <i class='fa fa-question-circle consulta' aria-hidden='true'  ng-click="openModal('sm', 'ModalTituloGeneroSecundario_','ModalMensajeGeneroSecundario_')"></i>
+      </div>
+
+</div>
+
+<!-- Comosición! -->
+
+<div class='form-group col-md-4 ' >
+      <label for='Composicion' translate>Composicion_</label>
+      <div class=' consulta' >
+      <select id='Composicion' ng-model='album.Composicion' class='form-control '  >
+        <option selected translate ng-repeat='composicion in Composiciones'>{{composicion}}</option>
+
+
+      </select>
+    </div>
+      <div class=' consulta'>
+      <i class='fa fa-question-circle consulta' aria-hidden='true'  ng-click="openModal('sm', 'ModalTituloComposicion_','ModalMensajeComposicion_')"></i>
+      </div>
+
+</div>
+
+
+
+<!--   Letras Explícitas?! -->
+
+<div class='form-group col-md-4 ' >
+      <label for='LetrasExplicitas' translate>LetrasExplicitas_</label>
+      <div class=' consulta' >
+      <select id='LetrasExplicitas' ng-model='album.LetrasExplicitas' class='form-control '  >
+        <option selected translate ng-repeat='letrasExpli in LetrasExplicitasSiNO'>{{letrasExpli}}</option>
+
+
+      </select>
+    </div>
+      <div class=' consulta'>
+      <i class='fa fa-question-circle consulta' aria-hidden='true'  ng-click="openModal('sm', 'ModalTituloLetrasExplisitas_','ModalMensajeLetrasExplisitas_')"></i>
+      </div>
+
+</div>
+
+<!--   Precio en Tiendas! -->
+
+<div class='form-group col-md-4 ' >
+      <label for='PrecioEnTiendas' translate>PrecioEnTiendas_</label>
+      <div class=' consulta' >
+      <select id='PrecioEnTiendas' ng-model='album.PrecioEnTiendas' class='form-control '  >
+        <option selected translate ng-repeat='precio in PreciosEnTiendas'>{{precio}}</option>
+
+
+      </select>
+    </div>
+      <div class=' consulta'>
+      <i class='fa fa-question-circle consulta' aria-hidden='true'  ng-click="openModal('sm', 'ModalTituloPreciosEnTiendas_','ModalMensajePreciosEnTiendas_')"></i>
+      </div>
+
+</div>
+
+
+<!--     Codigo ISRC?! -->
+
+<div class='form-group col-md-4 ' >
+      <label for='TieneCodigoISRC' translate>TieneCodigoISRC_</label>
+      <div class=' consulta' >
+      <select id='TieneCodigoISRC' ng-model='album.TieneCodigoISRC' class='form-control '  >
+        <option selected translate ng-repeat='codigoISRC in CodigosISRC'>{{codigoISRC}}</option>
+
+
+      </select>
+    </div>
+      <div class=' consulta'>
+      <i class='fa fa-question-circle consulta' aria-hidden='true'  ng-click="openModal('sm', 'ModalTituloCodigoISRC_','ModalMensajeCodigoISRC_')"></i>
+      </div>
+</div>
+<div class='form-group col-md-4' ng-show='album.TieneCodigoISRC==CodigosISRC[1]'>
+<!-- <div class='form-group col-md-4' ng-show='album.TieneCodigoISRC==CodigosISRC[0]'> -->
+     <p class='form-group'>
+    <label for='CodigoISRC'  translate>CodigoISRC_</label>
+    <input id='CodigoISRC' required name='email' type='text' ng-model='album.CodigoISRC' class='form-control' />
+  </p>
+  </div>
+
+
+<div class='form-group col-md-4'>
+ <div class='col-md-10' >
+   <label for='FechaDeLanzamiento' translate>FechaDeLanzamiento_</label>
+
+
+
+        <p class='input-group'>
+          <input id='FechaDeLanzamiento'  type='text' class='form-control' uib-datepicker-popup='{{format}}' ng-model='dt' is-open='popup1.opened' datepicker-options='dateOptions' ng-required='true'  alt-input-formats='altInputFormats' clear-text='{{clear}}' close-text='{{close}}' current-text= '{{hoy}}'/>
+          <span class='input-group-btn'>
+            <button type='button' class='btn btn-default' ng-click='open1()'><i class='glyphicon glyphicon-calendar'></i></button>
+          </span>
+        </p>
+ </div>
+ <div class='col-md-2' >
+      <i class='fa fa-question-circle consulta' aria-hidden='true'  ng-click="openModal('lg', 'ModalTituloFechaLazamiento_','ModalMensajeFechaLanzamiento_')"></i>
+      </div>
+
+
+</div>
+
+
+ <hr class='mb-4'>
+
+<br>
+<div class='row' >
+ <div class='col-md-12' ng-show='album.NumeroDeCanciones' >
+  <h2  translate>NombreDelTema_ </h2>
+  <div class=' consulta'>
+      <i class='fa fa-question-circle consulta' aria-hidden='true'  ng-click="openModal('gm', 'ModalTituloTrack_','ModalMensajeTack_')"></i>
+      </div>
+<ul>
+    <li ng-repeat='i in tracks track by $index''><h3>track {{$index+1}} </h3>
+     <p class='form-group'>
+    <label for='NombreDelTema' {{$index+1}}</label>
+    <input id='NombreDelTema' required name='>NombreDelTema' type='text' ng-model='tracks[$index].nombre' class='form-control' />
+  </p>
+  </li>
+</ul>
+</div>
+    <hr class='mb-4'>
+
+<div class='col-md-4' >
+            <button class='btn btn-primary btn-lg btn-block' type='submit' ng-click='grabarDetalleLanzamiento()' translate>GuardarLanzamientoDetalle_</button>
+
+          </div>
+<div class='col-md-4' >
+            <button class='btn btn-primary btn-lg btn-block' type='submit' ng-click='grabarProducto()' translate>GuardarLanzamientoProcesar_</button>
+
+</div>
+</div>
+
+   </form>
+</div>

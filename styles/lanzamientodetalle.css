@@ -1,0 +1,20 @@
+
+.consulta{
+   /*float:right;*/
+   display: inline-block;
+   /*background-color: red;*/
+   text-align: right;
+    padding-right: 8px;
+   /*background-color: blue;*/
+     color: #4CAF50;
+  text-align: center;
+
+}
+
+.lanzamientoRotulo{
+   /*float:left;*/
+   /*background-color: blue;*/
+   text-align: left;
+    padding-right: 8px;
+
+}

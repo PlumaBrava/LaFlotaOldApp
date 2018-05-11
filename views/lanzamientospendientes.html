@@ -1,0 +1,36 @@
+<h2 translate>LanzamientosPendientes_</h2>
+
+ <div> <h3 translate>{{error}}</h3>
+</div>
+
+
+<uib-accordion close-others="oneAtATime">
+
+    <div uib-accordion-group class="panel-primary class" ng-class="{'panel-danger': lanzamiento.status==='pendiente'}"  is-open="isopen" ng-repeat="lanzamiento in listaLanzamientosPendientes | orderBy:orderBy  | filter:searchText" >
+      <uib-accordion-heading >
+        {{lanzamiento.Nombre}}
+        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
+        <p class=" pull-right">{{lanzamiento.timestampCreacion | date:'dd-MM-yyyy'}}  </p>
+      </uib-accordion-heading>
+
+      <div class="row">
+        <div class="col-sm-6">
+           <span translate>SeleccioneFuncionesHabilitadas</span>
+        </div>
+        <div class="col-sm-6" >
+            <button class="btn btn-danger btn-xs pull-right " data-title="Delete" ng-click="crearProducto()" ng-show="lanzamiento.pais" ><span class="glyphicon glyphicon-trash"></span></button>
+             <button class="btn btn-success btn-xs pull-right " data-title="Play"   ng-click="modificarProducto(lanzamiento)" ><span class="glyphicon glyphicon-save"></span></button>
+        </div>
+    </div>
+
+<div class="row">
+ {{lanzamiento.DescripciondelProducto}}
+
+
+
+ </div>
+
+
+</div>
+
+  </uib-accordion>

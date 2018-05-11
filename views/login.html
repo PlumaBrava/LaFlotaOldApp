@@ -1,0 +1,27 @@
+<p class="bg-danger">{{err}}</p>
+<h1 translate>LOGIN_TITULO</h1>
+
+
+<form role="form">
+  <p class="form-group">
+    <label for="loginEmail" translate="email">email</label>
+    <input id="loginEmail" required name="email" type="email" ng-model="email" class="form-control" />
+  </p>
+  <p class="form-group">
+    <label for="loginPass" translate="password">password</label>
+    <input id="loginPass" required name="pass" type="password" ng-model="pass" class="form-control" />
+  </p>
+  <p class="form-group" ng-cloak ng-show="createMode">
+    <label for="loginConfirm" translate>confirmpassword</label>
+    <input id="loginConfirm"  name="confirm" type="password" ng-model="confirm" class="form-control" />
+  </p>
+
+  <p>
+    <button  class="btn btn-primary" ng-click="login.emailPasswordLogin(email, pass)" ng-hide="createMode" translate>LogIn</button>
+    <button  class="btn btn-default" ng-click="activarRegistro()" ng-hide="createMode" translate >Register</button>
+    <button  class="btn btn-default" ng-click="login.sendPasswordResetEmail(email)" ng-hide="createMode" translate>OlvidoSuClave</button>
+    <button  class="btn btn-primary" ng-cloak ng-show="createMode"
+            ng-click="login.createAccount(email, pass, confirm)" translate="CreateAccount"></button>
+    <button  class="btn btn-default" ng-cloak ng-show="createMode" ng-click="cancelarRegistro()" translate="Cancel"></button>
+  </p>
+</form>

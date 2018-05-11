@@ -1,0 +1,108 @@
+
+<!--   <script type="text/ng-template" id="group-template.html">
+    <div class="panel-heading">
+      <h4 class="panel-title" style="color:#fa39c3">
+        <a href tabindex="0" class="accordion-toggle" ng-click="toggleOpen()" uib-accordion-transclude="heading">
+          <span uib-accordion-header ng-class="{'text-muted': isDisabled}">
+            {{heading}}
+          </span>
+        </a>
+      </h4>
+    </div>
+    <div class="panel-collapse collapse" uib-collapse="!isOpen">
+      <div class="panel-body" style="text-align: right" ng-transclude></div>
+    </div>
+  </script> -->
+
+
+  <h4  translate>TituloUsuariosAdministrativos</h4>
+
+<div class="row">
+<form>
+<p class="form-group col-sm-8" >
+<label for="userEmail" translate="Labelemail"></label>
+    <input id="userEmail" required name="useremail" type="email" ng-model="useremail" class="form-control" />
+  </p>
+    <button class="col-sm-2 btn btn-primary pull-right" ng-click="crearUsuario(useremail)" translate>NuevoUsuario</button>
+
+    </div>
+    </form>
+</div>
+ <div> <h1 translate>{{errorMailUsuario}}</h1>
+
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" ng-model="oneAtATime">
+      Open only one at a time
+    </label>
+  </div>
+  <uib-accordion close-others="oneAtATime">
+
+    <div uib-accordion-group class="panel-default" ng-class="{'panel-danger': !{{usuario.habilitado}}}"  is-open="isopen" ng-repeat="usuario in UsuariosperfilesCtrl.listaUsuarios" >
+      <uib-accordion-heading >
+        {{usuario.mail}}<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
+      </uib-accordion-heading>
+
+      <div class="row">
+        <div class="col-sm-6">
+           <span translate>SeleccioneFuncionesHabilitadas</span>
+        </div>
+        <div class="col-sm-6" >
+            <button class="btn btn-danger btn-xs pull-right " data-title="Delete" ng-click="deshabilitarUsuario(usuario)" ng-show="usuario.habilitado" ><span class="glyphicon glyphicon-trash"></span></button>
+             <button class="btn btn-success btn-xs pull-right " data-title="Play"  ng-click="modificarUsuario(usuario)" ><span class="glyphicon glyphicon-save"></span></button>
+        </div>
+    </div>
+
+<div class="row">
+<div class="col-sm-4">
+     <!-- Usuarios -->
+      <div class="checkbox"><label> <input type="checkbox" ng-model="usuario.perfil.usuarios" ng-click="perfilModificado()">
+                            <span translate>usuarios</span> </label>
+      </div>
+     <!-- Planes -->
+      <div class="checkbox"><label> <input type="checkbox" ng-model="usuario.perfil.planes" ng-click="perfilModificado()">
+                            <span translate>planes</span> </label>
+      </div>
+
+
+     <!-- Bonos -->
+      <div class="checkbox"><label> <input type="checkbox" ng-model="usuario.perfil.bonos" ng-click="perfilModificado()">
+                            <span translate>bonos</span> </label>
+      </div>
+
+     <!-- Cargar Pagos -->
+      <div class="checkbox"><label> <input type="checkbox" ng-model="usuario.perfil.cargarPagos" ng-click="perfilModificado()">
+                            <span translate>cargarPagos</span> </label>
+      </div>
+</div>
+
+ <div class="col-sm-4">
+
+     <!-- Cargar Canciones -->
+      <div class="checkbox"><label> <input type="checkbox" ng-model="usuario.perfil.cargarCanciones" ng-click="perfilModificado()">
+                            <span translate>cargarCanciones</span> </label>
+      </div>
+     <!-- Consultas -->
+      <div class="checkbox"><label> <input type="checkbox" ng-model="usuario.perfil.consultas" ng-click="perfilModificado()">
+                            <span translate>consultas</span> </label>
+      </div>
+
+
+ </div>
+ <div class="col-sm-4">
+         <!-- finanzas -->
+      <div class="checkbox"><label> <input type="checkbox" ng-model="usuario.perfil.finanzas" ng-click="perfilModificado()">
+                            <span translate>finanzas</span> </label>
+      </div>
+
+     <!-- cargarLiquidaciones -->
+      <div class="checkbox"><label> <input type="checkbox" ng-model="usuario.perfil.cargarLiquidaciones" ng-click="perfilModificado()">
+                            <span translate>cargarLiquidaciones</span> </label>
+      </div>
+ </div>
+ </div>
+
+
+</div>
+
+  </uib-accordion>

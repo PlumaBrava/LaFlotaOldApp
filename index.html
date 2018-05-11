@@ -1,0 +1,208 @@
+<!doctype html>
+<html>
+  <head>
+
+
+    <meta charset="utf-8">
+      <title>La Flota</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/barrasuperior.css">
+    <link rel="stylesheet" href="styles/producto.css">
+    <link rel="stylesheet" href="styles/lanzamientodetalle.css">
+    <!-- endbuild -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
+
+    <!-- <script defer src="/__/firebase/4.12.0/firebase-app.js"></script> -->
+    <!-- include only the Firebase features as you need -->
+   <!--  <script defer src="/__/firebase/4.12.0/firebase-auth.js"></script>
+    <script defer src="/__/firebase/4.12.0/firebase-database.js"></script>
+    <script defer src="/__/firebase/4.12.0/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/4.12.0/firebase-storage.js"></script>
+    <script defer src="/__/firebase/init.js"></script> -->
+  </head>
+
+<!-- <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script> -->
+
+  <body ng-app="laFlotaApp">
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+    <!-- <div class="header barrasuperior"> -->
+      <!-- <div class="navbar navbar-default barrasuperior" role="navigation"> -->
+      <div class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse" role="navigation">
+
+        <div class="container" ng-controller="MainCtrl">
+          <div class="navbar-header ">
+
+            <a class="navbar-brand" ui-sref="home">
+                <div class="logoLaflota" translate>logoLaflota</div>
+                <div class=" logoDistribuidoraDigital" translate="logoDistribuidoraDigital"></div>
+            </a>
+
+          </div>
+
+          <div class=" navbar-right" >
+
+            <ul class="nav navbar-nav">
+
+              <li class="dropdown ">
+
+                <a class="btn btn-primary navbar-btn dropdown-toggle"  data-toggle="dropdown" translate>Informacion</a>
+                     <ul class="dropdown-menu">
+                          <li><a  ui-sref="quienessomos" translate>quienessomos</a></li>
+                          <li><a ui-sref="preguntasfrecuentes" translate>preguntasfrecuentes</a></li>
+                          <li><a ui-sref="consultas" translate>consultas</a></li>
+                        </ul>
+              </li>
+              <li >
+                <a ui-sref="login" class="btn btn-primary navbar-btn" translate>Ingresar</a>
+              </li>
+              <li >
+                <a ui-sref="pago" class="btn btn-primary navbar-btn" translate>pago</a>
+              </li>
+              <li >
+                <a ui-sref="landing" class="btn btn-primary navbar-btn" translate>landing</a>
+              </li>
+               <li >
+                <a ui-sref="lanzamientodetalle" class="btn btn-primary navbar-btn" translate>lanzamientos_</a>
+              </li>
+               <li >
+                <a ui-sref="usuariosperfiles" class="btn btn-primary navbar-btn" ng-click="clickU()" translate>Usuario</a>
+              </li>
+ <!--                <li >
+
+                    <a class="btn btn-primary navbar-btn dropdown-toggle"  data-toggle="dropdown" translate>Idioma</a>
+                     <ul class="dropdown-menu">
+                        <li ng-click="switchLanguage('es_AR')" translate="LANG_ES_AR"></li>
+                        <li ng-click="switchLanguage('en_US')" translate="LANG_EN_US"></li>
+                        <li ng-click="switchLanguage('de_DE')" translate="LANG_DE_DE"></li>
+                    </ul>
+              </li> -->
+
+                              <!-- Single button -->
+    <div class="btn-group" uib-dropdown  ng-show="esAdministrativo">
+      <button id="administracion-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled" translate>Administracion
+         <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="administracion-button">
+        <li role="menuitem"><a ui-sref="usuariosperfiles" translate="usuarios" ng-click="clickU()"></a></li>
+          <li role="menuitem" ><a ui-sref="productoslistado" translate="planes"></a></li>
+        <li role="menuitem" ><a href="#"  translate="bonos"></a></li>
+        <li class="divider"></li>
+        <li role="menuitem" ><a ui-sref="consultasrespuestas"  translate="consultas"></a></li>
+        <li role="menuitem" ><a ui-sref="lanzamientospendientes"  translate="cargarCanciones"></a></li>
+        <li role="menuitem" ><a href="#"  translate="cargarPagos"></a></li>
+        <li class="divider"></li>
+        <li role="menuitem" ><a href="#"  translate="finanzas"></a></li>
+        <li role="menuitem" ><a href="#"  translate="cargarLiquidaciones"></a></li>
+
+      </ul>
+    </div>
+
+
+                           <!-- Single button -->
+    <div class="btn-group" uib-dropdown is-open="status.isopen">
+      <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled" translate>Idioma
+         <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+        <li role="menuitem" ng-click="switchLanguage('es_AR')"><a href="#" translate="LANG_ES_AR"></a></li>
+        <li role="menuitem" ng-click="switchLanguage('en_US')"><a href="#"  translate="LANG_EN_US"></a></li>
+        <li role="menuitem" ng-click="switchLanguage('de_DE')"><a href="#"  translate="LANG_DE_DE"></a></li>
+
+      </ul>
+    </div>
+
+
+
+
+            </ul>
+
+          </div>
+        </div>
+      </div>
+    <!-- </div> -->
+
+    <div class="container">
+        <div ui-view></div>
+    <!-- <div ng-include="'views/main.html'" ng-controller="MainCtrl"></div> -->
+    </div>
+
+    <div class="footer">
+      <div class="container">
+
+        <a class="bold footerDerechos" target="_blank" translate>footerDerechos</a>
+           <div style="line-height: 1.5em;" class="footerSocial">
+                    <a class="bold" target="_blank" href="https://www.instagram.com/perez.juan.jose.147/"><i class="fa fa-instagram" style="color:#a143b1;width:18px;" aria-hidden="true"></i>Instagram</a>
+
+                    <a class="bold" target="_blank" href="https://twitter.com/JJPerez147"><i class="fa fa-twitter" style="color: #58ccff;width:18px;" aria-hidden="true"></i>Twitter</a>
+
+                    <a class="bold" target="_blank" href="https://www.facebook.com/laflotadigital/"><i class="fa fa-facebook" style="color: #3b5998;width:18px;" aria-hidden="true"></i>Facebook</a>
+
+                    <a class="bold" target="_blank" href="https://www.youtube.com/subscription_center?add_user=laFlota"><i class="fa fa-youtube" style="color: #fe021c;width:18px;" aria-hidden="true"></i>YouTube</a>
+                </div>
+            </div>
+      </div>
+    </div>
+
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/firebase/firebase.js"></script>
+    <script src="bower_components/angularfire/dist/angularfire.js"></script>
+    <script src="bower_components/ngstorage/ngStorage.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/controllers/usuariosperfiles.js"></script>
+        <script src="scripts/services/firebaseservice.js"></script>
+        <script src="scripts/controllers/consultas.js"></script>
+        <script src="scripts/controllers/consutlasrespuestas.js"></script>
+        <script src="scripts/controllers/pago.js"></script>
+        <script src="scripts/controllers/producto.js"></script>
+        <script src="scripts/services/subirarchivo.js"></script>
+        <script src="scripts/directives/ngfileselect.js"></script>
+        <script src="scripts/controllers/productoslistado.js"></script>
+        <script src="scripts/controllers/productoslanding.js"></script>
+        <script src="scripts/controllers/lanzamientosdetalles.js"></script>
+        <script src="scripts/controllers/lanzamientospendientes.js"></script>
+        <!-- endbuild -->
+</body>
+</html>
