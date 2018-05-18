@@ -29,9 +29,9 @@ fb.listarConsultasPendientes()
          console.log('cont listaConsultasPendientes',error);
     });
 
-    $scope.responderConsulta=function(consulta){
+    $scope.responderConsulta=function(consulta,mensaje){
    console.log('responderConsulta', consulta);
-   fb.responderConsulta(consulta);
+   fb.responderConsulta(consulta,mensaje);
 };
 
   }]);

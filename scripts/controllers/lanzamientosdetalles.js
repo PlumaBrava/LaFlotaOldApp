@@ -9,8 +9,56 @@
  */
 angular.module('laFlotaApp')
   // .controller('LanzamientosdetallesCtrl', function () {
-      .controller('LanzamientosdetallesCtrl', ['$scope','$state','firebaseservice', '$translate','$uibModal', function ($scope,$state,fb,$translate,$uibModal) {
+      .controller('LanzamientosdetallesCtrl', ['$scope','$state','firebaseservice', '$translate','$uibModal','subirArchivo', function ($scope,$state,fb,$translate,$uibModal,subirArchivo) {
         console.log('LanzamientosdetallesCtrl');
+
+
+
+
+$scope.grabarProducto = function(){
+ console.log("grabarProducto " );
+    console.log( $scope.producto);
+    fb.grabarProducto($scope.producto.productoKey,$scope.producto);
+};
+
+ $scope.getSongFile = function (index) {
+   console.log("getSongFile ", index );
+ }
+ $scope.getFile = function () {
+     console.log("getFile " );
+    console.log( $scope.file);
+        $scope.progress = 0;
+        subirArchivo.subirArchivo($scope.file, $scope,'LaFlotaImagenAlbum/'+ fb.getUser().uid)
+                      .then(function(result) {
+                        console.log('result Imagen');
+                        console.log(result);
+                          $scope.album.arteURL= result.downloadURL;
+                          $scope.album.nombreArchivoArte = result.metadata.name;
+                          $scope.okdisponible=true;
+                      },function(result) {
+                      console.log('error Imagen');
+                      console.log(result);
+                      });
+};
+
+ $scope.$on('fileProgress', function(e, progress) {
+     console.log("fileProgress " );
+     console.log(e );
+     console.log(progress);
+        $scope.progress = progress.loaded / progress.total;
+   });
+this.onChange = function onChange(fileList) {
+    console.log("onChange");
+    console.log(fileList);
+    $ctrl.fileToUpload = fileList[0];
+  };
+
+
+
+
+
+
+
 
 
  $translate('current-text').then(function (current) {

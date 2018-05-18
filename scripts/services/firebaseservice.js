@@ -39,7 +39,9 @@ this.writeNuevoUsuario=function(mail) {
 
 };
 
-
+this.getUser=function(){
+   return localStorage.user;
+}
 
 this.crearUsuario=function(mail,propiedades) {
   console.log('crearUsuario');
@@ -160,41 +162,41 @@ var usuario=  localStorage.user;
 
 var ref = firebase.database().ref();
 var refConsulta;
-var refMensaje;
-var consultakey;
-var mensajekey;
+// var refMensaje;
+var consultaKey;
+// var mensajekey;
 var esConsultaNueva=false;
 if(!consultaKey){
     refConsulta= ref.child('Consultas').child(usuario.uid).push();
-    consultakey=refConsulta.key;
-    refMensaje= ref.child('Consultas').child(usuario.uid).child(consultakey).push();
-    mensajekey=refMensaje.key;
-    esConsultaNueva=false;
+    consultaKey=refConsulta.key;
+    // refMensaje= ref.child('Consultas').child(usuario.uid).child(consultaKey).push();
+    // mensajekey=refMensaje.key;
+    esConsultaNueva=true;
 } else {
     refConsulta= ref.child('Consultas').child(usuario.uid);
-    consultakey=refConsulta.key;
-    refMensaje= ref.child('Consultas').child(usuario.uid).child(consultakey).push();
-    mensajekey=refMensaje.key;
-    esConsultaNueva=true;
+    consultaKey=refConsulta.key;
+    // refMensaje= ref.child('Consultas').child(usuario.uid).child(consultaKey).push();
+    // mensajekey=refMensaje.key;
+    esConsultaNueva=false;
 };
 
-var mensaje = {'mensaje':mensaje, 'timestamp': firebase.database.ServerValue.TIMESTAMP,'usuarioMail':usuario.email};
-var consulta={'titulo':titulo, 'status':'pendiente', mensajekey : mensaje };
+var mensaje = [{'mensaje':mensaje, 'timestamp': firebase.database.ServerValue.TIMESTAMP,'usuarioMail':usuario.email}];
+var consulta={'titulo':titulo, 'status':'pendiente', 'listaMensajes' : mensaje , 'timestamp': firebase.database.ServerValue.TIMESTAMP};
 var consultaPendiente=consulta;
 consultaPendiente.userkey=usuario.uid;
 
 var updateMultiple={};
 
 if(esConsultaNueva){
-updateMultiple['Consultas/'+usuario.uid+'/'+consultakey]=consulta;
+updateMultiple['Consultas/'+usuario.uid+'/'+consultaKey]=consulta;
 
 } else{
-    updateMultiple['Consultas/'+usuario.uid+'/'+consultakey+'/'+mensajekey]=mensaje;
+    updateMultiple['Consultas/'+usuario.uid+'/'+consultaKey+'/'+'listaMensajes']=mensaje;
 }
 
 
 
-updateMultiple['ConsultasPendientes/'+consultakey]=consultaPendiente;
+updateMultiple['ConsultasPendientes/'+consultaKey]=consultaPendiente;
 
 ref.update(updateMultiple,function(error){
     if(error){
@@ -208,19 +210,72 @@ ref.update(updateMultiple,function(error){
 
 };
 
+this.agregarMensajeAConsulta=function(consulta,mensaje) {
 
-this.responderConsulta=function(consulta){
-   console.log('responderConsulta ',   consulta);
+  console.log('agregarMensajeAConsulta');
+  console.log(  localStorage.user);
+  var usuario=  localStorage.user;
+  console.log('agregarMensajeAConsulta',consulta);
+  console.log('agregarMensajeAConsulta',mensaje);
+  var ref = firebase.database().ref();
+  var consultaKey=consulta.$id;
+  var listMsj=new Array(consulta.listaMensajes.length);
+  for(var i=0;i<consulta.listaMensajes.length;i++){
+    listMsj[i]={};
+     console.log('agregarMensajeAConsulta',i + consulta.listaMensajes[i].mensaje);
 
-var usuario=  localStorage.user;
+  listMsj[i].mensaje=consulta.listaMensajes[i].mensaje;
+  listMsj[i].timestamp=consulta.listaMensajes[i].timestamp;
+  listMsj[i].usuarioMail=consulta.listaMensajes[i].usuarioMail;
+  if(consulta.listaMensajes[i].tipoMensaje){
+  listMsj[i].tipoMensaje=consulta.listaMensajes[i].tipoMensaje;
+  }
+  };
+
+  var mensaje ={'mensaje':mensaje, 'timestamp': firebase.database.ServerValue.TIMESTAMP,'usuarioMail':usuario.email };
+   listMsj[listMsj.length]=mensaje;
+  var consultaUpdate={'titulo':consulta.titulo, 'status':'pendiente', 'listaMensajes' : listMsj , 'timestamp': consulta.timestamp,'userkey':consulta.userkey};
+
+  console.log('agregarMensajeAConsulta',consulta);
+
+  var consultaPendiente=consulta;
+  consultaPendiente.userkey=usuario.uid;
+
+  var updateMultiple={};
+
+  updateMultiple['Consultas/'+usuario.uid+'/'+consultaKey]=consultaUpdate;
+  updateMultiple['ConsultasPendientes/'+consultaKey]=consultaUpdate;
+// updateMultiple['Consultas/'+usuario.uid+'/'+consultaKey+'/'+status]='pendiente';
+//   updateMultiple['Consultas/'+usuario.uid+'/'+consultaKey+'/'+'listaMensajes'+'/'+consulta.listaMensajes.length]=mensaje;
+
+//   updateMultiple['ConsultasPendientes/'+consultaKey+'/'+'listaMensajes'+'/'+consulta.listaMensajes.length]=mensaje;
+//   updateMultiple['ConsultasPendientes/'+consultaKey+'/'+'/'+status]='pendiente';
+    console.log('agregarMensajeAConsulta',updateMultiple);
 
 
-var ref = firebase.database().ref();
+ref.update(updateMultiple,function(error){
+    if(error){
 
-var updateMultiple={};
-updateMultiple['Consultas/'+consulta.userkey+'/'+consulta.$id+'/status']='ConRespuesta';
+  console.log('agregarMensajeAConsulta error'+ error);
+    } else {
+        console.log('agregarMensajeAConsulta ok');
+    };
+});
 
-updateMultiple['ConsultasPendientes/'+consulta.$id]=null;
+
+};
+
+this.responderConsulta=function(consulta,msj){
+     console.log('responderConsulta ',   consulta);
+    var ref = firebase.database().ref();
+ var usuario=  localStorage.user;
+ var consultaKey=consulta.$id;
+  var mensaje ={'mensaje':msj, 'timestamp': firebase.database.ServerValue.TIMESTAMP,'usuarioMail':usuario.email,'tipoMensaje':'respuesta'};
+    var updateMultiple={};
+
+    updateMultiple['Consultas/'+consulta.userkey+'/'+consulta.$id+'/status']='ConRespuesta';
+    updateMultiple['Consultas/'+consulta.userkey+'/'+consultaKey+'/'+'listaMensajes'+'/'+consulta.listaMensajes.length]=mensaje;
+    updateMultiple['ConsultasPendientes/'+consulta.$id]=null;
   console.log('responderConsulta updateMultiple');
   console.log(updateMultiple);
 ref.update(updateMultiple,function(error){
@@ -239,6 +294,7 @@ this.listarUsuariosConsultas=function() {
 return new Promise(function (resolve, reject){
     console.log('Construccion de la promesa listarUsuariosConsultas');
 var usuario=  localStorage.user;
+console.log('listarUsuariosConsultas',usuario);
       var ref = firebase.database().ref();
   var key= ref.child('Consultas').child(usuario.uid);
  var list = $firebaseArray(key);
@@ -257,6 +313,7 @@ var usuario=  localStorage.user;
 
 });
 };
+
 
 
 this.listarConsultasPendientes=function() {
@@ -333,7 +390,7 @@ updateMultiple['LaFlotaProductosLanding/'+productoKey]=producto;
   updateMultiple['Productos/'+productoKey]=producto;
   updateMultiple['LaFlotaProductosLanding/'+productoKey]=null;
 
-    // updateMultiple['Consultas/'+usuario.uid+'/'+consultakey+'/'+mensajekey]=producto;
+
 }
 
 

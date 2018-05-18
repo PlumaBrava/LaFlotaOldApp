@@ -15,8 +15,8 @@ angular.module('laFlotaApp')
 var self=this;
 
 
-$scope.subjet="Nueva consulta";
-$scope.mensaje="este es mi mensaje";
+$scope.subjet='';
+$scope.mensaje='';
 $scope.error="sin error";
 $scope.listaConsultas={};
 $scope.crearUsuarioConsulta=function(titulo, mensaje,mensajekey){
@@ -33,6 +33,21 @@ $scope.crearUsuarioConsulta=function(titulo, mensaje,mensajekey){
          fb.crearUsuarioConsulta(titulo,mensaje,mensajekey);
      }
 };
+
+
+$scope.agregarMensaje_UsuarioConsulta=function(consulta,mensaje){
+     console.log('agregarMensaje_UsuarioConsulta '+consulta);
+     console.log('agregarMensaje_UsuarioConsulta '+mensaje);
+
+   if(!mensaje){
+        $scope.error="mensajeSinTexto";
+     } else {
+        $scope.error="enviandoMensaje";
+         fb.agregarMensajeAConsulta(consulta,mensaje);
+     }
+};
+
+
 
 
 fb.listarUsuariosConsultas()

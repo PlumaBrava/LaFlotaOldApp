@@ -18,27 +18,25 @@
 
     <div uib-accordion-group class="panel-primary class" ng-class="{'panel-danger': consulta.status==='pendiente'}"  is-open="isopen" ng-repeat="consulta in listaConsultasPendientes | orderBy:orderBy  | filter:searchText" >
       <uib-accordion-heading >
-        {{consulta.titulo}}<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
+        {{consulta.titulo}}  {{consulta.mensaje}}<!-- <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i> -->
         <p class=" pull-right">{{consulta.timestamp | date:'dd-MM-yyyy hh-mm-ss'}}</p>
       </uib-accordion-heading>
 
-      <div class="row">
-        <div class="col-sm-6">
-           <span translate>SeleccioneFuncionesHabilitadas</span>
-        </div>
-        <div class="col-sm-6" >
-            <button class="btn btn-danger btn-xs pull-right " data-title="Delete" ng-click="deshabilitarUsuario(usuario)" ng-show="usuario.habilitado" ><span class="glyphicon glyphicon-trash"></span></button>
-             <button class="btn btn-success btn-xs pull-right " data-title="Play"  ng-click="responderConsulta(consulta)" ><span class="glyphicon glyphicon-save"></span></button>
-        </div>
-    </div>
+    <div class="" ng-repeat="lista in consulta.listaMensajes">
 
-<div class="row">
- {{consulta.mensaje}}
+  <div class=" mensajeConsulta" ng-class="{'mensajeRespuesta': lista.tipoMensaje==='respuesta'}">
+         <span > {{lista.mensaje}}</span>
+      <p class="text-right generadorDelMensaje"  > <small>{{lista.usuarioMail}}, {{lista.timestamp | date:'dd-MM-yyyy hh:mm:ss'}}</small></p>
+  </div>
+</div>
 
-
+<div class="row argregarMensaje ">
+  <hr class='mb-4'>
+<h4 class="media-heading" translate>AgregarMensaje_</h4>
+<input class=" mensajeParaEnviar col-sm-8" translate-attr="{ placeholder: 'mensajePlaceHolder_'}" ng-model="message_respuesta" />
+<button class="btn col-sm-2 btn btn-primary botonEnviarMensaje pull-right " data-title="Delete" ng-click="responderConsulta(consulta,message_respuesta)" ><span >Responder</span></button>
 
  </div>
-
 
 </div>
 

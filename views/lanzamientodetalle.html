@@ -12,6 +12,27 @@
     </p>
 
   </div>
+
+    <div>
+    <div>
+<label class="btn btn-primary" for="arte_album" >
+    <input id="arte_album" type="file" style="display:none;"  ng-file-select="onFileSelect($files)">
+    Seleccione Imagen
+</label>
+
+      <div class=" pull-right text-right" style="background-color:red ;">
+        {{album.nombreArchivoArte}}
+      </div>
+      <div>
+
+                <img class="rounded float-right fotoLinkdelProducto" ng-src="{{album.arteURL}}" alt="Sin Imagen"/><br/>
+                <b  ng-hide="progress==0 || progress==100">Progress:</b>
+                <progress ng-hide="progress==0 || progress==100 "  value="{{progress}}"></progress>
+
+        </div>
+        </div>
+    </div>
+
  <h2 translate>Tiendas_</h2>
 
       <div class=' consulta'>
@@ -278,6 +299,28 @@
     <label for='NombreDelTema'> {{$index+1}}</label>
     <input id='NombreDelTema' required name='>NombreDelTema' type='text' ng-model='tracks[$index].nombre' class='form-control' />
   </p>
+
+<div>
+    <div>
+<label class="btn btn-primary" for="archivoCancion"  >  SeleccioneArchivo_ {{$index}}
+    <!-- <input id="archivoCancion" type="file" style="display:none;"   index="{{$index}}" ng-select-song="onFileSelect($files)" > -->
+    <input id="archivoCancion" type="file" style="display:none;"   ng-select-song="{{'myFile' + $index}}" >
+
+</label>
+
+      <div class=" pull-right text-right" style="background-color:red ;">
+        {{album.nombreArchivoArte}}
+      </div>
+      <div>
+
+                <img class="rounded float-right fotoLinkdelProducto" ng-src="{{album.arteURL}}" alt="Sin Imagen"/><br/>
+                <b  ng-hide="progress==0 || progress==100">Progress:</b>
+                <progress ng-hide="progress==0 || progress==100 "  value="{{progress}}"></progress>
+
+        </div>
+        </div>
+    </div>
+
   </li>
 </ul>
 </div>

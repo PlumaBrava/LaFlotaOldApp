@@ -65,11 +65,14 @@
 "_comentario4":"Textos consultas.html",
 
 "TituloConsultas":"Consultas",
-"SubjetConsulta":"Titulo",
+"SubjetConsulta":"Título",
+"SubjetConsultaplaceholder_":"Tema de la consulta",
 "mensajeConsulta":"Mensaje",
 "NuevaConsulta":"Nueva Consulta",
 "mensajeSinTitulo":"Ingresar un Titulo para la consuta",
 "mensajeSinTexto":"Ingresar la consuta",
+"mensajePlaceHolder_":"Mensaje de la consulta",
+"AgregarMensaje_":"Agregar Mensaje",
 
 
 "_comentario5":"Textos productos.html",
@@ -144,6 +147,7 @@
 "TieneCodigoISRC_":"Tiene Código ISRC",
 "CodigoISRC_":"Código ISRC ",
 "NombreDelTema_":"Nombre del Track",
+"Seleccione Archivo_":"Seleccione Archivo",
 "GuardarLanzamientoDetalle_":"Guardar",
 "GuardarLanzamientoProcesar_":"Procesar",
 
