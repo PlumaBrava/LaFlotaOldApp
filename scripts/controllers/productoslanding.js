@@ -27,8 +27,21 @@ fb.listarProductosLanding()
          // $state.go('Usuariosperfiles');
     })
     .catch(function(error){
-         console.log('cont listarUsuariosConsultas',error);
+         console.log('error listarUsuariosConsultas',error);
     });
+
+
+$scope.comprar=function(plan){
+console.log('conprarPlan',plan);
+fb.conprarPlan(plan)
+  .then(function(dato){
+   console.log('conprarPlan',dato);
+      $scope.$apply(function () {});
+  })
+    .catch(function(error){
+         console.log('error conprarPlan',error);
+    });
+};
 
 
   }]);

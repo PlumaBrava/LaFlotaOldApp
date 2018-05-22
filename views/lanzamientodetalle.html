@@ -41,27 +41,27 @@
 
 
             <div class='custom-control custom-checkbox checkbox-inline'>
-              <input type='checkbox' class='custom-control-input' id='albumtiendasSpotify' ng-model='album.tiendas.Spotify'>
+              <input type='checkbox'  checked=checked class='custom-control-input' id='albumtiendasSpotify' ng-model='album.tiendas.Spotify'>
               <label class='custom-control-label' for='albumtiendasSpotify' translate >Spotify_</label>
             </div>
             <div class='custom-control custom-checkbox checkbox-inline'>
-              <input type='checkbox' class='custom-control-input' id='albumtiendasiTunes' ng-model='album.tiendas.iTunes'>
+              <input type='checkbox'  checked=checked class='custom-control-input' id='albumtiendasiTunes' ng-model='album.tiendas.iTunes'>
               <label class='custom-control-label' for='albumtiendasiTunes' translate >iTunes_</label>
             </div>
 
             <div class='custom-control custom-checkbox checkbox-inline'>
-              <input type='checkbox' class='custom-control-input' id='albumtiendasAppleMusic' ng-model='album.tiendas.AppleMusic' >
+              <input type='checkbox' checked class='custom-control-input' id='albumtiendasAppleMusic' ng-model='album.tiendas.AppleMusic' >
               <label class='custom-control-label' for='albumtiendasAppleMusic' translate >AppleMusic_</label>
             </div>
 
             <div class='custom-control custom-checkbox checkbox-inline'>
-              <input type='checkbox' class='custom-control-input' id='albumtiendasGooglePlay' ng-model='album.tiendas.GooglePlay' >
+              <input type='checkbox' checked= class='custom-control-input' id='albumtiendasGooglePlay' ng-model='album.tiendas.GooglePlay' >
               <label class='custom-control-label' for='albumtiendasGooglePlay' translate >GooglePlay_</label>
             </div>
 
 
             <div class='custom-control custom-checkbox checkbox-inline'>
-              <input type='checkbox' class='custom-control-input' id='albumtiendasAmazon' ng-model='album.tiendas.Amazon' >
+              <input type='checkbox'checked class='custom-control-input' id='albumtiendasAmazon' ng-model='album.tiendas.Amazon' >
               <label class='custom-control-label' for='albumtiendasAmazon' translate >Amazon_</label>
             </div>
 
@@ -286,42 +286,72 @@
 
  <hr class='mb-4'>
 
+<!--     Artista -->
+
+<div class='form-group col-md-4 ' >
+      <label for='Artista_' translate>Artista_</label>
+      <div class=' consulta' >
+      <select id='Artista_' ng-model='album.Artista' class='form-control '  >
+
+        <option  ng-repeat='artista in listaArtistas'>{{artista.$value}}</option>
+
+
+      </select>
+
+
+</div>
+</div>
+      <div class=' consulta'>
+      <i class='fa fa-question-circle consulta' aria-hidden='true'  ng-click="openModal('lg', 'ModalTituloCodigoISRC_','ModalMensajeCodigoISRC_')"></i>
+      </div>
+<div class='col-md-4' >
+            <button class='btn btn-primary btn-lg btn-block' type='submit' ng-click="openModalArtista('sm', 'ModalTituloCodigoISRC_','ModalMensajeCodigoISRC_')" translate>AgregarArtista_</button>
+
+          </div>
+
+ <hr class='mb-4'>
+
+
 <br>
 <div class='row' >
  <div class='col-md-12' ng-show='album.NumeroDeCanciones' >
-  <h2  translate>NombreDelTema_ </h2>
+  <h2  translate>TituloListadoTracks_ </h2>
   <div class=' consulta'>
       <i class='fa fa-question-circle consulta' aria-hidden='true'  ng-click="openModal('gm', 'ModalTituloTrack_','ModalMensajeTack_')"></i>
       </div>
 <ul>
-    <li ng-repeat='i in tracks track by $index'><h3>track {{$index+1}} </h3>
-     <p class='form-group'>
-    <label for='NombreDelTema'> {{$index+1}}</label>
-    <input id='NombreDelTema' required name='>NombreDelTema' type='text' ng-model='tracks[$index].nombre' class='form-control' />
-  </p>
+    <li ng-repeat='tr in tracks track by $index'><h3>track {{$index+1}} </h3>
+      <p class='form-group'>
+        <label for='NombreDelTema'translate> NombreDelTema_</label>
+        <input id='NombreDelTema' required name='>NombreDelTema' type='text' ng-model='tr.nombre' class='form-control' />
+        <!-- <input id='linkDelTema' required name='>linkeDelTema' type='text' ng-model='tr.link' class='form-control' /> -->
+       </p>
 
-<div>
-    <div>
-<label class="btn btn-primary" for="archivoCancion"  >  SeleccioneArchivo_ {{$index}}
-    <!-- <input id="archivoCancion" type="file" style="display:none;"   index="{{$index}}" ng-select-song="onFileSelect($files)" > -->
-    <input id="archivoCancion" type="file" style="display:none;"   ng-select-song="{{'myFile' + $index}}" >
-
-</label>
-
-      <div class=" pull-right text-right" style="background-color:red ;">
-        {{album.nombreArchivoArte}}
-      </div>
       <div>
+         <div>
 
-                <img class="rounded float-right fotoLinkdelProducto" ng-src="{{album.arteURL}}" alt="Sin Imagen"/><br/>
+            <label class="" for="archivoCancion" translate  >SeleccioneArchivo_</label>
+              <input  class="btn btn-primary form-control" id="archivoCancion" type="file"   ng-select-song="{{'trackFile' + $index}}" songindex="{{ $index}}" parametro1="jj" >
+
+              <button  class="btn btn-primary"    ng-click="uploadTrack('trackFile' + $index,$index)"  translate>  SubirArchivo_
+              </button>
+              <pre>
+
+                nombre:{{SongFileDetalle[$index].name}}<br>
+                Tamaño: {{SongFileDetalle[$index].size}}<br>
+                Tipo: {{SongFileDetalle[$index].type}}<br>
+              </pre>
+              <div class=" pull-right text-right" style="background-color:red ;">
+                {{file}}
+              </div>
+            <div>
+
                 <b  ng-hide="progress==0 || progress==100">Progress:</b>
                 <progress ng-hide="progress==0 || progress==100 "  value="{{progress}}"></progress>
-
+            </div>
         </div>
-        </div>
-    </div>
-
-  </li>
+      </div>
+    </li>
 </ul>
 </div>
     <hr class='mb-4'>

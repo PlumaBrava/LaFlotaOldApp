@@ -1,1 +1,45 @@
-<p>This is the mislanzamientos view.</p>
+<div class="row">
+<h1 translate="">MisLanzamientos_</h1>
+ <div> <h3 class="col-sm-2" translate>{{error}}</h3>
+  <button class="btn btn-primary btn-lg pull-right col-sm-3" ng-click="crearLanzamiento()" translate="" >NuevoLanzamiento_</button>
+</div>
+</div>
+
+<div class="row">
+<uib-accordion close-others="oneAtATime">
+
+    <div uib-accordion-group class="panel-primary class" ng-class="{'panel-danger': producto.status==='pendiente'}"  is-open="isopen" ng-repeat="lanzamiento in listaLanamientosUsuario | orderBy:orderBy  | filter:searchText" >
+<!--       <uib-accordion-heading  >
+        {{producto.NombredelProducto}}<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
+        <p class=" pull-right" ng-click="modificarProducto(producto)" >{{producto.MontodelProducto}}</p>
+      </uib-accordion-heading> -->
+       <uib-accordion-heading  >
+        <div ng-click="modificarLanzamiento(lanzamiento)">
+        {{lanzamiento.Nombre}}
+        <p class=" pull-right"  >{{lanzamiento.timestampCreacion | date:'dd-MM-yyyy hh-mm-ss'}}</p>
+        </div>
+      </uib-accordion-heading>
+
+
+      <div class="row">
+        <div class="col-sm-6">
+           <span translate>SeleccioneFuncionesHabilitadas</span>
+        </div>
+        <div class="col-sm-6" >
+
+             <button class="btn btn-success btn-xs pull-right " data-title="Play"   ng-click="modificarProducto(producto)" ><span class="glyphicon glyphicon-save"></span></button>
+        </div>
+    </div>
+
+<div class="row">
+ {{producto.DescripciondelProducto}}
+
+
+
+ </div>
+
+
+</div>
+
+  </uib-accordion>
+  </div>

@@ -88,7 +88,7 @@ $stateProvider
 $stateProvider
 .state('productoslistado',{
     url:'/productosListado',
-    templateUrl:'views/productosListado.html',
+    templateUrl:'views/productoslistado.html',
      controller:'ProductoslistadoCtrl as productoListadosCtrl'
 });
 
@@ -99,9 +99,22 @@ $stateProvider
      controller:'ProductoslandingCtrl as productoslanding'
 });
 
+
+$stateProvider
+.state('mislanzamientos',{
+    url:'/mislanzamientos',
+    templateUrl:'views/mislanzamientos.html',
+     controller:'MislanzamientosCtrl as mislanzamientosdetalles'
+});
+
+
 $stateProvider
 .state('lanzamientodetalle',{
     url:'/lanzamientodetalle',
+     params: {
+            lanzamiento: null
+
+        },
     templateUrl:'views/lanzamientodetalle.html',
      controller:'LanzamientosdetallesCtrl as lanzamientosdetalles'
 });
@@ -119,15 +132,22 @@ $stateProvider
   }]).config( function(){
 
 
+ // var config = {
+ //    apiKey: "AIzaSyATFHPOvPIszswYY0tCgJ06rlyQ24WHDCA",
+ //    authDomain: "logistica-144918.firebaseapp.com",
+ //    databaseURL: "https://logistica-144918.firebaseio.com",
+ //    projectId: "logistica-144918",
+ //    storageBucket: "logistica-144918.appspot.com",
+ //    messagingSenderId: "378485183737"
+ //  };
  var config = {
-    apiKey: "AIzaSyATFHPOvPIszswYY0tCgJ06rlyQ24WHDCA",
-    authDomain: "logistica-144918.firebaseapp.com",
-    databaseURL: "https://logistica-144918.firebaseio.com",
-    projectId: "logistica-144918",
-    storageBucket: "logistica-144918.appspot.com",
-    messagingSenderId: "378485183737"
+    apiKey: "AIzaSyDPkDlE2JP3iSiQ6Fzl8dAZanwNwFaVJDI",
+    authDomain: "laflota-19ada.firebaseapp.com",
+    databaseURL: "https://laflota-19ada.firebaseio.com",
+    projectId: "laflota-19ada",
+    storageBucket: "laflota-19ada.appspot.com",
+    messagingSenderId: "615365712454"
   };
-
   firebase.initializeApp(config);
     })
 

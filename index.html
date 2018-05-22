@@ -22,6 +22,19 @@
     <!-- endbuild -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
+<script >
+  var a = document.createElement('a');
+
+if(typeof a.download != "undefined")
+{
+  console.log("aref soported")
+}
+else
+{
+    console.log("aref NOT soported")
+  // download attribute is not supported
+}
+</script>
 
     <!-- <script defer src="/__/firebase/4.12.0/firebase-app.js"></script> -->
     <!-- include only the Firebase features as you need -->
@@ -50,6 +63,7 @@
             <a class="navbar-brand" ui-sref="home">
                 <div class="logoLaflota" translate>logoLaflota</div>
                 <div class=" logoDistribuidoraDigital" translate="logoDistribuidoraDigital"></div>
+                <div>{{user}}</div>
             </a>
 
           </div>
@@ -76,12 +90,13 @@
               <li >
                 <a ui-sref="landing" class="btn btn-primary navbar-btn" translate>landing</a>
               </li>
-               <li >
-                <a ui-sref="lanzamientodetalle" class="btn btn-primary navbar-btn" translate>lanzamientos_</a>
+
+                <li >
+                <a ui-sref="mislanzamientos" class="btn btn-primary navbar-btn" translate>MisLanzamientos_</a>
               </li>
-               <li >
+        <!--        <li >
                 <a ui-sref="usuariosperfiles" class="btn btn-primary navbar-btn" ng-click="clickU()" translate>Usuario</a>
-              </li>
+              </li> -->
  <!--                <li >
 
                     <a class="btn btn-primary navbar-btn dropdown-toggle"  data-toggle="dropdown" translate>Idioma</a>
@@ -98,27 +113,27 @@
          <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="administracion-button">
-        <li role="menuitem"><a ui-sref="usuariosperfiles" translate="usuarios" ng-click="clickU()"></a></li>
-          <li role="menuitem" ><a ui-sref="productoslistado" translate="planes"></a></li>
-        <li role="menuitem" ><a href="#"  translate="bonos"></a></li>
-        <li class="divider"></li>
-        <li role="menuitem" ><a ui-sref="consultasrespuestas"  translate="consultas"></a></li>
-        <li role="menuitem" ><a ui-sref="lanzamientospendientes"  translate="cargarCanciones"></a></li>
-        <li role="menuitem" ><a href="#"  translate="cargarPagos"></a></li>
-        <li class="divider"></li>
-        <li role="menuitem" ><a href="#"  translate="finanzas"></a></li>
-        <li role="menuitem" ><a href="#"  translate="cargarLiquidaciones"></a></li>
+        <li role="menuitem"  ng-show="perfilUsuario.usuarios"><a ui-sref="usuariosperfiles" translate="usuarios" ></a></li>
+          <li role="menuitem"  ng-show="perfilUsuario.planes"><a ui-sref="productoslistado" translate="planes"></a></li>
+        <li role="menuitem"  ng-show="perfilUsuario.bonos" ><a href="#"  translate="bonos"></a></li>
+        <li class="divider"  ng-show="perfilUsuario.usuarios||perfilUsuario.planes||perfilUsuario.bonos"></li>
+        <li role="menuitem"  ng-show="perfilUsuario.consultas"><a ui-sref="consultasrespuestas"  translate="consultas"></a></li>
+        <li role="menuitem"  ng-show="perfilUsuario.cargarCanciones" ><a ui-sref="lanzamientospendientes"  translate="cargarCanciones"></a></li>
+        <li role="menuitem"  ng-show="perfilUsuario.cargarPagos"><a href="#"  translate="cargarPagos"></a></li>
+        <li class="divider" ng-show="perfilUsuario.usuarios"></li>
+        <li role="menuitem"  ng-show="perfilUsuario.finanzas"><a href="#"  translate="finanzas"></a></li>
+        <li role="menuitem"  ng-show="perfilUsuario.cargarLiquidaciones"><a href="#"  translate="cargarLiquidaciones"></a></li>
 
       </ul>
     </div>
 
 
                            <!-- Single button -->
-    <div class="btn-group" uib-dropdown is-open="status.isopen">
-      <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled" translate>Idioma
+    <div class="btn-group" uib-dropdown >
+      <button id="idioma-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled" translate>Idioma
          <span class="caret"></span>
       </button>
-      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="idioma-button">
         <li role="menuitem" ng-click="switchLanguage('es_AR')"><a href="#" translate="LANG_ES_AR"></a></li>
         <li role="menuitem" ng-click="switchLanguage('en_US')"><a href="#"  translate="LANG_EN_US"></a></li>
         <li role="menuitem" ng-click="switchLanguage('de_DE')"><a href="#"  translate="LANG_DE_DE"></a></li>
@@ -127,6 +142,13 @@
     </div>
 
 
+                           <!-- Single button -->
+    <div class="btn-group" uib-dropdown >
+      <button id="single-button" type="button" class="btn btn-primary" ng-click="logOut()" translate>LogOut
+
+      </button>
+
+    </div>
 
 
             </ul>
@@ -205,6 +227,8 @@
         <script src="scripts/controllers/lanzamientosdetalles.js"></script>
         <script src="scripts/controllers/lanzamientospendientes.js"></script>
         <script src="scripts/directives/ngselectsong.js"></script>
+        <script src="scripts/controllers/mislanzamientos.js"></script>
+        <script src="scripts/controllers/miscompras.js"></script>
         <!-- endbuild -->
 </body>
 </html>

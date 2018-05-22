@@ -20,7 +20,9 @@ angular.module('laFlotaApp')
 
     var subirArchivo = function (file, scope,path) {
       console.log("subirArchivo");
-
+ console.log(file);
+  console.log(scope);
+   console.log(path);
     self.deferred = $q.defer();
     self.ModalScopeA=scope;
 

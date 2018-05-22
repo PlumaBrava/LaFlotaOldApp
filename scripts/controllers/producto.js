@@ -13,7 +13,7 @@ var self =this;
  $scope.progress = 0;
    console.log('$stateParams');
     console.log($stateParams);
-  if($stateParams.producto.$id){
+  if($stateParams.producto){
 
     $scope.producto={
         productoKey:$stateParams.producto.$id,

@@ -65,6 +65,7 @@ body {
 @media screen and (min-width: 768px) {
   .container {
     max-width: 730px;
+    /*max-width: max-device-width;*/
   }
 
   /* Remove the padding we set earlier */

@@ -77,6 +77,11 @@
 
 "_comentario5":"Textos productos.html",
 
+
+"ListadoDePlanes_":"Listado de Planes",
+"NuevoPlan_":"Nuevo Plan",
+
+
 "NombredelProducto":"Nombre del Producto",
 "DescripciondelProducto":"Descripción",
 "PaisdelProducto":"País",
@@ -146,15 +151,21 @@
 "PrecioEnTiendas_":"Precio de la canción (itunes & Coogle Play)",
 "TieneCodigoISRC_":"Tiene Código ISRC",
 "CodigoISRC_":"Código ISRC ",
+"TituloListadoTracks_":"Tracks",
 "NombreDelTema_":"Nombre del Track",
 "Seleccione Archivo_":"Seleccione Archivo",
 "GuardarLanzamientoDetalle_":"Guardar",
 "GuardarLanzamientoProcesar_":"Procesar",
+"Artista_":"Artista",
+"AgregarArtista_":"Agregar Artista",
+"SeleccioneArchivo_":"Seleccionar Archivo",
+"SubirArchivo_":"Subir",
+
 
 
 "_comentario9":"LanzamientoDetalles Modals ",
 "ModalTituloNombreDelAlbum_":"Nombre del Album",
-"ModalMensajeNombreDelAlbum_":"Podés ingresar hasta 30 canciones por Álbum.",
+"ModalMensajeNombreDelAlbum_":"Ingresa el Nombre del álbum.",
 "ModalTituloTiendas_":"Tiendas",
 "ModalMensajeTiendas_":"Podés Seleccionar las tiendas en donde se publicará tu música.",
 
@@ -230,6 +241,39 @@
 
 "_comentario9":"LanzamientoPnedientes",
 "LanzamientosPendientes_":"Lanzamientos Pendientes",
+"LanzamientoPendienteCargado_":"Lanzamiento Cargado/Procesado",
+"LanzamientoPendienteArte_":"Arte",
+"LanzamientoPendienteDescargar_":"Descargar",
+"LanzamientoPendienteTracks_":"Tracks",
+
+
+"Comentario10_":"LandingPage",
+"Comentario10_":"LandingPage",
+"TituloLanding_":"Planes",
+"ComprarPlan_":"Comprar",
+"DetallePlanTiulo_":"Detalle del Plan",
+"CantidadDeArtistasIncluidos_":"Cantidad de Artistas",
+"CantidadDeAlbumsIncluidos_":"Cantidad de Albums",
+"DuraciondelProducto_":"Duración",
+"DescripciondelProducto_":"Descripción",
+
+
+
+
+"Comentario11_":"Mis Lanzamientos",
+"MisLanzamientos_":"Mis Lanzamientos",
+"NuevoLanzamiento_":"Nuevo Lanzamiento",
+
+
+"Comentario12_":"Pagos",
+"TituloFormularioPago_":"Pagos",
+"DescripcionFormularioPago_":"Verificá las compras realizadas y completá el Pago",
+"MisCompras_":"Mis Compras",
+
+"Comentario13_":"Modal Artistas",
+"AgregarTituloArtista_":"Argrear Artistas",
+"NombreDelArtista_":"Nombre del Artista",
+"AgregarArtista_":"Agregar a la Lista",
 
 
 "fin_":"fin"

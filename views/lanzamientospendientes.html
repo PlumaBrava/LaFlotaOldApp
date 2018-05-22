@@ -13,24 +13,36 @@
         <p class=" pull-right">{{lanzamiento.timestampCreacion | date:'dd-MM-yyyy'}}  </p>
       </uib-accordion-heading>
 
+
+       <div class="row">
+              <div class="col-sm-6">
+                  <div >
+                 <h3 translate>LanzamientoPendienteArte_</h3>
+ <img class="rounded float-right fotoLinkdelProducto" ng-src="{{lanzamiento.arteURL}}" alt="Sin Imagen"/><br/>
+               <a href="{{lanzamiento.arteURL}}" download="{{lanzamiento.Nombre}}-Arte-{{lanzamiento.nombreArchivoArte}}">  <button class="btn btn-success pull-right " ng-click="descargarArchivo(lanzamiento.arteURL)" translate>LanzamientoPendienteDescargar_</button></a>
+              </div>
+              </div>
+              <div class="col-sm-6" >
+                 <button class="btn btn-success btn-xs pull-right " data-title="Play"   ng-click="lanzamientoCargado(lanzamiento)" translate>LanzamientoPendienteCargado_</button>
+              </div>
+          </div>
+
       <div class="row">
         <div class="col-sm-6">
-           <span translate>SeleccioneFuncionesHabilitadas</span>
+              <h3 translate>LanzamientoPendienteTracks_</h3>
+
+                <ul>
+                    <li class="row" ng-repeat='i in lanzamiento.tracks track by $index'>
+                      <samp>track {{$index+1}}: {{i.nombre}}
+                        <a href="{{i.link}}" download="{{i.nombre}}-Track-{{$index}}">
+                           <button class="btn btn-success pull-right "  ng-click="descargarArchivo(i.link)" translate>LanzamientoPendienteDescargar_</button>
+                       </a>
+                      </samp>
+                   </li>
+               </ul>
         </div>
-        <div class="col-sm-6" >
-            <button class="btn btn-danger btn-xs pull-right " data-title="Delete" ng-click="crearProducto()" ng-show="lanzamiento.pais" ><span class="glyphicon glyphicon-trash"></span></button>
-             <button class="btn btn-success btn-xs pull-right " data-title="Play"   ng-click="modificarProducto(lanzamiento)" ><span class="glyphicon glyphicon-save"></span></button>
         </div>
-    </div>
 
-<div class="row">
- {{lanzamiento.DescripciondelProducto}}
+  </div>
 
-
-
- </div>
-
-
-</div>
-
-  </uib-accordion>
+</uib-accordion>

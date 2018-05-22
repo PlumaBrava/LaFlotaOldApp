@@ -39,9 +39,7 @@ this.writeNuevoUsuario=function(mail) {
 
 };
 
-this.getUser=function(){
-   return localStorage.user;
-}
+
 
 this.crearUsuario=function(mail,propiedades) {
   console.log('crearUsuario');
@@ -147,6 +145,16 @@ return new Promise(function (resolve, reject){
 this.getUsuario=function(){
     console.log('getUsuario');
   return localStorage.user;
+};
+
+this.getUser=function(){
+  var user={
+    uid:localStorage.user.uid,
+    apiKey:localStorage.user.apiKey,
+    email:localStorage.user.email
+  }
+   return user;
+
 };
 
 
@@ -421,7 +429,6 @@ ref.update(updateMultiple,function(error){
 
 
 
-
 this.listarProductos=function(){
   console.log('listarProductos');
 
@@ -537,6 +544,230 @@ this.listarLanzamientosPendientes=function(){
   }, function(error) {
     console.error('Error:', error);
     reject({ value: 'error listarLanzamientosPendientes', result: error});
+  });
+
+
+});
+};
+
+
+this.listarListarLanzamientosUsuarios=function(){
+  console.log('listarListarLanzamientosUsuarios');
+
+  return new Promise(function (resolve, reject){
+    console.log('Construccion de la promesa listarListarLanzamientosUsuarios');
+    var ref = firebase.database().ref();
+    var user=self.getUsuario();
+    var key= ref.child('LanzamientosUsuario').child(user.uid);
+    var list = $firebaseArray(key);
+      list.$loaded( function() {
+    // x === list; // true
+      console.log('listarListarLanzamientosUsuarios exito');
+      console.log(list);
+      resolve({ value: 'retorno listarListarLanzamientosUsuarios', result: list});
+
+  }, function(error) {
+    console.error('Error:', error);
+    reject({ value: 'error listarListarLanzamientosUsuarios', result: error});
+  });
+
+
+});
+};
+
+
+
+this.conprarPlan=function(plan){
+    console.log('conprarPlan');
+    delete plan.$$hashKey;
+    delete plan.$id;
+    delete plan.$priority;
+
+    console.log(plan);
+    var compra={};
+    compra.estado="PendientePago";
+    compra.producto=plan;
+    compra.user=self.getUsuario(),
+    compra.timestampCreacion=firebase.database.ServerValue.TIMESTAMP;
+
+     console.log(compra);
+    var ref = firebase.database().ref();
+    var user=self.getUsuario();
+    var refCompraUsuario= ref.child('ComprasUsuario').child(user.uid).push();
+    var compraUsuarioKey=refCompraUsuario.key;
+
+
+    var updateMultiple={};
+
+    plan.user=user;
+    updateMultiple['Compras/'+compraUsuarioKey]=compra;
+    updateMultiple['ComprasUsuario/'+user.uid+'/'+compraUsuarioKey]=compra;
+
+    console.log('conprarPlan updateMultiple');
+    console.log(updateMultiple);
+ return new Promise(function (resolve, reject){
+    ref.update(updateMultiple,function(error){
+      if(error){
+         console.log('conprarPlan error'+ error);
+            reject('conprarPlan error'+ error);
+      } else {
+
+        console.log('conprarPlan ok');
+         resolve("ok");
+      };
+    });
+});
+};
+
+
+this.cancelarCompra=function(compra){
+    console.log('cancelarCompra');
+
+
+    console.log(compra);
+
+    var ref = firebase.database().ref();
+    var user=self.getUsuario();
+
+
+    var updateMultiple={};
+
+
+    updateMultiple['Compras/'+compra.$id]=null;
+    updateMultiple['ComprasUsuario/'+user.uid+'/'+compra.$id]=null;
+
+    console.log('cancelarCompra updateMultiple');
+    console.log(updateMultiple);
+ return new Promise(function (resolve, reject){
+    ref.update(updateMultiple,function(error){
+      if(error){
+         console.log('cancelarCompra error'+ error);
+            reject('cancelarCompra error'+ error);
+      } else {
+
+        console.log('cancelarCompra ok');
+         resolve("ok");
+      };
+    });
+});
+};
+
+
+this.listarcomprasUsuario=function(){
+  console.log('listarcomprasUsuario');
+
+  return new Promise(function (resolve, reject){
+    console.log('Construccion de la promesa listarcomprasUsuario');
+    var ref = firebase.database().ref();
+    var user=self.getUsuario();
+    var key= ref.child('ComprasUsuario').child(user.uid)
+    var list = $firebaseArray(key);
+      list.$loaded( function() {
+    // x === list; // true
+      console.log('listarcomprasUsuario exito');
+      console.log(list);
+      resolve({ value: 'retorno listarcomprasUsuario', result: list});
+
+  }, function(error) {
+    console.error('Error:', error);
+    reject({ value: 'error listarcomprasUsuario', result: error});
+  });
+
+
+});
+};
+
+
+
+/// Artistas
+
+
+this.agregarArtista=function(artista){
+    console.log('AgregarArtista');
+
+
+    console.log(artista);
+
+
+
+    var ref = firebase.database().ref();
+    var user=self.getUsuario();
+    var refArtistaUsuario= ref.child('ArtistaUsuario').child(user.uid).push();
+    var artistaUsuarioKey=refArtistaUsuario.key;
+
+
+    var updateMultiple={};
+
+    updateMultiple['ArtistaUsuario/'+user.uid+'/'+artistaUsuarioKey]=artista;
+
+    console.log('AgregarArtista updateMultiple');
+    console.log(updateMultiple);
+ return new Promise(function (resolve, reject){
+    ref.update(updateMultiple,function(error){
+      if(error){
+         console.log('AgregarArtista error'+ error);
+            reject('AgregarArtista error'+ error);
+      } else {
+
+        console.log('AgregarArtista ok');
+         resolve("ok");
+      };
+    });
+});
+};
+
+
+this.cancelarArtistaUsuario=function(artista){
+    console.log('cancelarArtistaUsuario');
+
+
+    console.log(artista);
+
+    var ref = firebase.database().ref();
+    var user=self.getUsuario();
+
+
+    var updateMultiple={};
+
+
+
+    updateMultiple['ArtistaUsuario/'+user.uid+'/'+artista.$id]=null;
+
+    console.log('cancelarArtistaUsuario updateMultiple');
+    console.log(updateMultiple);
+ return new Promise(function (resolve, reject){
+    ref.update(updateMultiple,function(error){
+      if(error){
+         console.log('cancelarArtistaUsuario error'+ error);
+            reject('cancelarArtistaUsuario error'+ error);
+      } else {
+
+        console.log('cancelarArtistaUsuario ok');
+         resolve("ok");
+      };
+    });
+});
+};
+
+
+this.listarArtistaUsuario=function(){
+  console.log('listarArtistaUsuario');
+
+  return new Promise(function (resolve, reject){
+    console.log('Construccion de la promesa listarArtistaUsuario');
+    var ref = firebase.database().ref();
+    var user=self.getUsuario();
+    var key= ref.child('ArtistaUsuario').child(user.uid)
+    var list = $firebaseArray(key);
+      list.$loaded( function() {
+    // x === list; // true
+      console.log('listarArtistaUsuario exito');
+      console.log(list);
+      resolve({ value: 'retorno listarArtistaUsuario', result: list});
+
+  }, function(error) {
+    console.error('Error:', error);
+    reject({ value: 'error listarArtistaUsuario', result: error});
   });
 
 

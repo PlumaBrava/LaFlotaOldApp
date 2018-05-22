@@ -1,0 +1,53 @@
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title" translate>AgregarTituloArtista_</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+
+
+
+     <div class='row'>
+      <div class='d-flex flex-row form-group col-md-4'>
+         <p class='form-group' >
+          <label for='NombreDelArtista' translate>NombreDelArtista_ </label>
+          <input id='NombreDelArtista' required name='nombre' type='text' ng-model='nombre' class='form-control' />
+
+        </p>
+
+      </div>
+
+
+        <div class=' col-md-4'>
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.agregarArtista(nombre)" translate="">AgregarArtista_</button>
+            {{listaArtistas[0].$value}}
+         </div>
+    </div>
+
+
+  <div class='row'>
+
+<hr class='mb-4'>
+
+ <ul class='list-group col-md-4'>
+            <li class='list-group-item d-flex justify-content-between lh-condensed' ng-repeat="artista in listaArtistas">
+              <div>
+                <h6 >{{artista.$value}}<i class="fa fa-window-close fa-2x pull-right"  aria-hidden="true" uib-popover="I appeared on mouse enter!" popover-trigger="'cancelar'" ng-click="cancelarCompra(compra)"></i></h6>
+
+              </div>
+
+            </li>
+</ul>
+
+
+
+        </div>
+
+
+<hr class='mb-4'>
+
+
+
+
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+        </div>

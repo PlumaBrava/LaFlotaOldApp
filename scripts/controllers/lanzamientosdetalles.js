@@ -9,9 +9,87 @@
  */
 angular.module('laFlotaApp')
   // .controller('LanzamientosdetallesCtrl', function () {
-      .controller('LanzamientosdetallesCtrl', ['$scope','$state','firebaseservice', '$translate','$uibModal','subirArchivo', function ($scope,$state,fb,$translate,$uibModal,subirArchivo) {
+      .controller('LanzamientosdetallesCtrl', ['$scope','$state', '$stateParams','firebaseservice', '$translate','$uibModal','subirArchivo', function ($scope,$state, $stateParams, fb,$translate,$uibModal,subirArchivo) {
         console.log('LanzamientosdetallesCtrl');
 
+   console.log('$stateParams');
+    console.log($stateParams);
+  if($stateParams.lanzamiento){
+
+    $scope.album={
+
+        lanzamientoKey:$stateParams.lanzamiento.$id,
+        CodigoISRC:$stateParams.lanzamiento.CodigoISRC,
+        Composicion:$stateParams.lanzamiento.Composicion,
+        GeneroPrincipal:$stateParams.lanzamiento.GeneroPrincipal,
+        GeneroSecundarios:$stateParams.lanzamiento.GeneroSecundarios,
+        Idioma:$stateParams.lanzamiento.Idioma,
+        LetrasExplicitas: $stateParams.lanzamiento.LetrasExplicitas,
+        Nombre: $stateParams.lanzamiento.Nombre,
+        NumeroDeCanciones: $stateParams.lanzamiento.NumeroDeCanciones,
+        PrecioEnTiendas: $stateParams.lanzamiento.PrecioEnTiendas,
+        TieneCodigoISRC:$stateParams.lanzamiento.TieneCodigoISRC,
+        arteURL:$stateParams.lanzamiento.arteURL,
+        nombreArchivoArte: $stateParams.lanzamiento.nombreArchivoArte,
+        tiendas:$stateParams.lanzamiento.tiendas,
+        timestampCreacion:$stateParams.lanzamiento.timestampCreacion,
+        Artista:$stateParams.lanzamiento.Artista,
+
+        user:$stateParams.lanzamiento.user
+
+
+        };
+     $scope.tracks=$stateParams.lanzamiento.tracks;
+     $scope.SongFileDetalle=new Array(parseInt($stateParams.lanzamiento.NumeroDeCanciones, 10));
+
+} else {
+
+    $scope.album={
+        CodigoISRC:null,
+        Composicion:null,
+        GeneroPrincipal:null,
+        GeneroSecundarios:null,
+        Idioma:null,
+        LetrasExplicitas: null,
+        Nombre: null,
+        NumeroDeCanciones:null,
+        PrecioEnTiendas: null,
+        TieneCodigoISRC:null,
+        arteURL:null,
+        nombreArchivoArte: null,
+        tiendas:{ Amazon:true,
+                  AppleMusic:true,
+                  ClaroMusica:true,
+                  GooglePlay:true,
+                  MediaNet: true,
+                  MicrosoftGroove:true,
+                  Pandora:true,
+                  Saavn:true,
+                  Spotify:true,
+                  Tidal:true,
+                  YouTubeMusic:true,
+                  iTunes:true },
+        timestampCreacion:null,
+        tracks:null,
+         Artista:null,
+        user:null
+
+    };
+}
+
+
+fb.listarArtistaUsuario()
+    .then(function(dato){
+        console.log('listarArtistaUsuario',dato);
+         $scope.listaArtistas=dato.result;
+console.log('listarArtistaUsuario', $scope.listaArtistas);
+         $scope.$apply(function () {});
+
+
+    })
+    .catch(function(error){
+         console.log('error listarArtistaUsuario',error);
+    });
 
 
 
@@ -55,7 +133,28 @@ this.onChange = function onChange(fileList) {
 
 
 
+$scope.uploadTrack=function(fileName,index){
+  console.log('uploadTrack');
+  console.log(fileName);
+  console.log( $scope[fileName]);
+  $scope.SongFileDetalle[index]=($scope[fileName]);
+  console.log( $scope.SongFileDetalle[index]);
+  console.log($scope);
 
+subirArchivo.subirArchivo( $scope.SongFileDetalle[index], $scope,'LaFlotaAudioUser/'+ fb.getUser().uid)
+                      .then(function(result) {
+                        console.log('result uploadTrack');
+                        console.log(result);
+                          $scope.tracks[index].link= result.downloadURL;
+                           $scope.tracks[index].nombreArchivo = result.metadata.name;
+                          $scope.okdisponible=true;
+                      },function(result) {
+                      console.log('error uploadTrack');
+                      console.log(result);
+                      });
+
+
+};
 
 
 
@@ -228,11 +327,12 @@ $translate('Idioma_').then(function (dato) {
     // console.log('updateNumeroCanciones is lenght',numeroCanciones.length);
 if (numeroCanciones){
      $scope.tracks=new Array(parseInt(numeroCanciones, 10));
+     $scope.SongFileDetalle=new Array(parseInt(numeroCanciones, 10));
      console.log('updateNumeroCanciones',$scope.tracks);
 
      for(var i=0; i<$scope.tracks.length;i++){
-      $scope.tracks[i]={'nombre':'Nombre del tema','link':'link123','otos datos':'xx'};;
-
+      $scope.tracks[i]={'nombre':'Nombre del tema','link':'link123','otos datos':'xx','index':i};;
+      $scope.SongFileDetalle[i]=i;
      }
      }
   }
@@ -240,8 +340,10 @@ if (numeroCanciones){
 $scope.grabarDetalleLanzamiento=function(){
  console.log('grabarDetalleLanzamiento');
     $scope.album.tracks=$scope.tracks;
-   fb.grabarDetalleLanzamiento('',$scope.album);
+   fb.grabarDetalleLanzamiento($scope.album.lanzamientoKey,$scope.album);
 };
+
+
 $scope.openModal = function (size,titulo, mensaje) {
   console.log("openModal");
     var parentElem = null;
@@ -291,52 +393,56 @@ $scope.openModal = function (size,titulo, mensaje) {
     });
 };
 
-
-$scope.openTickModal = function (size, item) {
-
+$scope.openModalArtista = function (size,titulo, mensaje) {
+  console.log("openModalArtista");
     var parentElem = null;
-
+    // var parentElem = parentSelector ?
+      // angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
     var modalInstance = $uibModal.open({
-      animation: $scope.animationsEnabled,
+      animation: true,
       ariaLabelledBy: 'modal-title',
       ariaDescribedBy: 'modal-body',
-
-      templateUrl: 'views/modal_tick.html',
-      controller: 'ModalInstanceTick',
+      templateUrl:  'views/modalartistas.html',
+      controller: 'ModalArtistaCtrl',
       controllerAs: '$ctrl',
       size: size,
       appendTo: parentElem,
       resolve: {
-
-        item:function(){
-            return item;
+        titulo: function () {
+          return titulo;
+        },
+        mensaje: function () {
+          return mensaje;
         }
       }
     });
 
-    modalInstance.result.then(function (returnedItem) {
+
+      modalInstance.result.then(function (returnedItem) {
 
 
         console.log('return:'+returnedItem);
         console.log(returnedItem);
-        console.log(item);
 
 
-        // item.texto=returnedItem;
-        item.intervaloMs = returnedItem.intervaloMs;
-        item.volumen = returnedItem.volumen;
-        item.duracion = Number(returnedItem.duracion);
-        item.duracionHMS=fb.msToDHMSMS(returnedItem.duracion);
-        item.ascendente=returnedItem.ascendente;
-        item.tipoDigital=returnedItem.tipoDigital;
-        $scope.models.dropzones.A=self.calculoDeDuracion($scope.models.dropzones.A,0);
+
+        // // item.texto=returnedItem;
+        // item.intervaloMs = returnedItem.intervaloMs;
+        // item.volumen = returnedItem.volumen;
+        // item.duracion = Number(returnedItem.duracion);
+        // item.duracionHMS=fb.msToDHMSMS(returnedItem.duracion);
+        // item.ascendente=returnedItem.ascendente;
+        // item.tipoDigital=returnedItem.tipoDigital;
+        // $scope.models.dropzones.A=self.calculoDeDuracion($scope.models.dropzones.A,0);
 
     }, function () {
 
-        console.log('return dismissed:');
-      // $log.info('Modal dismissed at: ' + new Date());
+        console.log('return dismissed: openModalArtista');
+
     });
-  };
+};
+
+
   }])
 
  .controller('ModalInstanceCtrl', function ($uibModalInstance,titulo, mensaje,$translate) {
@@ -572,6 +678,79 @@ var codigo =[
   };
   return s;
 };
+
+
+
+
+})
+ .controller('ModalArtistaCtrl', function ($uibModalInstance,titulo, mensaje,$translate,firebaseservice,$scope) {
+  var $ctrl = this;
+  $ctrl.titulo = "titulo";
+  $ctrl.mensaje = "mensaje";
+  $ctrl.selected = {
+    // item: $ctrl.items[0]
+    item: mensaje
+  };
+
+ console.log("ModalArtistaCtrl firebaseservice",firebaseservice);
+$translate(titulo).then(function (dato) {
+    console.log("modalTraduccion dato",dato);
+    $ctrl.titulo= dato;
+  }, function (translationId) {
+    console.log("modalTraduccion no encontro",translationId);
+     $ctrl.titulo = translationId;
+  });
+
+ $translate(mensaje).then(function (dato) {
+    var parsed = angular.element("<div></div>");
+   var textVersion = parsed.text(dato).html();
+    console.log( textVersion);
+
+    console.log("ModalArtistaCtrl dato",encodeURIComponent(dato));
+    console.log( "ModalArtistaCtrl dato",decodeURIComponent(dato));
+    console.log("mModalArtistaCtrl dato",dato);
+     // $ctrl.mensaje=  unescape(dato);
+     // $ctrl.mensaje=   StringUTF8AsBytesArrayFromString(dato);
+  }, function (translationId) {
+     $ctrl.mensaje = translationId;
+  });
+
+  $ctrl.ok = function () {
+    $uibModalInstance.close($ctrl.selected.item);
+  };
+
+  $ctrl.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+
+
+ $ctrl.agregarArtista= function(artista) {
+   console.log('agregarArtista '+artista);
+  firebaseservice.agregarArtista(artista)
+  .then(function(dato){
+   console.log('agregarArtista',dato);
+
+  })
+    .catch(function(error){
+         console.log('error agregarArtista',error);
+    });
+};
+
+
+
+
+firebaseservice.listarArtistaUsuario()
+    .then(function(dato){
+        console.log('listarArtistaUsuario',dato);
+         $scope.listaArtistas=dato.result;
+console.log('listarArtistaUsuario', $ctrl.listaArtistas);
+         $scope.$apply(function () {});
+
+
+    })
+    .catch(function(error){
+         console.log('error listarArtistaUsuario',error);
+    });
 
 
 

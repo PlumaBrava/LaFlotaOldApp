@@ -3,7 +3,7 @@
 // <!-- Aplicación: 19679536 - MercadoPago application (mp-app-19679536)
 
 angular.module('laFlotaApp')
-  .controller('PagoCtrl', ['$scope','$localStorage','$http', function ( $scope,$localStorage,$http) {
+  .controller('PagoCtrl', ['$scope','$localStorage','$http','firebaseservice',function ( $scope,$localStorage,$http,fb) {
 
         console.log('PagoCtrl');
 var self=this;
@@ -382,6 +382,47 @@ $http({
 
 
 }
+
+
+$scope.cancelarCompra=function(compra){
+    console.log('cancelarCompra');
+     console.log(compra);
+
+fb.cancelarCompra(compra)
+  .then(function(dato){
+   console.log('cancelarCompra',dato);
+   $scope.MontoCompra=0;
+   for(var i=0;i<$scope.listaCompras.length;i++){
+        $scope.MontoCompra=parseFloat(parseFloat($scope.MontoCompra)+parseFloat($scope.listaCompras[i].producto.MontodelProducto)).toFixed(2);
+        };
+      $scope.$apply(function () {
+
+      });
+  })
+    .catch(function(error){
+         console.log('error cancelarCompra',error);
+    });
+
+
+
+   };
+
+fb.listarcomprasUsuario()
+    .then(function(dato){
+        console.log('listarcomprasUsuario',dato);
+        $scope.listaCompras=dato.result;
+        $scope.MontoCompra=0;
+        console.log('listarcomprasUsuario',$scope.listaCompras);
+        for(var i=0;i<$scope.listaCompras.length;i++){
+        $scope.MontoCompra=parseFloat(parseFloat($scope.MontoCompra)+parseFloat($scope.listaCompras[i].producto.MontodelProducto)).toFixed(2);
+        };
+        $scope.$apply(function () {});
+
+
+    })
+    .catch(function(error){
+         console.log('error listarcomprasUsuario',error);
+    });
 
 
   }]);

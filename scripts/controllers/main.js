@@ -8,10 +8,12 @@
  * Controller of the laFlotaApp
  */
 angular.module('laFlotaApp')
-  .controller('MainCtrl', ['$scope','$localStorage','$translate', '$firebaseAuth','firebaseservice', function ($scope,localStorage,$translate,firebaseAuth,fb) {
+  .controller('MainCtrl', ['$scope','$localStorage','$translate', '$firebaseAuth','firebaseservice','$state', function ($scope,localStorage,$translate,firebaseAuth,fb,$state) {
 
 var self=this;
     $scope.logueado=false;
+     $scope.perfilUsuario=null;
+     $scope.userMail=null;
     console.log('MainCtrl localStorage.userKey : ');
     console.log(localStorage.user);
 if(localStorage.user){
@@ -62,13 +64,19 @@ auth.$onAuthStateChanged(function(firebaseUser) {
   } else {
     console.log('Signed out');
      console.log('state Main to mis practicas');
-     console.log($state.current);
+       $state.go('home');
+     // console.log($state.current);
      // console.log('$urlRouterProvider');
 // console.log($location);
 //      console.log($location.url());
 //      console.log($location.path);
-
-    $scope.user='Sign Up';
+  $scope.esAdministrativo=false;
+ localStorage.user=null;
+  $scope.logueado=false;
+     $scope.perfilUsuario=null;
+     $scope.userMail='';
+    // $scope.user='Sign Up';
+    $scope.user=null;
     $scope.photoURL=null;
     $scope.photoURLshow=false;
      $scope.photoURLshow=false;
@@ -87,8 +95,19 @@ auth.$onAuthStateChanged(function(firebaseUser) {
   }
 });
 
-$scope.clickU=function(){
-    console.log("clickU");
+$scope.logOut=function(){
+  console.log('logOut');
+
+  auth.$signOut()
+    .then(function() {
+        console.log('logOut exitoso');
+           localStorage.user=user;
+  // $state.go('home');
+    })
+    .catch(function(error) {
+        console.log('logOut error');
+      // An error happened
+    });
 };
 
   $scope.verificarSiEsUsuarioAministrativo=function(email){
@@ -120,11 +139,12 @@ $scope.buscarUsuario=function(mail){
     if(self.listaUsuarios[i].mail==mail && self.listaUsuarios[i].habilitado){
          console.log('buscarUsuario true');
         existeElMail=true;
+        $scope.perfilUsuario=self.listaUsuarios[i].perfil;
         break;
       } ;
 
 };
-    console.log('buscarUsuario false');
+
     return existeElMail;
 };
 

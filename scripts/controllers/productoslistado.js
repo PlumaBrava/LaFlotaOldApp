@@ -17,7 +17,7 @@ var self=this;
 $scope.error="sin error";
 $scope.listaProductos={};
 $scope.modificarProducto=function(producto){
-     console.log('crearProducto ');
+     console.log('modificarProducto ');
         $state.go('producto',{producto:producto});
 
 };
@@ -35,5 +35,8 @@ fb.listarProductos()
          console.log('cont listarUsuariosConsultas',error);
     });
 
-
+$scope.crearProducto=function(){
+ console.log('crearProducto ');
+        $state.go('producto',{producto:null});
+};
   }]);
