@@ -1,0 +1,146 @@
+
+        <div class='col-md-8 order-md-1'>
+          <h4 class='mb-3' translate>ConfiguracionUsuarioTitulo_</h4>
+          <form class='needs-validation' novalidate>
+
+            <div class='mb-3'>
+              <label for='username' translate >UserMail_</label>
+              <div class='input-group'>
+                <div class='input-group-prepend'>
+                  <span class='input-group-text'>@</span>
+                </div>
+                <input disabled type='text' class='form-control' id='username' placeholder='{{user.email}}' required   ng-model='configuracion.email'>
+                <div class='invalid-feedback' style='width: 100%;' translate>
+                  UserMailComentario_
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <div class='row'>
+              <div class='col-md-6 mb-3'>
+                <label for='firstName' translate="">ConfiguracionNombre_</label>
+                <input type='text' class='form-control' id='firstName' placeholder='' value='' required ng-model='configuracion.Nombre'>
+                <div class='invalid-feedback' translate="">
+                  ConfiguracionNombreComentario_
+                </div>
+              </div>
+              <div class='col-md-6 mb-3'>
+                <label for='lastName' translate>ConfiguracionApellido_</label>
+                <input type='text' class='form-control' id='lastName' placeholder='' value='' required ng-model='configuracion.Apellido'>
+                <div class='invalid-feedback' translate="">
+                 ConfiguracionApellidoComentario_
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <div class='mb-3'>
+              <label for='address' translate> ConfiguracionDireccion_</label>
+              <input type='text' class='form-control' id='address' placeholder='Ej: Av. de Mayo 525 Piso 8 Dpto F' required ng-model='configuracion.Direccion1'>
+              <div class='invalid-feedback' translate>
+                ConfiguracionDireccionComentario_
+              </div>
+            </div>
+
+            <div class='mb-3'>
+              <label for='ConfiguracionCiudad_' translate="ConfiguracionCiudad_" ><span class='text-muted' translate>ConfiguracionOptional_</span></label>
+              <input type='text' class='form-control' id='ConfiguracionCiudad_' placeholder='Ej. Viedma' ng-model='configuracion.Direccion2'>
+            </div>
+
+            <div class='row py-5'>
+              <div class='col-md-3 mb-3'>
+                <label for='country' translate>ConfiguracionPais_</label>
+                <select class='custom-select d-block w-100' id='country' required ng-model='configuracion.Pais'>
+              <!--     <option value=''>Choose...</option> -->
+                   <option selected translate ng-repeat="pais in paises">{{pais}}</option>
+                </select>
+                <div class='invalid-feedback' translate>
+                  ConfiguracionPaisComentario_
+                </div>
+              </div>
+              <div class='col-md-4 mb-3'>
+                <label for='state' translate>ConfiguracionProvincia_</label>
+                <select class='custom-select d-block w-100' id='state' required  ng-model='configuracion.provincia'>
+                  <!-- <option value=''>Choose...</option> -->
+                  <option selected translate ng-repeat="provincia in provincias">{{provincia}}</option>
+                </select>
+                <div class='invalid-feedback' translate>
+                   ConfiguracionProvinciaComentario_
+                </div>
+              </div>
+              <div class='col-md-5 mb-3'>
+                <label for='zip' translate>ConfiguracionCP_</label>
+                <input type='text' class='form-control' id='zip' placeholder='' required ng-model='configuracion.codigoPostal'>
+                <div class='invalid-feedback' translate>
+                  ConfiguracionCPComentario_
+                </div>
+              </div>
+            </div>
+
+            <hr class='mb-4'>
+                <div class=' mb-3'>
+                    <label for='zip' translate>ConfiguracionCUIT_</label>
+                    <input type='text' class='form-control' id='zip' placeholder='' required ng-model='configuracion.cuit'>
+                    <div class='invalid-feedback' translate>
+                  ConfiguracionCUITComentario_
+                </div>
+              </div>
+
+            <hr class='mb-4'>
+
+            <h4 class='mb-3' translate>ConfiguracionArtistas_</h4>
+
+<button class='btn btn-primary btn-lg btn-block  ' type='submit' ng-click="openModalArtista('lg', '')" translate>AgregarArtista_</button>
+
+            <div class='row artistaCard'  ng-repeat="artista in listaArtistas">
+            <div class='row' >
+              <div class='col-md-6 mb-3'>
+                <label for='nombreArtista' translate>configuracionNombreArtista_</label>
+                <div class='form-control'> {{artista.nombre}}
+                <!-- <small class='text-muted'>Full name as displayed on card</small> -->
+               <!--  <div class='invalid-feedback' translate>
+                  configuracionNombreArtistaComentario_
+                </div> -->
+              </div>
+              </div>
+
+
+
+              <div class='col-md-6 mb-3'>
+                <label for='cc-number' translate>configuracionLinkRedSocial1Artista_</label>
+                 <div class='form-control'> {{artista.redSocial}}
+
+              </div>
+            </div>
+
+            <div class='row'>
+              <div class='col-md-6 mb-3 artistaDNI'>
+                <h4 translate>configuracionDNIArtista_</h4>
+                 <!-- <img class="rounded float-right fotoLinkdelProducto" ng-src="{{album.arteURL}}" alt="Sin Imagen"/><br/> -->
+                 <img class=" fotoLinkdelProducto " id="fotoDNI" ng-src='{{artista.linkDNI}}' alt="Sin Imagen"/><br/>
+                <!-- <small class='text-muted'>Full name as displayed on card</small> -->
+
+              </div>
+              <div class='col-md-6 mb-3'>
+                <label for='buttonModificaArtista' translate></label>
+                <button class='btn btn-primary btn-lg btn-block' id='buttonModificaArtista' translate ng-click="openModalArtista('lg',artista)">ConfiguracionBotonModificarArtista_</button>
+                    <div class='invalid-feedback' translate>
+
+                </div>
+              </div>
+              </div>
+              </div>
+              </div>
+
+
+
+
+            <hr class='mb-4'>
+            <button class='btn btn-primary btn-lg btn-block' type='submit' ng-click="guardarConfiguracion()" translate="">ConfiguracionGuardar_</button>
+          </form>
+    </div>

@@ -4,7 +4,9 @@
     <form class="form-horizontal"  role="form">
 
           <div class="form-group">
-            <label for="subjet" translate="SubjetConsulta" class="control-label"></label>
+              <label for="mailConsulta" translate="MailConsulta_" class="control-label" ng-show="mostrarMailConsulta"></label>
+            <input id="mailConsulta" required  type="mail" ng-model="mailConsulta" class="form-control" ng-show="mostrarMailConsulta" />
+            <label for="subjet" translate="SubjetConsulta_" class="control-label"></label>
             <input id="subjet" required  type="text" ng-model="subjet" class="form-control"  translate-attr="{ placeholder: 'SubjetConsultaplaceholder_'}"/>
             <label for="mensaje" translate="mensajeConsulta"></label>
             <textarea type="text" required rows="5" id="mensaje"  ng-model="mensaje" class="form-control" translate-attr="{ placeholder: 'mensajePlaceHolder_'}"></textarea>
@@ -64,15 +66,3 @@
   </uib-accordion>
 
 
-<form action="https://us-central1-logistica-144918.cloudfunctions.net/enviarGmail" method="post">
-    <label>Assunto:</label>cd
-    <input type="text" name="assunto">
-
-    <label>Destinatários:</label>
-    <input type="text" name="destinatarios">
-
-    <label>Mensagem:</label>
-    <input type="text" name="corpo">
-
-    <button type="submit">Enviar</button>
-  </form>

@@ -93,9 +93,17 @@ $scope.muestraProducto = function(){
 $scope.grabarProducto = function(){
  console.log("grabarProducto " );
     console.log( $scope.producto);
-    fb.grabarProducto($scope.producto.productoKey,$scope.producto);
-};
+if(self.losDatosDelProductoSonCorrectos()){
 
+
+
+    fb.grabarProducto($scope.producto.productoKey,$scope.producto);
+       $state.go('productoslistado');
+        }
+};
+this.losDatosDelProductoSonCorrectos=function(){
+  return true;
+};
  $scope.getFile = function () {
      console.log("getFile " );
     console.log( $scope.file);
@@ -111,6 +119,7 @@ $scope.grabarProducto = function(){
                       console.log('error Imagen');
                       console.log(result);
                       });
+
 };
 
  $scope.$on('fileProgress', function(e, progress) {

@@ -1,0 +1,157 @@
+ <div>
+ <form  name="bonosForm" class="needs-validation" novalidate>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+
+                <label for="BonoCodigo"  translate="BonoCodigo_" ng-click="muestraProducto()"></label>
+                <input type="text" class="form-control" ng-model="bono.Codigo" id="BonoCodigo" placeholder="" value="" required >
+                <div class="invalid-feedback" translate>
+                  {{ErrorCodigo}}
+                </div>
+                <div class="form-group">
+                    <label for="BonoDescripcion" translate>BonoDescripcion_</label>
+                    <textarea class="form-control" ng-model="bono.Descripcion" id="BonoDescripcion" rows="8"></textarea>
+                </div>
+                 <div class="invalid-feedback" translate>
+                  {{ErrorDescripcion}}
+                </div>
+        </div>
+        </div>
+
+
+
+
+
+   <hr class="mb-4">
+    <div class="row">
+<div class="form-group col-md-4">
+      <label for="BonoTipoDescuento" translate>BonoTipoDescuento_</label>
+      <select id="BonoTipoDescuento" ng-model="bono.TipoDescuento" class="form-control"  >
+        <option selected translate >porcentaje_</option>
+        <option selected translate >montoFijo_</option>
+      </select>
+       <div class="invalid-feedback" translate>
+                  {{ErrorTipoDescuento}}
+                </div>
+</div>
+
+<div class="form-group col-md-4" ng-show="bono.TipoDescuento=='montoFijo_'">
+        <label for="BonoMoneda" translate>BonoMoneda_</label>
+          <select id="BonoMoneda" ng-model="bono.Moneda"   class="form-control">
+             <option selected translate ng-repeat="moneda in monedas">{{moneda}}</option>
+
+        </select>
+</div>
+
+<div class="form-group col-md-4" ng-show="bono.TipoDescuento=='montoFijo_'">
+    <label for="BonoMonto" translate >BonoMonto_</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="BonoMonto"  ng-model="bono.Monto"  placeholder="35,00" required>
+            <div class="invalid-feedback" style="width: 100%;" translate>
+              {{ErrorMonto}}
+              </div>
+        </div>
+</div>
+
+<div class="form-group col-md-4" ng-show="bono.TipoDescuento=='porcentaje_'" >
+    <label for="BonoMonto" translate >BonoPorcentaje_</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="BonoPorcentaje_"  ng-model="bono.Porcentaje"  placeholder="10%" required>
+            <div class="invalid-feedback" style="width: 100%;" translate="">
+             {{ErrorPorcentaje}}
+              </div>
+        </div>
+</div>
+</div>
+
+
+
+         <hr class="mb-4">
+
+    <div class="row">
+
+
+<div class="form-group col-md-4">
+    <label for="BonoCantidadMaxima" translate >BonoCantidadMaxima_</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="BonoCantidadMaxima"  ng-model="bono.CantidadMaxima" placeholder="1" required>
+            <div class="invalid-feedback" style="width: 100%;" translate>
+         {{ErrorCantidadMaxima}}
+              </div>
+        </div>
+</div>
+
+<div class="form-group col-md-4" >
+    <label for="BonoCantidadAplicada" translate >BonoCantidadAplicada_</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="BonoCantidadAplicada"  ng-model="bono.CantidadAplicada" placeholder="0" disabled>
+        </div>
+</div>
+
+<div class='col-md-10' >
+   <label for='BonoFechaDesde' translate>BonoFechaDesde_</label>
+
+
+
+        <p class='input-group'>
+          <input id='BonoFechaDesde'  type='text' class='form-control' uib-datepicker-popup='{{format}}' ng-model='bono.FechaInicio' is-open='popup1.opened' datepicker-options='dateOptions' ng-required='true'  alt-input-formats='altInputFormats' clear-text='{{clear}}' close-text='{{close}}' current-text= '{{hoy}}'/>
+          <span class='input-group-btn'>
+            <button type='button' class='btn btn-default' ng-click='open1()'><i class='glyphicon glyphicon-calendar'></i></button>
+          </span>
+        </p>
+         <div class="invalid-feedback" style="width: 100%;" translate>
+            {{ErrorFechaInicio}}
+              </div>
+ </div>
+
+<div class='col-md-10' >
+   <label for='BonoFechaHasta' translate>BonoFechaHasta_</label>
+
+
+
+        <p class='input-group'>
+          <input id='BonoFechaHasta'  type='text' class='form-control' uib-datepicker-popup='{{format}}' ng-model='bono.FechaFin' is-open='popup2.opened' datepicker-options='dateOptions' ng-required='true'  alt-input-formats='altInputFormats' clear-text='{{clear}}' close-text='{{close}}' current-text= '{{hoy}}'/>
+          <span class='input-group-btn'>
+            <button type='button' class='btn btn-default' ng-click='open2()'><i class='glyphicon glyphicon-calendar'></i></button>
+          </span>
+        </p>
+        <div class="invalid-feedback" style="width: 100%;" translate>
+            {{ErrorFechaFin}}
+              </div>
+ </div>
+
+
+</div>
+ <div class="row">
+         <hr class="mb-4">
+
+
+
+            </div>
+
+            <div class="form-group col-md-4">
+      <label for="AsociadoAPlan_" translate>AsociadoAPlan_</label>
+      <select id="AsociadoAPlan_" ng-model="bono.AsociadoAPlan" class="form-control">
+
+        <option  translate>aplicaATodoslosPlanes_</option>
+             <option selected translate ng-repeat="producto in listaProductos">{{producto.NombredelProducto}}</option>
+
+      </select>
+      <div class="invalid-feedback" style="width: 100%;" translate>
+            {{ErrorAsociadoAPlan}}
+              </div>
+</div>
+</div>
+
+
+
+    <hr class="mb-4">
+
+
+            <button class="btn btn-primary btn-lg btn-block" type="submit" ng-click="crearBono()" translate>gabarBono_</button>
+          </form>
+
+<hr class="mb-4">
+
+</div>
+

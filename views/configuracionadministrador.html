@@ -1,0 +1,21 @@
+
+<p class="bg-danger">{{err}}</p>
+<h1 translate>ConfiguracionAdministrador_TITULO</h1>
+
+
+<form role="form">
+  <p class="form-group">
+    <label for="loginEmail" translate="email"></label>
+    <input id="loginEmail" required name="email" type="email" ng-model="email" class="form-control" />
+  </p>
+  <p class="form-group">
+    <label for="loginPass" translate="password">password</label>
+    <input id="loginPass" required name="pass" type="password" ng-model="pass" class="form-control" />
+  </p>
+
+
+  <p>
+    <button  class="btn btn-primary" ng-click="guardarConfiguracion(email, pass)"  translate>GrabarConfiguracion</button>
+
+  </p>
+</form>

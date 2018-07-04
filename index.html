@@ -19,33 +19,16 @@
     <link rel="stylesheet" href="styles/producto.css">
     <link rel="stylesheet" href="styles/lanzamientodetalle.css">
     <link rel="stylesheet" href="styles/consultas.css">
+    <link rel="stylesheet" href="styles/configuracionusuario.css">
+    <link rel="stylesheet" href="styles/pago.css">
     <!-- endbuild -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
-<script >
-  var a = document.createElement('a');
 
-if(typeof a.download != "undefined")
-{
-  console.log("aref soported")
-}
-else
-{
-    console.log("aref NOT soported")
-  // download attribute is not supported
-}
-</script>
 
-    <!-- <script defer src="/__/firebase/4.12.0/firebase-app.js"></script> -->
-    <!-- include only the Firebase features as you need -->
-   <!--  <script defer src="/__/firebase/4.12.0/firebase-auth.js"></script>
-    <script defer src="/__/firebase/4.12.0/firebase-database.js"></script>
-    <script defer src="/__/firebase/4.12.0/firebase-messaging.js"></script>
-    <script defer src="/__/firebase/4.12.0/firebase-storage.js"></script>
-    <script defer src="/__/firebase/init.js"></script> -->
   </head>
 
-<!-- <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script> -->
+
 
   <body ng-app="laFlotaApp">
     <!--[if lte IE 8]>
@@ -55,116 +38,130 @@ else
     <!-- Add your site or application content here -->
     <!-- <div class="header barrasuperior"> -->
       <!-- <div class="navbar navbar-default barrasuperior" role="navigation"> -->
-      <div class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse" role="navigation">
+      <!-- <div class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse" role="navigation"> -->
+      <div class="navbar  navbar-inverse  navbar-fixed-top"  role="navigation">
 
-        <div class="container" ng-controller="MainCtrl">
+        <div class="container-fluid" ng-controller="MainCtrl">
+
           <div class="navbar-header ">
 
             <a class="navbar-brand" ui-sref="home">
                 <div class="logoLaflota" translate>logoLaflota</div>
                 <div class=" logoDistribuidoraDigital" translate="logoDistribuidoraDigital"></div>
-                <div>{{user}}</div>
+
             </a>
 
           </div>
 
-          <div class=" navbar-right" >
+          <div class=" navbar-right collapse navbar-collapse navHeaderCollapse" >
 
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav ">
 
               <li class="dropdown ">
 
-                <a class="btn btn-primary navbar-btn dropdown-toggle"  data-toggle="dropdown" translate>Informacion</a>
+                  <a class="dropdown-toggle " role="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" translate>Informacion<span class="caret"></span></a>
                      <ul class="dropdown-menu">
                           <li><a  ui-sref="quienessomos" translate>quienessomos</a></li>
                           <li><a ui-sref="preguntasfrecuentes" translate>preguntasfrecuentes</a></li>
                           <li><a ui-sref="consultas" translate>consultas</a></li>
-                        </ul>
+                     </ul>
               </li>
+
               <li >
-                <a ui-sref="login" class="btn btn-primary navbar-btn" translate>Ingresar</a>
-              </li>
-              <li >
-                <a ui-sref="pago" class="btn btn-primary navbar-btn" translate>pago</a>
-              </li>
-              <li >
-                <a ui-sref="landing" class="btn btn-primary navbar-btn" translate>landing</a>
+                  <a ui-sref='landing'  translate>landing_</a>
               </li>
 
-                <li >
-                <a ui-sref="mislanzamientos" class="btn btn-primary navbar-btn" translate>MisLanzamientos_</a>
+              <li ng-show="user">
+                  <a ui-sref='pago'  translate>pago_</a>
               </li>
-        <!--        <li >
-                <a ui-sref="usuariosperfiles" class="btn btn-primary navbar-btn" ng-click="clickU()" translate>Usuario</a>
-              </li> -->
- <!--                <li >
 
-                    <a class="btn btn-primary navbar-btn dropdown-toggle"  data-toggle="dropdown" translate>Idioma</a>
-                     <ul class="dropdown-menu">
-                        <li ng-click="switchLanguage('es_AR')" translate="LANG_ES_AR"></li>
-                        <li ng-click="switchLanguage('en_US')" translate="LANG_EN_US"></li>
-                        <li ng-click="switchLanguage('de_DE')" translate="LANG_DE_DE"></li>
-                    </ul>
-              </li> -->
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"  translate>MisCosas_ <span class="caret"></span></a>
 
-                              <!-- Single button -->
-    <div class="btn-group" uib-dropdown  ng-show="esAdministrativo">
-      <button id="administracion-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled" translate>Administracion
-         <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="administracion-button">
-        <li role="menuitem"  ng-show="perfilUsuario.usuarios"><a ui-sref="usuariosperfiles" translate="usuarios" ></a></li>
-          <li role="menuitem"  ng-show="perfilUsuario.planes"><a ui-sref="productoslistado" translate="planes"></a></li>
-        <li role="menuitem"  ng-show="perfilUsuario.bonos" ><a href="#"  translate="bonos"></a></li>
-        <li class="divider"  ng-show="perfilUsuario.usuarios||perfilUsuario.planes||perfilUsuario.bonos"></li>
-        <li role="menuitem"  ng-show="perfilUsuario.consultas"><a ui-sref="consultasrespuestas"  translate="consultas"></a></li>
-        <li role="menuitem"  ng-show="perfilUsuario.cargarCanciones" ><a ui-sref="lanzamientospendientes"  translate="cargarCanciones"></a></li>
-        <li role="menuitem"  ng-show="perfilUsuario.cargarPagos"><a href="#"  translate="cargarPagos"></a></li>
-        <li class="divider" ng-show="perfilUsuario.usuarios"></li>
-        <li role="menuitem"  ng-show="perfilUsuario.finanzas"><a href="#"  translate="finanzas"></a></li>
-        <li role="menuitem"  ng-show="perfilUsuario.cargarLiquidaciones"><a href="#"  translate="cargarLiquidaciones"></a></li>
-
-      </ul>
-    </div>
+                <ul class="dropdown-menu">
+                    <li >
+                      <a ui-sref="mislanzamientos"  translate>MisLanzamientos_</a>
+                    </li>
+                    <li >
+                      <a ui-sref="miscompras"  translate>MisCompras_</a>
+                    </li>
+                    <li >
+                      <a ui-sref="misplanesvigentes"  translate>MisPlanesVigentes_</a>
+                    </li>
+                </ul>
+            </li>
 
 
-                           <!-- Single button -->
-    <div class="btn-group" uib-dropdown >
-      <button id="idioma-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled" translate>Idioma
-         <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="idioma-button">
-        <li role="menuitem" ng-click="switchLanguage('es_AR')"><a href="#" translate="LANG_ES_AR"></a></li>
-        <li role="menuitem" ng-click="switchLanguage('en_US')"><a href="#"  translate="LANG_EN_US"></a></li>
-        <li role="menuitem" ng-click="switchLanguage('de_DE')"><a href="#"  translate="LANG_DE_DE"></a></li>
-
-      </ul>
-    </div>
+              <li ng-show="user">
+                  <a ui-sref='configuracionusuario' translate>configuracionUsuario_</a>
+              </li>
 
 
-                           <!-- Single button -->
-    <div class="btn-group" uib-dropdown >
-      <button id="single-button" type="button" class="btn btn-primary" ng-click="logOut()" translate>LogOut
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ng-show="esAdministrativo" translate>Administracion <span class="caret"></span></a>
 
-      </button>
+                <ul class="dropdown-menu">
+                  <li  ng-show="perfilUsuario.usuarios"><a ui-sref="usuariosperfiles" translate="usuarios" ></a></li>
 
-    </div>
+                  <li  ng-show="perfilUsuario.planes"><a ui-sref="productoslistado" translate="planes"></a></li>
+
+                  <li ng-show="perfilUsuario.bonos" ><a ui-sref="listadobonos"  translate="bonos"></a></li>
+                  <li role="separator" class="divider"></li>
+                  <li class="divider"  ng-show="perfilUsuario.usuarios||perfilUsuario.planes||perfilUsuario.bonos"  ></li>
+
+                  <li   ng-show="perfilUsuario.consultas"><a ui-sref="consultasrespuestas"  translate="consultas"></a></li>
+
+                  <li   ng-show="perfilUsuario.cargarCanciones" ><a ui-sref="lanzamientospendientes"  translate="cargarCanciones"></a></li>
+                  <li   ng-show="perfilUsuario.cargarPagos"><a href="#"  translate="cargarPagos"></a></li>
+                  <li class="divider" ng-show="perfilUsuario.usuarios"></li>
+                  <li   ng-show="perfilUsuario.finanzas"><a ui-sref="listadopagos"    translate="finanzas"></a></li>
+                  <li   ng-show="perfilUsuario.finanzas"><a ui-sref="comprasrealizadas"    translate="comprasRealizadas_"></a></li>
+                  <li   ng-show="perfilUsuario.cargarLiquidaciones"><a ui-sref="#"  translate="cargarLiquidaciones"></a></li>
+                  <li role="separator" class="divider"  ng-show="true"></li>
+                  <li  ng-show="true"><a ui-sref="configuracionadministrador"  translate="configuracionesUsuarioAdministrador"></a></li>
 
 
-            </ul>
 
+                </ul>
+              </li>
+            <!-- Idioma -->
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" translate>Idioma <span class="caret"></span></a>
+
+                <ul class="dropdown-menu">
+
+                  <li role="menuitem" ng-click="switchLanguage('es_AR')"><a href="#" translate="LANG_ES_AR"></a></li>
+                  <li role="menuitem" ng-click="switchLanguage('en_US')"><a href="#"  translate="LANG_EN_US"></a></li>
+                  <li role="menuitem" ng-click="switchLanguage('de_DE')"><a href="#"  translate="LANG_DE_DE"></a></li>
+                </ul>
+            </li>
+
+            <li  ng-hide="user" >
+                  <a ui-sref="login" ><span class="logIn glyphicon glyphicon-log-in" ></span><span translate>  Ingresar_</span></a>
+              </li>
+
+
+              <li>
+                <p class="navbar-text navbar-right"><a> <span> {{user}}  </span></a></p>
+              </li>
+               <li  ng-show="user" style="margin-left: 25px;  ">
+
+                   <a ng-click="logOut()"  ><span class="logIn glyphicon glyphicon-log-out" ></span> <span translate> LogOut</span></a>
+              </li>
+             </ul>
           </div>
         </div>
       </div>
-    <!-- </div> -->
 
-    <div class="container">
+
+
+    <div class="container-fluid">
         <div ui-view></div>
     <!-- <div ng-include="'views/main.html'" ng-controller="MainCtrl"></div> -->
     </div>
 
     <div class="footer">
-      <div class="container">
+      <div class="container-fluid">
 
         <a class="bold footerDerechos" target="_blank" translate>footerDerechos</a>
            <div style="line-height: 1.5em;" class="footerSocial">
@@ -194,8 +191,8 @@ else
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/firebase/firebase.js"></script>
@@ -207,6 +204,8 @@ else
     <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
     <script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/jszip/dist/jszip.js"></script>
+    <script src="bower_components/jszip-utils/dist/jszip-utils.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -229,6 +228,16 @@ else
         <script src="scripts/directives/ngselectsong.js"></script>
         <script src="scripts/controllers/mislanzamientos.js"></script>
         <script src="scripts/controllers/miscompras.js"></script>
+        <script src="scripts/services/subirarchivosong.js"></script>
+        <script src="scripts/controllers/configuracionusuario.js"></script>
+        <script src="scripts/controllers/listadopagos.js"></script>
+        <script src="scripts/controllers/bonos.js"></script>
+        <script src="scripts/controllers/listadobonos.js"></script>
+        <script src="scripts/controllers/configuracionusuarioadministrador.js"></script>
+        <script src="scripts/controllers/misplanesvigentes.js"></script>
+        <script src="scripts/controllers/comprasrealizadas.js"></script>
+        <script src="scripts/controllers/spotifycallback.js"></script>
+        <script src="scripts/services/spotiservice.js"></script>
         <!-- endbuild -->
 </body>
 </html>

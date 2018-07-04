@@ -32,8 +32,12 @@ fb.listarProductosLanding()
 
 
 $scope.comprar=function(plan){
+if(!fb.getUsuario()){
+  $state.go('login');
+  return;
+}
 console.log('conprarPlan',plan);
-fb.conprarPlan(plan)
+fb.comprarPlan(plan)
   .then(function(dato){
    console.log('conprarPlan',dato);
       $scope.$apply(function () {});

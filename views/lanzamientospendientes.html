@@ -17,6 +17,10 @@
        <div class="row">
               <div class="col-sm-6">
                   <div >
+                  <button ng-click="compressed(lanzamiento.tracks,lanzamiento.Nombre)">ZipAll_</button>
+
+
+
                  <h3 translate>LanzamientoPendienteArte_</h3>
  <img class="rounded float-right fotoLinkdelProducto" ng-src="{{lanzamiento.arteURL}}" alt="Sin Imagen"/><br/>
                <a href="{{lanzamiento.arteURL}}" download="{{lanzamiento.Nombre}}-Arte-{{lanzamiento.nombreArchivoArte}}">  <button class="btn btn-success pull-right " ng-click="descargarArchivo(lanzamiento.arteURL)" translate>LanzamientoPendienteDescargar_</button></a>
@@ -35,7 +39,9 @@
                     <li class="row" ng-repeat='i in lanzamiento.tracks track by $index'>
                       <samp>track {{$index+1}}: {{i.nombre}}
                         <a href="{{i.link}}" download="{{i.nombre}}-Track-{{$index}}">
-                           <button class="btn btn-success pull-right "  ng-click="descargarArchivo(i.link)" translate>LanzamientoPendienteDescargar_</button>
+                           <button class="btn btn-success pull-right "
+
+                            translate>LanzamientoPendienteDescargar_</button>
                        </a>
                       </samp>
                    </li>

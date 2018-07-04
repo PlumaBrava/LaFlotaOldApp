@@ -1,0 +1,160 @@
+.secure_thumbnailSize{
+   height: 40px;
+ width: auto;
+ float:left;
+ margin: 5px;
+ padding: 5px;
+ border-radius: 5px;
+      border-style:solid;
+    border-width:thin;
+    border-color: gray;
+}
+
+/*Barra de Status de la transacción*/
+
+/* Progress Tracker v2 */
+
+ol.avance[data-steps="2"] li {
+  width: 49%;
+}
+ol.avance[data-steps="3"] li {
+  width: 33%;
+}
+ol.avance[data-steps="4"] li {
+  width: 24%;
+}
+ol.avance[data-steps="5"] li {
+  width: 19%;
+}
+ol.avance[data-steps="6"] li {
+  width: 16%;
+}
+ol.progress[data-steps="7"] li {
+  width: 14%;
+}
+ol.avance[data-steps="8"] li {
+  width: 12%;
+}
+ol.avance[data-steps="9"] li {
+  width: 11%;
+}
+.avance {
+  width: 80%;
+  list-style: none;
+  list-style-image: none;
+  margin: auto;
+  padding: 0;
+
+}
+.avance li {
+  float: left;
+  text-align: center;
+  position: relative;
+
+}
+.avance .name {
+  display: block;
+  vertical-align: bottom;
+  text-align: center;
+  margin-bottom: 1em;
+  color: black;
+  opacity: 0.3;
+
+}
+.avance .step {
+  color: black;
+  border: 3px solid silver;
+  background-color: silver;
+  border-radius: 50%;
+  line-height: 4.2;
+  width: 4.2em;
+  height: 4.2em;
+  display: inline-block;
+  z-index: 0;
+font-size: 1.2em;
+}
+.avance .step span {
+  opacity: 0.3;
+}
+.avance .active .name,
+.avance .active .step span {
+  opacity: 1;
+
+}
+.avance .step:before {
+  content: "";
+  display: block;
+  background-color: silver;
+  height: 1.4em;
+  width: 50%;
+  position: absolute;
+  bottom: 1.6em;
+  left: 0;
+  z-index: -1;
+}
+.avance .step:after {
+  content: "";
+  display: block;
+  background-color: silver;
+  height: 1.4em;
+  width: 50%;
+  position: absolute;
+  bottom: 1.6em;
+  right: 0;
+  z-index: -1;
+}
+.avance li:first-of-type .step:before {
+  display: none;
+}
+.avance li:last-of-type .step:after {
+  display: none;
+}
+.avance .done .step{
+  border: 3px solid yellowgreen;
+}
+.avance .done .step,
+.avance .done .step:before,
+.avance .done .step:after{
+    background-color: yellowgreen;
+}
+
+.avance .active .step,
+.avance .active .step:before {
+  background-color: yellow;
+}
+
+.avance .active .step {
+  border: 3px solid yellow;
+}
+
+/*Deja Titlo y Avance de navegación fija en la parte superior*/
+ .pagoTituloAvance .affix {
+      /*top:52px;*/
+  /*    width: 100%;*/
+      /*z-index: 9999 !important;*/
+       /*background-color: red;*/
+        /*width: 75%;*/
+
+  /*margin: auto;*/
+  /*padding: 0;*/
+
+  }
+
+
+  /*.pagoTitloAvance > .affix ~ .container-fluid {
+     position: relative;
+     top: 550px;
+     background-color: red;
+  }*/
+
+.facturacionCard{
+    border-radius: 20px;
+    border-style:solid;
+    border-width:thin;
+    border-color: gray;
+    /*background-color: blue;*/
+    padding: 25px;
+    margin-bottom: 25px
+    /*padding-left: 25px;*/
+
+}

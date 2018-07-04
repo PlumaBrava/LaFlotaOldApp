@@ -1,4 +1,7 @@
  <div class="checkbox">
+    <h1 translate>ListaConsultasRespuestas_ </h1>
+    <h2 translate="CantidadConsultas_ " translate-value-cantidad="{{listaConsultasPendientes.length}}"> </h2>
+
     <label>
       <input type="checkbox" ng-model="oneAtATime">
       Open only one at a time
@@ -33,11 +36,14 @@
 <div class="row argregarMensaje ">
   <hr class='mb-4'>
 <h4 class="media-heading" translate>AgregarMensaje_</h4>
-<input class=" mensajeParaEnviar col-sm-8" translate-attr="{ placeholder: 'mensajePlaceHolder_'}" ng-model="message_respuesta" />
-<button class="btn col-sm-2 btn btn-primary botonEnviarMensaje pull-right " data-title="Delete" ng-click="responderConsulta(consulta,message_respuesta)" ><span >Responder</span></button>
+<div class="row">
+<input class=" mensajeParaEnviar col-sm-6" translate-attr="{ placeholder: 'mensajePlaceHolder_'}" ng-model="message_respuesta" />
+<button class="btn col-sm-2 btn btn-primary botonEnviarMensaje pull-right "  ng-click="sendMail2(consulta)" ><span translate >RespuestasEnviarMail_</span></button>
+<button class="btn col-sm-2 btn btn-primary botonEnviarMensaje pull-right "  ng-click="sacarDelListado(consulta)" ><span translate="" >RespuestasSacarDelListado_</span></button>
+<button class="btn col-sm-2 btn btn-primary botonEnviarMensaje pull-right "  ng-click=" responderConsulta(consulta,message_respuesta) " ><span translate="" >RespuestasResponder_</span></button>
 
  </div>
-
+</div>
 </div>
 
   </uib-accordion>

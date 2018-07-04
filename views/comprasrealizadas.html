@@ -1,0 +1,56 @@
+
+<div class="row">
+<h1 translate>comprasRealizadas_</h1>
+
+</div>
+
+<div class="row">
+<uib-accordion close-others="oneAtATime">
+
+    <div uib-accordion-group class="panel-primary class" ng-class="{'panel-danger': compra.estado ==='pendiente'}"  is-open="isopen" ng-repeat="compra in ListaDeCompras" >
+<!--       <uib-accordion-heading  >
+        {{producto.NombredelProducto}}<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
+        <p class=" pull-right" ng-click="modificarProducto(producto)" >{{producto.MontodelProducto}}</p>
+      </uib-accordion-heading> -->
+       <uib-accordion-heading  >
+        <div ng-click="">
+        Monto: {{compra.monto}} ,    Estado: {{compra.estado}}
+            <p class=" pull-right"  >{{compra.timestampCreacion | date:'dd-MM-yyyy'}}      ,</p>
+            <p class=" pull-right"  >{{compra.usuario.userMail}}     ,</p>
+
+        </div>
+      </uib-accordion-heading>
+
+
+      <div class="row">
+        <div class="col-sm-6" ng-repeat="productoComprado in compra.lista" >
+           <span translate>{{productoComprado.producto.NombredelProducto}}</span>
+           <span translate>{{productoComprado.producto.MontodelProducto}}</span>
+        </div>
+
+    </div>
+
+<div class="row">
+        <div class="col-sm-6"  >
+           <span translate>{{compra.bono.Codigo}}</span>
+           <span translate>{{compra.bono.TipoDescuento}}</span>
+           <span translate>{{compra.bono.Porcentaje}}</span>
+           <span translate>{{compra.bono.montoDescuento}}</span>
+
+        </div>
+        <div class="col-sm-6" >
+            <span translate>Pago</span>
+            <span translate>ID: {{compra.datosPago.id}}</span>
+            <span translate>barcode: {{compra.datosPago.barcode.content}}</span>
+            <span translate>external_resource_url: {{compra.datosPago.external_resource_url}}</span>
+            <span translate>payment_type_id: {{compra.datosPago.payment_type_id}}</span>
+            <span translate>payment_method_id: {{compra.datosPago.payment_method_id}}</span>
+        </div>
+    </div>
+
+
+
+</div>
+
+  </uib-accordion>
+  </div>

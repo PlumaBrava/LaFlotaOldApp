@@ -14,6 +14,54 @@ angular
 
 
 
+$urlRouterProvider.rule(function ($injector, $location) {
+
+       //what this function returns will be set as the $location.url
+        var path = $location.path(), normalized = path.toLowerCase();
+        console.log('$urlRouterProvider');
+        console.log($injector);
+        console.log('path: '+path);
+        console.log('-'+path+'-');
+        console.log('path nomalized :'+normalized);
+        console.log($location);
+        console.log($location.url());
+         // $location.url('/spotifycallback/'+$location.url().replace('#','?'));
+
+
+          console.log($location.url().indexOf('access_token')); // -1 si no le encuenta, de lo contrario da el lugar en el array
+          console.log($location.url().indexOf('token_type')); // -1 si no le encuenta, de lo contrario da el lugar en el array
+          console.log($location.url().indexOf('expires_in')); // -1 si no le encuenta, de lo contrario da el lugar en el array
+
+          if(path==='' && $location.url().indexOf('access_token')!==-1 && $location.url().indexOf('token_type')!==-1 && $location.url().indexOf('expires_in'))
+            {
+              console.log('cambio URL spotifycallback');
+              $location.url('/spotifycallback'+$location.url().replace('#','?'));
+            // $location.replace().path('/spotifycallback/');
+        }
+
+
+        console.log(normalized);
+        if (path !== normalized) {
+        //     //instead of returning a new url string, I'll just change the $location.path directly so I don't have to worry about constructing a new url string and so a new state change is not triggered
+        //     // $location.replace().path(normalized);
+        }
+        // because we've returned nothing, no state change occurs
+    });
+$stateProvider
+.state('spotifycallback',{
+    // url:'/spotifycallback/',
+    // url:'/spotifycallback/?access_token&token_type&expires_in',
+    url:'/spotifycallback?access_token&token_type&expires_in',
+    templateUrl:'views/spotifycallback.html',
+    resolve: {
+    'urlFix': ['$location', function($location){
+      console.log(' resolve');
+      console.log($location.url());
+        // $location.url($location.url().replace('#','?'));
+     }]
+   },
+    controller:'SpotifycallbackCtrl as sp'
+});
 
 // $urlRouterProvider.otherwise('/');
 $stateProvider
@@ -46,6 +94,13 @@ $stateProvider
 });
 
 $stateProvider
+.state('configuracionadministrador',{
+    url:'/configuracionadministrador',
+    templateUrl:'views/configuracionadministrador.html',
+     controller:'ConfiguracionusuarioadministradorCtrl as configuracionadministradorCtrl'
+});
+
+$stateProvider
 .state('consultas',{
     url:'/consultas',
     templateUrl:'views/consultas.html',
@@ -65,6 +120,17 @@ $stateProvider
     url:'/login',
     templateUrl:'views/login.html',
      controller:'LoginCtrl as login'
+});
+
+$stateProvider
+.state('configuracionusuario',{
+    url:'/configuracionusuario',
+      params: {
+            pagando: null
+
+        },
+    templateUrl:'views/configuracionusuario.html',
+     controller:'ConfiguracionusuarioCtrl as configuracionusuario'
 });
 
 $stateProvider
@@ -119,11 +185,63 @@ $stateProvider
      controller:'LanzamientosdetallesCtrl as lanzamientosdetalles'
 });
 
+
+$stateProvider
+.state('miscompras',{
+    url:'/miscompras',
+    templateUrl:'views/miscompras.html',
+     controller:'MiscomprasCtrl as miscomprascontroller'
+});
+
+$stateProvider
+.state('comprasrealizadas',{
+    url:'/comprasrealizadas',
+    templateUrl:'views/comprasrealizadas.html',
+     controller:'ComprasrealizadasCtrl as comprasrealizadascontroller'
+});
+
+$stateProvider
+.state('misplanesvigentes',{
+    url:'/misplanesvigentes',
+    templateUrl:'views/misplanesvigentes.html',
+     controller:'MisplanesvigentesCtrl as misplanesvigentescontroller'
+});
+
+
 $stateProvider
 .state('lanzamientospendientes',{
     url:'/lanzamientospendientesdetalle',
     templateUrl:'views/lanzamientospendientes.html',
      controller:'LanzamientosPendientesCtrl as lanzamientospendientes'
+});
+
+
+$stateProvider
+.state('bonos',{
+    url:'/bonos',
+      params: {
+            bono: null
+
+        },
+    templateUrl:'views/bonos.html',
+     controller:'BonosCtrl as bonosCtrl'
+});
+
+
+$stateProvider
+.state('listadobonos',{
+    url:'/listadobonos',
+    templateUrl:'views/listadobonos.html',
+     controller:'ListadobonosCtrl as Listadobonos'
+});
+
+
+// mercado Pago. listado de Pagos realizados.
+$stateProvider
+.state('listadopagos',{
+    url:'/listadopagos',
+    templateUrl:'views/listadopagos.html',
+     controller:'ListadopagosCtrl as listadopagos'
 });
 
 $stateProvider

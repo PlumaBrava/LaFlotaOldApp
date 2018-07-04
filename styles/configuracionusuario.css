@@ -1,0 +1,15 @@
+.artistaCard{
+    border-radius: 20px;
+    border-style:solid;
+    border-width:thin;
+    border-color: gray;
+    /*background-color: blue;*/
+    padding: 25px;
+    margin-bottom: 25px
+    /*padding-left: 25px;*/
+
+}
+
+.artistaDNI{
+    padding-left:  30px;
+}

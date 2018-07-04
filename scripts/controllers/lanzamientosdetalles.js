@@ -9,11 +9,13 @@
  */
 angular.module('laFlotaApp')
   // .controller('LanzamientosdetallesCtrl', function () {
-      .controller('LanzamientosdetallesCtrl', ['$scope','$state', '$stateParams','firebaseservice', '$translate','$uibModal','subirArchivo', function ($scope,$state, $stateParams, fb,$translate,$uibModal,subirArchivo) {
+      .controller('LanzamientosdetallesCtrl', ['$scope','$state', '$stateParams','firebaseservice', '$translate','$uibModal','subirArchivo','subirarchivosong', 'spotiService',function ($scope,$state, $stateParams, fb,$translate,$uibModal,subirArchivo,subirarchivosong,spotiService) {
         console.log('LanzamientosdetallesCtrl');
-
+var self=this;
    console.log('$stateParams');
     console.log($stateParams);
+    $scope.errorAlbum={};
+    $scope.progress=0;
   if($stateParams.lanzamiento){
 
     $scope.album={
@@ -34,6 +36,7 @@ angular.module('laFlotaApp')
         tiendas:$stateParams.lanzamiento.tiendas,
         timestampCreacion:$stateParams.lanzamiento.timestampCreacion,
         Artista:$stateParams.lanzamiento.Artista,
+        FechaDeLanzamiento:$stateParams.lanzamiento.FechaDeLanzamiento,
 
         user:$stateParams.lanzamiento.user
 
@@ -41,12 +44,24 @@ angular.module('laFlotaApp')
         };
      $scope.tracks=$stateParams.lanzamiento.tracks;
      $scope.SongFileDetalle=new Array(parseInt($stateParams.lanzamiento.NumeroDeCanciones, 10));
+     $scope.progressSong=new Array(parseInt($stateParams.lanzamiento.NumeroDeCanciones, 10));
+console.log( $scope.SongFileDetalle);
+
+for(var i=0; i<$scope.tracks.length;i++){
+
+      $scope.SongFileDetalle[i]={'name':$scope.tracks[i].nombreArchivo,
+      'size':$scope.tracks[i].size,
+      'type':$scope.tracks[i].type};
+
+      $scope.progressSong[i]=0;
+     }
 
 } else {
 
     $scope.album={
         CodigoISRC:null,
         Composicion:null,
+        FechaDeLanzamiento:null,
         GeneroPrincipal:null,
         GeneroSecundarios:null,
         Idioma:null,
@@ -64,6 +79,7 @@ angular.module('laFlotaApp')
                   MediaNet: true,
                   MicrosoftGroove:true,
                   Pandora:true,
+                  Deezer:true,
                   Saavn:true,
                   Spotify:true,
                   Tidal:true,
@@ -76,7 +92,147 @@ angular.module('laFlotaApp')
 
     };
 }
+$scope.getFileName=function(){
+  console.log('getFileName');
+}
+  $scope.errorAlbum.Nombre="";
+  $scope.errorAlbum.Arte="";
+  $scope.errorAlbum.Tiendas="";
+  $scope.errorAlbum.Tiendas="";
+  $scope.errorAlbum.NumeroDeCanciones="";
+  $scope.errorAlbum.Idioma="";
+this.verificarLanzamiento=function(){
+  var hayError=false;
+  var Mensaje='';
 
+  $scope.errorAlbum.Arte="";
+  $scope.errorAlbum.Nombre="";
+  $scope.errorAlbum.Arte="";
+  $scope.errorAlbum.Tiendas="";
+
+  $scope.errorAlbum.NumeroDeCanciones="";
+  $scope.errorAlbum.Idioma="";
+  $scope.errorAlbum.GeneroPrincipal="";
+  $scope.errorAlbum.GeneroSecundarios="";
+  $scope.errorAlbum.Composicion="";
+
+  $scope.errorAlbum.LetrasExplicitas="";
+  $scope.errorAlbum.PrecioEnTiendas="";
+  $scope.errorAlbum.TieneCodigoISRC="";
+  $scope.errorAlbum.CodigoISRC="";
+  $scope.errorAlbum.Artista="";
+  $scope.errorAlbum.FechaDeLanzamiento="";
+  $scope.errorAlbum.Tracks="";
+
+
+
+  if(!$scope.album.Nombre){
+    $scope.errorAlbum.Nombre='errorAlbumNombre_';
+    hayError=true;
+    // Mensaje=Mensaje+' errorAlbumNombre_ '+'\n'
+  };
+  if(!$scope.album.arteURL){
+     $scope.errorAlbum.Arte='errorAlbumArte_';
+    hayError=true;
+    // Mensaje=Mensaje+' errorAlbumArte_ '+'\n'
+  };
+
+   if(!$scope.album.tiendas.Amazon &&
+      !$scope.album.tiendas.AppleMusic&&
+      !$scope.album.tiendas.ClaroMusica&&
+      !$scope.album.tiendas.GooglePlay&&
+      !$scope.album.tiendas.MediaNet&&
+      !$scope.album.tiendas.MicrosoftGroove&&
+      !$scope.album.tiendas.Pandora&&
+      !$scope.album.tiendas.Saavn&&
+      !$scope.album.tiendas.Spotify&&
+      !$scope.album.tiendas.Tidal&&
+      !$scope.album.tiendas.YouTubeMusic&&
+      !$scope.album.tiendas.iTunes){
+    console.log("error Tiendas");
+      $scope.errorAlbum.Tiendas='errorAlbumTienda_';
+    hayError=true;
+    // Mensaje=Mensaje+' errorAlbumArte_ '+'\n'
+  };
+console.log("$scope.album.NumeroDeCanciones");
+console.log($scope.album.NumeroDeCanciones);
+console.log($scope.album.Idioma);
+  if(!$scope.album.NumeroDeCanciones){
+    console.log("err $scope.album.NumeroDeCanciones");
+    console.log($scope.album.NumeroDeCanciones);
+      $scope.errorAlbum.NumeroDeCanciones='errorAlbumNumeroDeCanciones_';
+    hayError=true;
+    // Mensaje=Mensaje+' errorAlbumArte_ '+'\n'
+  };
+  if(!$scope.album.Idioma){
+    $scope.errorAlbum.Idioma='errorAlbumIdioma_';
+    hayError=true;
+  };
+
+  if(!$scope.album.GeneroPrincipal){
+    $scope.errorAlbum.GeneroPrincipal='errorAlbumGeneroPrincipal_';
+    hayError=true;
+  };
+
+  if(!$scope.album.GeneroSecundarios){
+    $scope.errorAlbum.GeneroSecundarios='errorAlbumGeneroSecundarios_';
+    hayError=true;
+  };
+
+  if(!$scope.album.Composicion){
+    $scope.errorAlbum.Composicion='errorAlbumComposicion_';
+    hayError=true;
+  };
+
+
+   if(!$scope.album.LetrasExplicitas){
+    $scope.errorAlbum.LetrasExplicitas='errorAlbumLetrasExplicitas_';
+    hayError=true;
+  };
+
+
+   if(!$scope.album.PrecioEnTiendas){
+    $scope.errorAlbum.PrecioEnTiendas='errorAlbumPrecioEnTiendas_';
+    hayError=true;
+  };
+
+   if(!$scope.album.TieneCodigoISRC){
+    $scope.errorAlbum.TieneCodigoISRC='errorAlbumTieneCodigoISRC_';
+    hayError=true;
+  };
+
+  if($scope.album.TieneCodigoISRC=='TengoCodigoISRC' && !$scope.album.CodigoISRC){
+
+       $scope.errorAlbum.CodigoISRC='errorAlbumCodigoISRC_';
+       hayError=true;
+
+  };
+
+ if(!$scope.album.Artista){
+    $scope.errorAlbum.Artista='errorAlbumArtista_';
+    hayError=true;
+  };
+
+  if(!$scope.album.FechaDeLanzamiento){
+    $scope.errorAlbum.FechaDeLanzamiento='errorAlbumFechaDeLanzamiento_';
+    hayError=true;
+  };
+
+  // if(!$scope.album.Tracks){
+  //   $scope.errorAlbum.Tracks='errorAlbumTracks_';
+  //   hayError=true;
+  // };
+
+
+  //       timestampCreacion:null,
+  //       tracks:null,
+  //        Artista:null,
+  //       user:null};
+  if(hayError){
+  $scope.openModal('lg', 'MensajesDeError_',Mensaje);
+  }
+  return hayError;
+};
 
 fb.listarArtistaUsuario()
     .then(function(dato){
@@ -106,7 +262,7 @@ $scope.grabarProducto = function(){
      console.log("getFile " );
     console.log( $scope.file);
         $scope.progress = 0;
-        subirArchivo.subirArchivo($scope.file, $scope,'LaFlotaImagenAlbum/'+ fb.getUser().uid)
+        subirArchivo.subirArchivo($scope.file, $scope,'LaFlotaImagenAlbum/'+ fb.getUsuario().uid)
                       .then(function(result) {
                         console.log('result Imagen');
                         console.log(result);
@@ -125,6 +281,12 @@ $scope.grabarProducto = function(){
      console.log(progress);
         $scope.progress = progress.loaded / progress.total;
    });
+  $scope.$on('fileProgressSong', function(e, progress) {
+     console.log("fileProgress " );
+     console.log(e );
+     console.log(progress);
+        $scope.progressSong[progress.indice] = progress.loaded / progress.total;
+   });
 this.onChange = function onChange(fileList) {
     console.log("onChange");
     console.log(fileList);
@@ -138,21 +300,26 @@ $scope.uploadTrack=function(fileName,index){
   console.log(fileName);
   console.log( $scope[fileName]);
   $scope.SongFileDetalle[index]=($scope[fileName]);
+  $scope.progressSong[index]=0;
+  $scope.tracks[index].size=$scope.SongFileDetalle[index].size;
+  $scope.tracks[index].type=$scope.SongFileDetalle[index].type;
+
   console.log( $scope.SongFileDetalle[index]);
   console.log($scope);
 
-subirArchivo.subirArchivo( $scope.SongFileDetalle[index], $scope,'LaFlotaAudioUser/'+ fb.getUser().uid)
+
+ console.log(subirarchivosong);
+subirarchivosong.subirArchivo( $scope.SongFileDetalle[index], $scope,'LaFlotaAudioUser/'+ fb.getUsuario().uid,index)
                       .then(function(result) {
                         console.log('result uploadTrack');
                         console.log(result);
                           $scope.tracks[index].link= result.downloadURL;
                            $scope.tracks[index].nombreArchivo = result.metadata.name;
-                          $scope.okdisponible=true;
+
                       },function(result) {
                       console.log('error uploadTrack');
                       console.log(result);
                       });
-
 
 };
 
@@ -328,19 +495,40 @@ $translate('Idioma_').then(function (dato) {
 if (numeroCanciones){
      $scope.tracks=new Array(parseInt(numeroCanciones, 10));
      $scope.SongFileDetalle=new Array(parseInt(numeroCanciones, 10));
+     $scope.progressSong=new Array(parseInt(numeroCanciones, 10));
      console.log('updateNumeroCanciones',$scope.tracks);
 
      for(var i=0; i<$scope.tracks.length;i++){
-      $scope.tracks[i]={'nombre':'Nombre del tema','link':'link123','otos datos':'xx','index':i};;
+      $scope.tracks[i]={'nombre':'','link':'','otos datos':'xx','index':i,'size':' ',type:' '};;
       $scope.SongFileDetalle[i]=i;
+      $scope.progressSong[i]=0;
      }
      }
   }
 
 $scope.grabarDetalleLanzamiento=function(){
  console.log('grabarDetalleLanzamiento');
+ if(!self.verificarLanzamiento()){
     $scope.album.tracks=$scope.tracks;
    fb.grabarDetalleLanzamiento($scope.album.lanzamientoKey,$scope.album);
+ };
+};
+
+
+$scope.getSpotifyToken=function(){
+console.log('getSpotifyToken');
+
+spotiService.getSpotifyToken();
+};
+
+
+$scope.getSpotifyArtista=function(artista){
+  console.log('getSpotifyUser');
+  console.log('artista',artista);
+
+spotiService.getSpotifyArtista(artista);
+
+
 };
 
 
@@ -393,7 +581,7 @@ $scope.openModal = function (size,titulo, mensaje) {
     });
 };
 
-$scope.openModalArtista = function (size,titulo, mensaje) {
+$scope.openModalArtista = function (size,artista) {
   console.log("openModalArtista");
     var parentElem = null;
     // var parentElem = parentSelector ?
@@ -408,11 +596,11 @@ $scope.openModalArtista = function (size,titulo, mensaje) {
       size: size,
       appendTo: parentElem,
       resolve: {
-        titulo: function () {
-          return titulo;
-        },
-        mensaje: function () {
-          return mensaje;
+        // titulo: function () {
+        //   return titulo;
+        // },
+        artista: function () {
+          return artista;
         }
       }
     });
@@ -683,37 +871,44 @@ var codigo =[
 
 
 })
- .controller('ModalArtistaCtrl', function ($uibModalInstance,titulo, mensaje,$translate,firebaseservice,$scope) {
+ .controller('ModalArtistaCtrl', function ($uibModalInstance,artista,$translate,firebaseservice,$scope,subirArchivo,spotiService) {
   var $ctrl = this;
-  $ctrl.titulo = "titulo";
-  $ctrl.mensaje = "mensaje";
+  // $ctrl.titulo = "titulo";
+  // $ctrl.mensaje = "mensaje";
   $ctrl.selected = {
     // item: $ctrl.items[0]
-    item: mensaje
+    // item: mensaje
+    item: ""
+  };
+  $ctrl.artista={
+    nombre:artista.nombre,
+    redSocial:artista.redSocial,
+    linkDNI:artista.linkDNI,
+    id:artista.$id
   };
 
- console.log("ModalArtistaCtrl firebaseservice",firebaseservice);
-$translate(titulo).then(function (dato) {
-    console.log("modalTraduccion dato",dato);
-    $ctrl.titulo= dato;
-  }, function (translationId) {
-    console.log("modalTraduccion no encontro",translationId);
-     $ctrl.titulo = translationId;
-  });
+ console.log("ModalArtistaCtrl artista",artista);
+// $translate(titulo).then(function (dato) {
+//     console.log("modalTraduccion dato",dato);
+//     $ctrl.titulo= dato;
+//   }, function (translationId) {
+//     console.log("modalTraduccion no encontro",translationId);
+//      $ctrl.titulo = translationId;
+//   });
 
- $translate(mensaje).then(function (dato) {
-    var parsed = angular.element("<div></div>");
-   var textVersion = parsed.text(dato).html();
-    console.log( textVersion);
+//  $translate(mensaje).then(function (dato) {
+//     var parsed = angular.element("<div></div>");
+//    var textVersion = parsed.text(dato).html();
+//     console.log( textVersion);
 
-    console.log("ModalArtistaCtrl dato",encodeURIComponent(dato));
-    console.log( "ModalArtistaCtrl dato",decodeURIComponent(dato));
-    console.log("mModalArtistaCtrl dato",dato);
-     // $ctrl.mensaje=  unescape(dato);
-     // $ctrl.mensaje=   StringUTF8AsBytesArrayFromString(dato);
-  }, function (translationId) {
-     $ctrl.mensaje = translationId;
-  });
+//     console.log("ModalArtistaCtrl dato",encodeURIComponent(dato));
+//     console.log( "ModalArtistaCtrl dato",decodeURIComponent(dato));
+//     console.log("mModalArtistaCtrl dato",dato);
+//      // $ctrl.mensaje=  unescape(dato);
+//      // $ctrl.mensaje=   StringUTF8AsBytesArrayFromString(dato);
+//   }, function (translationId) {
+//      $ctrl.mensaje = translationId;
+//   });
 
   $ctrl.ok = function () {
     $uibModalInstance.close($ctrl.selected.item);
@@ -725,18 +920,34 @@ $translate(titulo).then(function (dato) {
 
 
  $ctrl.agregarArtista= function(artista) {
-   console.log('agregarArtista '+artista);
+  // artista.linkDNI="https://firebasestorage.googleapis.com/v0/b/laflota-19ada.appspot.com/o/LaFlotaAudioUser%2FLyL1uhXJUmgitP3HBLvJfVblZLB2%2FDSC05391-14-2.jpg?alt=media&token=e8d1a606-fc3e-42dd-bdad-48506d919e4b";
+   console.log('agregarArtista ',artista);
   firebaseservice.agregarArtista(artista)
   .then(function(dato){
    console.log('agregarArtista',dato);
-
+  $uibModalInstance.dismiss('cancel');
   })
     .catch(function(error){
          console.log('error agregarArtista',error);
     });
 };
 
+// if(!spotiService.isSpotifyReady()){
+// spotiService.inicializaSpotify().then(
+//   function(r){
+//   console.log('inicializado ok Spotify: ' );
+//   // accessToken=spotiService.getSpotifyAccessTocken();
+//   // self.spotifyUserId=spotiService.getSpotifyUserID();
+//   });
+// };
 
+$ctrl.getSpotifyUser=function(artista){
+  console.log('getSpotifyUser');
+
+spotiService.inicializaSpotifyLaFlota();
+
+
+}
 
 
 firebaseservice.listarArtistaUsuario()
@@ -752,8 +963,28 @@ console.log('listarArtistaUsuario', $ctrl.listaArtistas);
          console.log('error listarArtistaUsuario',error);
     });
 
+ $scope.$on('fileProgress', function(e, progress) {
+     console.log("fileProgress " );
+     console.log(e );
+     console.log(progress);
+        $scope.progress = progress.loaded / progress.total;
+   });
 
+ $scope.getFile = function () {
+     console.log("getFile " );
+    console.log( $scope.file);
+        $scope.progress = 0;
+        subirArchivo.subirArchivo($scope.file, $scope,'LaFlotaDNIusuario/'+ firebaseservice.getUsuario().uid)
+                      .then(function(result) {
+                        console.log('result Imagen');
+                        console.log(result);
+                           $ctrl.artista.linkDNI= result.downloadURL;
 
+                      },function(result) {
+                      console.log('error Imagen');
+                      console.log(result);
+                      });
+};
 
 });
 

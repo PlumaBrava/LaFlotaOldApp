@@ -1,0 +1,46 @@
+<p>This is the listadoBonos view.</p>
+<div class="row">
+<h1 translate="">ListadoDeBonos_</h1>
+ <div> <h3 class="col-sm-2" translate>{{error}}</h3>
+  <button class="btn btn-primary btn-lg pull-right col-sm-2" ng-click="crearBono()" translate="" >NuevoBono_</button>
+</div>
+</div>
+
+<div class="row">
+<uib-accordion close-others="oneAtATime">
+
+    <div uib-accordion-group class="panel-primary class" ng-class="{'panel-danger': producto.status==='pendiente'}"  is-open="isopen" ng-repeat="bono in listaBonos  " >
+<!--       <uib-accordion-heading  >
+        {{producto.NombredelProducto}}<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
+        <p class=" pull-right" ng-click="modificarProducto(producto)" >{{producto.MontodelProducto}}</p>
+      </uib-accordion-heading> -->
+       <uib-accordion-heading  >
+        <div ng-click="modificarBono(bono)">
+        {{bono.Codigo}}
+        <p class=" pull-right"  >{{bono.Descripcion}}</p>
+        </div>
+      </uib-accordion-heading>
+
+
+      <div class="row">
+        <div class="col-sm-6">
+           <span translate>SeleccioneFuncionesHabilitadas</span>
+        </div>
+        <div class="col-sm-6" >
+
+             <button class="btn btn-success btn-xs pull-right "   ng-click="modificarProducto(producto)" ><span class="glyphicon glyphicon-save"></span></button>
+        </div>
+    </div>
+
+<div class="row">
+ {{producto.DescripciondelProducto}}
+
+
+
+ </div>
+
+
+</div>
+
+  </uib-accordion>
+  </div>

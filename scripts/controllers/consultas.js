@@ -15,14 +15,23 @@ angular.module('laFlotaApp')
 var self=this;
 
 
+$scope.mailConsulta='';
+
 $scope.subjet='';
 $scope.mensaje='';
 $scope.error="sin error";
 $scope.listaConsultas={};
-$scope.crearUsuarioConsulta=function(titulo, mensaje,mensajekey){
+
+if (fb.getUsuario()){
+$scope.mostrarMailConsulta=false;
+} else {
+    $scope.mostrarMailConsulta=true;
+    $state.go('login');
+}
+
+$scope.crearUsuarioConsulta=function( titulo, mensaje,mensajekey){
      console.log('crearMensaje '+titulo);
      console.log('crearMensaje '+mensaje);
-
      if(!titulo){
         $scope.error="mensajeSinTitulo";
      }

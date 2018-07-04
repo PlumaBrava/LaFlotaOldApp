@@ -13,10 +13,13 @@
 "quienessomos":"Quienes somos?",
 "preguntasfrecuentes":"Preguntas frecuentes",
 "consultas":"Consultas",
-"Ingresar":"Ingresar",
-"Idioma":"Idioma",
-"Administracion":"Administración",
+"Ingresar_":"  Ingresar",
+"Idioma_":"Idioma",
+"Administracion_":"Administración",
+"landing_":"Landing",
+"pago_":"Pago",
 "lanzamientos_":"Lanzamientos",
+"configuracionUsuario_":"Configuración",
 
 
  "_comentario1":"Textos Carrousel",
@@ -59,20 +62,32 @@
 "bonos":"Bonos",
 "consultas":"Consultas",
 "finanzas":"Finanzas",
+"comprasRealizadas_":"Compras Realizadas",
 "cargarLiquidaciones":"Cargar Liquidaciones",
+"configuracionesUsuarioAdministrador":"Configuración",
 
 
 "_comentario4":"Textos consultas.html",
 
 "TituloConsultas":"Consultas",
-"SubjetConsulta":"Título",
+"MailConsulta_":"Mail",
+"SubjetConsulta_":"Título",
 "SubjetConsultaplaceholder_":"Tema de la consulta",
 "mensajeConsulta":"Mensaje",
 "NuevaConsulta":"Nueva Consulta",
+"sinMailConsulta":"Ingresar un mail para la consuta",
 "mensajeSinTitulo":"Ingresar un Titulo para la consuta",
 "mensajeSinTexto":"Ingresar la consuta",
 "mensajePlaceHolder_":"Mensaje de la consulta",
 "AgregarMensaje_":"Agregar Mensaje",
+
+
+"_comentario4.1":"Textos consultasrespuestas.html",
+"ListaConsultasRespuestas_":"Lista de Consutlas Pendientes",
+"CantidadConsultas_":"Consultas Pendientes: {{cantidad}} ",
+"RespuestasResponder_":"Responder ",
+"RespuestasSacarDelListado_":"Sacar del listado",
+"RespuestasEnviarMail_":"Enviar Mail",
 
 
 "_comentario5":"Textos productos.html",
@@ -94,7 +109,7 @@
 "DuraciondelProducto":"Vigencia",
 "VigenciaAnualdelProducto":"Anual",
 "VigenciaVitaliciadelProducto":"Vitalicio",
-"AceptaBonificacionesdelProducto":"Hacepta Bonificaciones",
+"AceptaBonificacionesdelProducto":"Acepta Bonificaciones",
 "TiendasIncluidasdelProducto":"Tiendas Incluidas",
 "PlanSugeridodelProducto":"Plan Sugerido",
 "GrabarProducto":"Guardar",
@@ -109,6 +124,35 @@
 "PRY":"Paraguay",
 "DEU":"Alemania",
 
+"_comentario6-a":"Provincias Argentinas",
+
+"AR-B":"Buenos Aires",
+"AR-C":"Capital",
+"AR-K":"Catamarca",
+"AR-H":"Chaco",
+"AR-U":"Chubut",
+"AR-X":"Córdoba",
+"AR-W":"Corrientes",
+"AR-E":"Entre Ríos",
+"AR-P":"Formosa",
+"AR-Y":"Jujuy",
+"AR-L":"La Pampa",
+"AR-F":"La Rioja",
+"AR-M":"Mendoza",
+"AR-N":"Misiones",
+"AR-Q":"Neuquén",
+"AR-R":"Río Negro",
+"AR-A":"Salta",
+"AR-J":"San Juan",
+"AR-D":"San Luis",
+"AR-Z":"Santa Cruz",
+"AR-S":"Santa Fe",
+"AR-G":"Santiago del Estero",
+"AR-V":"Tierra del Fuego",
+"AR-T":"Tucumán",
+
+
+
 "_comentario7":"Monedas",
 
 "ARS":"Peso",
@@ -121,6 +165,8 @@
 "_comentario8":"LanzamientoDetalles",
 
 "NombreDelAlbum_":"Nombre del Album",
+"ArteDelAlbum_":"Arte del Album",
+"SeleccioneImagenAlbum_":"Seleccione una Imagen",
 "AlbumRecopilatorio_":"Album Recopilatorio?",
 "AlbumRecopilatorioSI_":"Si",
 "AlbumRecopilatorioNO_":"No",
@@ -152,7 +198,7 @@
 "TieneCodigoISRC_":"Tiene Código ISRC",
 "CodigoISRC_":"Código ISRC ",
 "TituloListadoTracks_":"Tracks",
-"NombreDelTema_":"Nombre del Track",
+"NombreDelTema_":"Nombre:",
 "Seleccione Archivo_":"Seleccione Archivo",
 "GuardarLanzamientoDetalle_":"Guardar",
 "GuardarLanzamientoProcesar_":"Procesar",
@@ -163,9 +209,32 @@
 
 
 
+"Errores_":"Errores",
+"MensajesDeError_":"Verifique los siguietes datos para Grabar",
+"errorAlbumNombre_":"Falta el NOMBRE del Album",
+"errorAlbumArte_":"Falta el ARTE del Album",
+"errorAlbumTienda_":"Seleccione almenos una tienda",
+"errorAlbumNumeroDeCanciones_":"Debe tener por lo menos un tema",
+"errorAlbumIdioma_":"En que idioma está el tema?",
+"errorAlbumGeneroPrincipal_":"Indique el género Principal",
+"errorAlbumGeneroSecundarios_":"Indique el género Secundario",
+"errorAlbumComposicion_":"Quien es el autor del tema?",
+"errorAlbumLetrasExplicitas_":"Tiene letras Explicitas?",
+"errorAlbumPrecioEnTiendas_":"Indique el precio de venta",
+"errorAlbumTieneCodigoISRC_":"Indique si tiene código ISRC",
+"errorAlbumCodigoISRC_":"Indique EL código ISRC",
+"errorAlbumArtista_":"Indique el artista",
+"errorAlbumFechaDeLanzamiento_":"Seleccione la fecha de lanzamiento",
+"errorAlbumTracks_":"Está icompleta la carga de los tracks",
+
+
+
+
 "_comentario9":"LanzamientoDetalles Modals ",
 "ModalTituloNombreDelAlbum_":"Nombre del Album",
 "ModalMensajeNombreDelAlbum_":"Ingresa el Nombre del álbum.",
+"ModalTituloArteAlbum_":"Arte del Album",
+"ModalMensajeArteDelAlbum_":"Es la imagen con la que se publicitará el albun en las tiendas.",
 "ModalTituloTiendas_":"Tiendas",
 "ModalMensajeTiendas_":"Podés Seleccionar las tiendas en donde se publicará tu música.",
 
@@ -189,6 +258,9 @@
 "ModalMensajeCodigoISRC_":"Este es el código que identifica al album",
 "ModalTituloTrack_" :"Nombre del Track",
 "ModalMensajeTack_":"•  Artistas Invitados: \r\nUsa la palabra feat. entre paréntesis con los nombres separados con 'comas' y '&'. \r\nEjemplo: Ciudad de Pobres Corazones (feat. Charly, Fito & Cerati) Partes or volúmenes: Si la canción tiene 'Parte 1', 'Volumen 2', etc., use una coma, y después la palabra 'Pt.' o 'Vol.' Ejemplo: Metrópolis, Pt. 2 Instrumental/Remix/Version: Si el título necesita una aclaración ponela entre paréntesis.  Ejemplo: Echoes (Instrumental) o Echoes (Versión Acústica) Paréntesis múltiples: Los títulos pueden tener solo un par de paréntesis, si necesitás más usa corchetes.  Ejemplo: Noche de disco (DJ Shadow) [Tiësto remix] [feat. Busta Rhymes] Covers: si es un cover, remix o algo así no incluyas el nombre del Artista Original en el título.  Ejemplo: Thriller Capitalización: Usá Mayúsculas en la primera letra. Las tiendas rechazan todo minúsculas o capitalizaciones eXTrAÑas.  Ejemplo: Es El Fin Del Mundo Como Lo Conocemos (Y Me Siento Bien) No Incluir Año/Fecha: No incluyas fechas en los títulos de las canciones.  (Ejemplo: 2016) ",
+
+"ModalTituloAgregarArtista_" :"Artista",
+"ModalMensajeAgregarArtista_":"Seleccione un Artista del listado o use el boton para agregar uno nuevo",
 
 
 "GeneroAlternativeBigBand_" :"Alternative Big Band",
@@ -235,8 +307,8 @@
 "Precio_1.29" :"U$D 1.29",
 
 
-"TengoCodigoISRC" :"No poseo código ISRC. (Asignar uno en forma gratuita)",
-"NoTengoCodigoISRC" :"Tengo Codigo ISRC",
+"TengoCodigoISRC" : "Tengo Codigo ISRC",
+"NoTengoCodigoISRC" :"No poseo código ISRC. (Asignar uno en forma gratuita)",
 
 
 "_comentario9":"LanzamientoPnedientes",
@@ -261,19 +333,178 @@
 
 
 "Comentario11_":"Mis Lanzamientos",
+
+"MisCosas_":"Mis Cosas",
 "MisLanzamientos_":"Mis Lanzamientos",
 "NuevoLanzamiento_":"Nuevo Lanzamiento",
+
+"MisPlanesVigentes_":"Mis Planes Vigentes",
+"MisCompras_":"Mis Compras",
+
 
 
 "Comentario12_":"Pagos",
 "TituloFormularioPago_":"Pagos",
 "DescripcionFormularioPago_":"Verificá las compras realizadas y completá el Pago",
 "MisCompras_":"Mis Compras",
+"AplicarBono_":"Aplicar Promo (Bono)",
+"BonoNoExiste_":"El bono No Existe",
+"ErrorLaPromocionNoComenzo_":"La Promocion no ha comenzado",
+"ErrorLaPromocionYaTermino_":"La Promocion ya terminó",
+"ErrorLaPromocionAsociadaAOtroProducto_":"La Promocion no aplica a los productos comprados",
+"ErrorSeConsumieronTodosLosBonos_":"La Promoción está agotada",
+
+"ModificarDatosDeFacturacion_":"Modificar",
+"ConfirmaFacturacion_":"Confirmar Facturación",
+"errorConfiguraciónMail_":"Comfigure el mail",
+"errorConfiguraciónNombre_":"Completar el Nombre de Facturación",
+"errorConfiguraciónApellido_":"Completar el Apellido",
+"errorConfiguraciónDireccion1_":"Completa La Dirección",
+"errorConfiguraciónDireccion2_":"Completa la Ciudad",
+"errorConfiguraciónPais_":"Completa el País",
+"errorConfiguraciónProvincia_":"Completa Provincia",
+"errorConfiguraciónCodigoPostal_":"Completa el código Postal",
+"errorConfiguraciónCuit_":"Completa el cuit",
+
+
+
+
+"Carrito_":"Carrito",
+"ConfirarCompra_":"Confirmar la compra",
+"ConfirmarFacturacion_":"Confirmar Facturación",
+"Pagar_":"Pagar",
+"ConfirmarPago_":"Pago Confirmado",
+"ConfirmarCompra_":"Confirmar Compra",
+
+"TituloSeccionPago_":"Pago",
+"ErrorMetodoDePago_":"Selecciona un método de Pago Válido",
+
+
+
+
+"MetodoDePago_": "Método de Pago",
+"TipoMetodoDePago_": "Método de Pago",
+"Identificacion_": "Identificación",
+"IngreseTipoIdentificacion_": "Ingrese tipo de Identificacion",
+"ErrorTipoIdentificacionSeleccionada_": "Tipo de Identificación Inválida",
+"NroIdentificacion_": "Número",
+"IngreseNroIdentificacion_": "Ingrese Numero de Identificacion",
+"IngreseTipoMetodoDePago_": "Ingrese Tipo de Pago",
+"ErrorNumeroIdentificion_": "Numero de Identificacion Invalido",
+"NombreEnLaTarjeta_": "Nombre en la Tarjeta",
+"IngreseNombreEnLaTarjeta_": "Ingrese el nombre como se muestra en la tarjeta",
+"IngreseNombreEnLaTarjeta_": "Ingrese el Numero como se muestra en la tarjeta",
+"NumeroEnLaTarjeta_": "Numero De Tarjeta",
+"ExpirationMonth_": "Mes de Vencimiento",
+"IngreseMesDeLaTarjeta_": "Dos Digitos para el mes de Vencimiento",
+"ExpirationYear_": "Ano de Vencimiento",
+"IngreseAnoDeLaTarjeta_": "Dos Digitos para el ano de Vencimiento",
+"CodigoSeguridadDeLaTarjeta_": "Código de Seguridad",
+"IngreseSeguridadDeLaTarjeta_": "Ingrese Codigo de Seguridad",
+"Cuotas_": "Seleccione las cuotas",
+"IngreseCuotasDeLaTarjeta_": "Seleccione la cantidad de cuotas en las que realizara el pago",
+"ErrorCuotaSeleccionada_": "Seleccione en cuantas cuotas realizara el pago",
+
+
+
+"credit_card": "Tarjeta de crédito",
+ "debit_card": "Tarjeta de débito",
+"ticket": "Ticket",
+"atm": "Cajero",
+
+
+
+
 
 "Comentario13_":"Modal Artistas",
-"AgregarTituloArtista_":"Argrear Artistas",
+"AgregarTituloArtista_":"Argregar Artistas",
 "NombreDelArtista_":"Nombre del Artista",
 "AgregarArtista_":"Agregar a la Lista",
+
+"Comentario14_":"Configuración de Usuarios",
+"ConfiguracionUsuarioTitulo_":"Configuración de Usuarios",
+"DatosDeDacturacion_":"Datos para Facturación",
+"UserMail_":"E-Mail",
+"UserMailComentario_":"Mail con el que ingresa a La Flota",
+"ConfiguracionNombre_":"Nombre",
+"ConfiguracionNombreComentario_":"Ingrese un Nombre Válido",
+"ConfiguracionApellido_":"Apellido",
+"ConfiguracionApellidoComentario_":"Ingrese un Apellido Válido",
+"ConfiguracionDireccion_":"Dirección de Facturación ",
+"ConfiguracionCiudad_":"Ciudad",
+"ConfiguracionOptional_":"(Opcional)",
+"ConfiguracionDireccionComentario_":"Ingrese una dirección Válida",
+"ConfiguracionPais_":"País",
+"ConfiguracionPaisComentario_":"Seleccona un País Válido",
+"ConfiguracionProvincia_":"Provincia",
+"ConfiguracionProvinciaComentario_":"Seleccona un provincia Válida",
+"ConfiguracionCP_":"Código Postal",
+"ConfiguracionCPComentario_":"Seleccona un Código Postal Válida",
+"ConfiguracionCUIT_":"CUIT",
+"ConfiguracionCUITComentario_":"Ingrese una CUIT Válida",
+"ConfiguracionArtistas_":"Listado De Artistas",
+"ConfiguracionCUIT_":"CUIT",
+"configuracionNombreArtista_":"Nombre del Artista",
+"configuracionNombreArtistaComentario_":"Ingrese un Artista Válido",
+"configuracionLinkRedSocial1Artista_":"Red Social ",
+"configuracionLinkRedSocial1ArtistaComentario_":"Ingrese un link para una red Social",
+"configuracionDNIArtista_":"DNI ",
+"configuracionDNIArtistaComentario_":"Adjunta el DNI del Artista",
+"ConfiguracionBotonModificarArtista_":"Modificar",
+
+
+
+"Comentario15_":"listadopagos.html",
+"ListadoPagoFecha_":"Fecha",
+"ListadoPagoRedExterna_":"Referencia",
+"ListadoPagoMetodoPago_":"Metodo",
+"ListadoPagoMail_":"Mail",
+"ListadoPagoMontoTransaccion_":"Monto",
+"ListadoPagoMoneda_":"Moneda",
+"ListadoPagoStatus_":"Status",
+"ListadoPagoStatusDetalle_":"Status Detalle",
+
+
+
+"ConfiguracionGuardar_":"Guardar",
+
+
+
+"Comentario16_":"bonos.html",
+"BonoCodigo_":"Código del Bono",
+"BonoDescripcion_":"Descripción",
+"BonoTipoDescuento_":"Tipo de Descuento",
+"BonoMoneda_":"Moneda",
+"BonoMonto_":"Monto",
+"BonoPorcentaje_":"Porcentaje",
+"porcentaje_":"Porcentaje",
+"montoFijo_":"Monto Fijo",
+"BonoFechaDesde_":"Vigencia Desde",
+"BonoFechaHasta_":"Vigencia Hasta",
+"BonoCantidadMaxima_":"Cantidad Máxima",
+"BonoCantidadAplicada_":"Cantidad consumida",
+"AsociadoAPlan_":"Plan Asociado",
+"aplicaATodoslosPlanes_":"Aplica a todos",
+"gabarBono_":"Grabar Bono",
+
+"ListadoDeBonos_":"Listado Bono",
+"NuevoBono_":"Nuevo Bono",
+"ErrordeCodigoDeBono_":"Ingrese un código Correcto",
+"ErrorDescripcionDeBono_":"Ingrese una Descripción",
+"ErrorIngreseTipoDescuentoDeBono_":"Ingrese un Tipo de Descuento",
+"ErrorMontoDeBono_":"El monto es Incorrecto",
+"ErrorMonedaDeBono_":"La moneda es Incorrecta",
+"ErrorPorcentaje_":"Ingrese un Numero entre 0 y 100",
+"ErrorCantidadMaximaDeBono_":"Cantidad maxima de bonos >0",
+"ErrorFechaInicioDeBono_":"La fecha de incio debe ser > hoy()",
+"ErrorFechaFinDeBono_":"La fecha de fin tiene que se posterior a la de Inicio",
+"ErrorAsociadoAPlanDeBono_":"Seleccione un valor",
+
+
+"Comentario17_":"configuracionadministrador.html",
+"ConfiguracionAdministrador_TITULO":"Configuración Administrador",
+"GrabarConfiguracion":"Grabar",
+
 
 
 "fin_":"fin"

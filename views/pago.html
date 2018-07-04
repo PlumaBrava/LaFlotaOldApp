@@ -1,48 +1,66 @@
 
 
-    <div class='bg-light''>
-      <div class='py-5 text-center'>
-        <img class='d-block mx-auto mb-4' src='https://getbootstrap.com/assets/brand/bootstrap-solid.svg' alt='' width='72' height='72'>
-        <h2 translate>TituloFormularioPago_</h2>
-        <p class='lead' translate>DescripcionFormularioPago_</p>
-      </div>
+    <div class='pagoTituloAvance' >
+      <!-- <div class=' text-center'  data-spy="affix" data-offset-top="0"> -->
+      <div class=' text-center'  >
 
-      <div class='row'>
+        <h1 translate>TituloFormularioPago_</h1>
+<!--         <p class='lead' translate>DescripcionFormularioPago_</p>
+        <h4 class='mb-3' translate>error: {{errorMercadoPago.message}}</h4>
+ -->
+
+<ol class="avance" data-steps="4">
+  <li class='{{avancedelacompra[0]}}'>
+    <span class="name" translate>ConfirarCompra_</span>
+    <span class="step"><span>1</span></span>
+  </li>
+  <li class='{{avancedelacompra[1]}}'>
+    <span class="name" translate>ConfirmarFacturacion_</span>
+    <span class="step" ><span>2</span></span>
+  </li>
+  <li class='{{avancedelacompra[2]}}'>
+    <span class="name" translate>Pagar_</span>
+    <span class="step"><span>3</span></span>
+  </li>
+  <li class='{{avancedelacompra[3]}}'>
+    <span class="name" translate>ConfirmarPago_</span>
+    <span class="step"><span>4</span></span>
+  </li>
+</ol>
+ </div>
+
+</div>
+
+<!-- Fila para ubicar los datos a la izquierda el carrito y a la derecha los datos de factura y pago/ -->
+
+<div class='row'>
+
+  <!-- Carrito -->
+
         <div class='col-md-4 order-md-2 mb-4'>
-          <h4 class='d-flex justify-content-between align-items-center mb-3'>
-            <span class='text-muted' translate>MisCompras_</span>
+          <h2 class='d-flex justify-content-between align-items-center mb-3'>
+            <span class='text-muted' translate>Carrito_</span>
             <span class='badge badge-secondary badge-pill'>{{listaCompras.length}}</span>
-          </h4>
+          </h2>
           <ul class='list-group mb-3'>
             <li class='list-group-item d-flex justify-content-between lh-condensed' ng-repeat="compra in listaCompras">
               <div>
-                <h6 class='my-0'>{{compra.producto.NombredelProducto}}<i class="fa fa-window-close fa-2x pull-right" style="color: #fe021c;width:18px;" aria-hidden="true" uib-popover="I appeared on mouse enter!" popover-trigger="'cancelar'" ng-click="cancelarCompra(compra)"></i></h6>
+                <h6 class='my-0'>{{compra.producto.NombredelProducto}}<i class="fa fa-window-close fa-2x pull-right" style="color: #fe021c;width:18px;" aria-hidden="true" uib-popover="Cancelar Item!" popover-trigger="'mouseenter'" ng-click="cancelarCompra(compra)"
+                ng-show="avancedelacompra[0]=='active'" ></i></h6>
                 <small class='text-muted'>{{compra.producto.DescripciondelProducto}}</small>
               </div>
               <span class='text-muted'>$ {{compra.producto.MontodelProducto}}</span>
             </li>
-<!--             <li class='list-group-item d-flex justify-content-between lh-condensed'>
-              <div>
-                <h6 class='my-0'>Second product</h6>
-                <small class='text-muted'>Brief description</small>
+
+
+            <li ng-show='montoDescuento' class='list-group-item d-flex justify-content-between bg-light'>
+              <div class='text-success'>
+                <h6 class='my-0'>Promo code<i class="fa fa-window-close fa-2x pull-right" style="color: #fe021c;width:18px;" aria-hidden="true" uib-popover="CancelarBono!" popover-trigger="'mouseenter'" ng-click="cancelarBono(promoCode)" ng-show="avancedelacompra[0]=='active'"></i></h6>
+                <small>{{promoCode.Descripcion}}</small>
               </div>
-              <span class='text-muted'>$8</span>
-            </li>
-            <li class='list-group-item d-flex justify-content-between lh-condensed'>
-              <div>
-                <h6 class='my-0'>Third item</h6>
-                <small class='text-muted'>Brief description</small>
-              </div>
-              <span class='text-muted'>$5</span> -->
+              <span class='text-success'>-$ {{montoDescuento}}</span>
             </li>
 
-            <li class='list-group-item d-flex justify-content-between bg-light'>
-              <div class='text-success'>
-                <h6 class='my-0'>Promo code</h6>
-                <small>EXAMPLECODE</small>
-              </div>
-              <span class='text-success'>-$5</span>
-            </li>
             <li class='list-group-item d-flex justify-content-between'>
               <span>Total ({{listaCompras[0].producto.MonedadelProducto}})</span>
 
@@ -50,170 +68,288 @@
             </li>
           </ul>
 
-          <form class='card p-2'>
+
+        <!-- Formultario para Bonos y Bontones -->
+         <form class='card p-2' ng-hide='montoDescuento' >
             <div class='input-group'>
-              <input type='text' class='form-control' placeholder='Promo code'>
+              <input type='text' class='form-control' ng-model='codigo' placeholder='Promo code'>
               <div class='input-group-append'>
-                <button type='submit' class='btn btn-secondary'>Redeem</button>
+                <button type='submit' ng-click='verificaAplicaBono(codigo)' class='btn btn-primary' translate>AplicarBono_</button>
               </div>
+              <small class="form-text text-muted mensajeError" translate>{{errorBono}}</small>
             </div>
           </form>
-        </div>
+           <div class='' ng-show="avancedelacompra[0]=='active'">
+                <button ng-click='confirmarCompra(codigo)' class='btn btn-primary btn-lg btn-block' translate>ConfirmarCompra_</button>
+              </div>
+
+    </div>
+
+        <!-- Datos de Facturación  (segunda columa)-->
+
+
         <div class='col-md-8 order-md-1'>
-          <h4 class='mb-3'>Billing address</h4>
-          <form class='needs-validation' novalidate>
+
+          <h2 class=' align-items-center mb-3' ng-hide="avancedelacompra[2]=='done'">
+            <span class='text-muted' translate>DatosDeDacturacion_</span>
+               <span>
+              <button ng-click="modificarDatosDeFacturacion()" class='btn btn-primary btn-lg ' translate>ModificarDatosDeFacturacion_</button>
+            </span>
+            <span class='d-flex justify-content-end'>
+              <button ng-show="pasaVerificacionDeFacturacion" ng-click="confirmarFacturacion()" class='btn btn-primary btn-lg ' translate>ConfirmaFacturacion_</button>
+            </span>
+          </h2>
+
+          <div class='facturacionCard' ng-hide="avancedelacompra[2]=='done'">
             <div class='row'>
               <div class='col-md-6 mb-3'>
-                <label for='firstName'>First name</label>
-                <input type='text' class='form-control' id='firstName' placeholder='' value='' required>
-                <div class='invalid-feedback'>
-                  Valid first name is required.
+                <label for='usermail' translate >UserMail_</label>
+                   <input disabled="" type='text' class='form-control' id='usermail' placeholder='{{user.email}}'  ng-model='configuracion.email'>
+                  <div class='invalid-feedback'>
+                    <small class="form-text text-muted mensajeError" translate>{{configuracionError.email}}</small>
+                    </div>
+
+              </div>
+
+                     <div class='col-md-6 mb-3'>
+                    <label for='zip' translate>ConfiguracionCUIT_</label>
+                    <input disabled="" type='text' class='form-control' id='zip' placeholder='' required ng-model='configuracion.cuit'>
+                    <div class='invalid-feedback' >
+                   <small class="form-text text-muted mensajeError" translate>{{configuracionError.cuit}}</small>
+                </div>
+                </div>
+
+
+
+
+            <div class='row'>
+              <div class='col-md-6 mb-3'>
+                <label for='firstName' translate="">ConfiguracionNombre_</label>
+                <input disabled="" type='text' class='form-control' id='firstName' placeholder='' value='' required ng-model='configuracion.Nombre'>
+                <div class='invalid-feedback' >
+                  <small class="form-text text-muted mensajeError" translate>{{configuracionError.Nombre}}</small>
                 </div>
               </div>
               <div class='col-md-6 mb-3'>
-                <label for='lastName'>Last name</label>
-                <input type='text' class='form-control' id='lastName' placeholder='' value='' required>
-                <div class='invalid-feedback'>
-                  Valid last name is required.
+                <label for='lastName' translate>ConfiguracionApellido_</label>
+                <input disabled="" type='text' class='form-control' id='lastName' placeholder='' value='' required ng-model='configuracion.Apellido'>
+                <div class='invalid-feedback' translate="">
+                  <small class="form-text text-muted mensajeError" translate>{{configuracionError.Apellido}}</small>
                 </div>
               </div>
             </div>
 
-            <div class='mb-3'>
-              <label for='username'>Username</label>
-              <div class='input-group'>
-                <div class='input-group-prepend'>
-                  <span class='input-group-text'>@</span>
-                </div>
-                <input type='text' class='form-control' id='username' placeholder='Username' required>
-                <div class='invalid-feedback' style='width: 100%;'>
-                  Your username is required.
-                </div>
+
+
+            <div class='row py-5'>
+            <div class='col-md-3 mb-3'>
+              <label for='address' translate> ConfiguracionDireccion_</label>
+              <input disabled="" type='text' class='form-control' id='address' placeholder='' required ng-model='configuracion.Direccion1'>
+              <div class='invalid-feedback' >
+               <small class="form-text text-muted mensajeError" translate>{{configuracionError.Direccion1}}</small>
               </div>
             </div>
 
-            <div class='mb-3'>
-              <label for='email'>Email <span class='text-muted'>(Optional)</span></label>
-              <input type='email' class='form-control' id='email' placeholder='you@example.com'>
-              <div class='invalid-feedback'>
-                Please enter a valid email address for shipping updates.
+            <div class= 'col-md-3 mb-3'>
+              <label for='ConfiguracionCiudad_' translate="ConfiguracionCiudad_" ><span class='text-muted' translate>ConfiguracionOptional_</span></label>
+              <input disabled="" type='text' class='form-control' id='ConfiguracionCiudad_' placeholder='' ng-model='configuracion.Direccion2'>
+              <div class='invalid-feedback' >
+               <small class="form-text text-muted mensajeError" translate>{{configuracionError.Direccion2}}</small>
               </div>
             </div>
-
-            <div class='mb-3'>
-              <label for='address'>Address</label>
-              <input type='text' class='form-control' id='address' placeholder='1234 Main St' required>
-              <div class='invalid-feedback'>
-                Please enter your shipping address.
-              </div>
             </div>
 
-            <div class='mb-3'>
-              <label for='address2'>Address 2 <span class='text-muted'>(Optional)</span></label>
-              <input type='text' class='form-control' id='address2' placeholder='Apartment or suite'>
-            </div>
-
-            <div class='row'>
-              <div class='col-md-5 mb-3'>
-                <label for='country'>Country</label>
-                <select class='custom-select d-block w-100' id='country' required>
-                  <option value=''>Choose...</option>
-                  <option>United States</option>
-                </select>
-                <div class='invalid-feedback'>
-                  Please select a valid country.
+            <div class='row py-5'>
+              <div class='col-md-3 mb-3'>
+                <label for='country' translate>ConfiguracionPais_</label>
+               <input disabled="" type='text' class='form-control' id='ConfiguracionCiudad_' placeholder='' ng-model='configuracion.Pais|translate'>
+                <div class='invalid-feedback' >
+                  <small class="form-text text-muted mensajeError" translate>{{configuracionError.Pais}}</small>
                 </div>
               </div>
               <div class='col-md-4 mb-3'>
-                <label for='state'>State</label>
-                <select class='custom-select d-block w-100' id='state' required>
-                  <option value=''>Choose...</option>
-                  <option>California</option>
+                <label for='state' translate>ConfiguracionProvincia_</label>
+                <input disabled="" type='text' class='form-control' id='ConfiguracionCiudad_' placeholder='' ng-model='configuracion.provincia|translate'>
+                <div class='invalid-feedback' >
+                   <small class="form-text text-muted mensajeError" translate>{{configuracionError.provincia}}</small>
+                </div>
+              </div>
+              <div class='col-md-5 mb-3'>
+                <label for='zip' translate>ConfiguracionCP_</label>
+                <input disabled="" type='text' class='form-control' id='zip' placeholder='' required ng-model='configuracion.codigoPostal'>
+                <div class='invalid-feedback' >
+                  <small class="form-text text-muted mensajeError" translate>{{configuracionError.codigoPostal}}</small>
+                </div>
+              </div>
+            </div>
+       </div>
+       </div>
+       </div>
+
+
+
+<!--  Pago -->
+
+
+        <div class='col-md-8 order-md-1'>
+
+          <h2 class='d-flex justify-content-between align-items-center mb-3'>
+            <span class='text-muted' translate>TituloSeccionPago_</span>
+          </h2>
+
+            <div class='row'>
+              <div class='col-md-2 mb-3' uib-popover="{{'IngreseTipoIdentificacion_' | translate}}" popover-trigger="'mouseenter'">
+                <label for='Identificacion_' translate>Identificacion_</label>
+                <select class=' form-control' id='Identificacion_' required  ng-model='tipoIdentificacionSeleccionada'>
+                  <option selected translate ng-repeat="tipoIdentificaciona in tiposIdentificaciona">{{tipoIdentificaciona.id}}</option>
                 </select>
                 <div class='invalid-feedback'>
-                  Please provide a valid state.
-                </div>
-              </div>
-              <div class='col-md-3 mb-3'>
-                <label for='zip'>Zip</label>
-                <input type='text' class='form-control' id='zip' placeholder='' required>
-                <div class='invalid-feedback'>
-                  Zip code required.
-                </div>
-              </div>
-            </div>
-            <hr class='mb-4'>
-            <div class='custom-control custom-checkbox'>
-              <input type='checkbox' class='custom-control-input' id='same-address'>
-              <label class='custom-control-label' for='same-address'>Shipping address is the same as my billing address</label>
-            </div>
-            <div class='custom-control custom-checkbox'>
-              <input type='checkbox' class='custom-control-input' id='save-info'>
-              <label class='custom-control-label' for='save-info'>Save this information for next time</label>
-            </div>
-            <hr class='mb-4'>
+                  <small class="form-text text-muted mensajeError" translate>{{ErrorTipoIdentificacionSeleccionada}}</small>
 
-            <h4 class='mb-3'>Payment</h4>
+                </div>
+              </div>
 
-            <div class='d-block my-3'>
-              <div class='custom-control custom-radio'>
-                <input id='credit' name='paymentMethod' type='radio' class='custom-control-input' checked required>
-                <label class='custom-control-label' for='credit'>Credit card</label>
+              <div class=' col-md-4 mb-3 '  uib-popover="{{'IngreseNroIdentificacion_' | translate}}" popover-trigger="'mouseenter'">
+                <label for='NroDocumento' translate>NroIdentificacion_</label>
+
+                <input type='text' class='form-control ' id='NroDocumento' placeholder='' required  ng-model='nroIdentificacion' ng-change="verificaNroIdentificacion(tipoIdentificacionSeleccionada,nroIdentificacion)" >
+                  <!-- <span class="glyphicon glyphicon-ok form-control-feedback"></span> -->
+
+                <div class='invalid-feedback'>
+                    <small class="form-text text-muted mensajeError" >
+                    {{ErrorNroIdentificacion|translate}}. {{nroIdentificacionError|translate}}</small>
+
+                </div>
+
+            </div>
+            </div>
+
+              <div class='row '>
+              <div class= 'col-md-4 mb-3 ' uib-popover="{{'IngreseTipoMetodoDePago_' | translate}}" popover-trigger="'mouseenter'">
+                <label for='country' translate>TipoMetodoDePago_</label>
+                <select class='form-control ' id='MetodoDePago_' required ng-model='tiposDeMetodosDePagoSeleccionado' ng-change="seleccionatiposDeMetodosDePago(  )">
+
+                  <option selected translate ng-repeat="tipoPago in TiposDeMetodosDePago">{{tipoPago}}</option>
+                </select>
+                <div class='invalid-feedback'>
+                   <small class="form-text text-muted mensajeError" translate>{{ErrormetodoDePagoSeleccionado}}</small>
+
+                </div>
               </div>
-              <div class='custom-control custom-radio'>
-                <input id='debit' name='paymentMethod' type='radio' class='custom-control-input' required>
-                <label class='custom-control-label' for='debit'>Debit card</label>
+
+              <div class=' col-md-4   ' >
+                <label  translate> </label>
+              <a class='form-control 'style="  border: 0; box-shadow: none;" href="https://www.mercadopago.com.ar/cuotas">Verificá el pago en Cuotas</a>
               </div>
-              <div class='custom-control custom-radio'>
-                <input id='paypal' name='paymentMethod' type='radio' class='custom-control-input' required>
-                <label class='custom-control-label' for='paypal'>Paypal</label>
+              </div>
+
+
+
+               <div class='row mb-3' ng-hide="tiposDeMetodosDePagoSeleccionado=='credit_card'||tiposDeMetodosDePagoSeleccionado=='debit_card'">
+                <!-- <label for='country' translate>MetodoDePago_</label> -->
+                  <div ng-repeat="metodoDePagoSeleccionado in metodosDePagoSeleccionados">
+                    <img class="secure_thumbnailSize " id="MetodoDePago_" ng-src='{{metodoDePagoSeleccionado.secure_thumbnail}}' ng-click="seleccionaDeMetodosDePago(metodoDePagoSeleccionado)" />
+                </div>
+              </div>
+
+
+<audio id="audio" src="http://www.soundjay.com/button/beep-07.wav" autostart="false" ></audio>
+
+
+            <div class='row' ng-show="tiposDeMetodosDePagoSeleccionado=='credit_card'||tiposDeMetodosDePagoSeleccionado=='debit_card'">
+              <div class='col-md-6 mb-3' uib-popover="{{'IngreseNombreEnLaTarjeta_' | translate}}" popover-trigger="'mouseenter'">
+                <label for='cc-name' translate>NombreEnLaTarjeta_</label>
+                <input type='text' class='form-control' id='cc-name' placeholder='' required ng-model='nameOnCard'
+                ng-change="verificarSecurityCode(securityCode)">
+
+                <div class='invalid-feedback'>
+                  <small class="form-text text-muted mensajeError" translate>{{ErrorNameOnCard}}</small>
+
+                </div>
+              </div>
+              <div class='col-md-6 mb-3' uib-popover="{{'IngreseNombreEnLaTarjeta_' | translate}}" popover-trigger="'mouseenter'" >
+                <label for='cc-number' translate >NumeroEnLaTarjeta_</label>
+                <input type='text' class='form-control' id='cc-number' placeholder='' required ng-change="guessingPaymentMethod(ccNumber)" ng-model="ccNumber">
+                <div class='invalid-feedback'>
+                <small class="form-text text-muted mensajeError" translate>{{ErrorccNumber}}</small>
+
+                </div>
               </div>
             </div>
-            <div class='row'>
-              <div class='col-md-6 mb-3'>
-                <label for='cc-name'>Name on card</label>
-                <input type='text' class='form-control' id='cc-name' placeholder='' required>
-                <small class='text-muted'>Full name as displayed on card</small>
+            <div class='row' ng-show="tiposDeMetodosDePagoSeleccionado=='credit_card'||tiposDeMetodosDePagoSeleccionado=='debit_card'">
+              <div class='col-md-3 mb-3' uib-popover="{{'IngreseMesDeLaTarjeta_' | translate}}" popover-trigger="'mouseenter'">
+                <label for='cc-expirationMonth' translate>ExpirationMonth_</label>
+                <input type='text' class='form-control' id='cc-expirationMonth' placeholder='' required ng-model="expirationMonth" ng-change="verificarExpirationMonth(expirationMonth)">
+
                 <div class='invalid-feedback'>
-                  Name on card is required
+                  <small class="form-text text-muted mensajeError" translate>{{ErrorExpirationMonth}}</small>
+
                 </div>
               </div>
-              <div class='col-md-6 mb-3'>
-                <label for='cc-number'>Credit card number</label>
-                <input type='text' class='form-control' id='cc-number' placeholder='' required>
+              <div class='col-md-3 mb-3' uib-popover="{{'IngreseAnoDeLaTarjeta_' | translate}}" popover-trigger="'mouseenter'">
+                <label for='cc-expirationYear' translate>ExpirationYear_ </label>
+                <input type='text' class='form-control' id='cc-expirationYear' placeholder='' required ng-model="expirationYear" ng-change="verificarExpirationYear(expirationYear)">
                 <div class='invalid-feedback'>
-                  Credit card number is required
+                  <small class="form-text text-muted mensajeError" translate>{{ErrorExpirationYear}}</small>
+
+
                 </div>
               </div>
-            </div>
-            <div class='row'>
-              <div class='col-md-3 mb-3'>
-                <label for='cc-expiration'>Expiration</label>
-                <input type='text' class='form-control' id='cc-expiration' placeholder='' required>
+              <div class='col-md-3 mb-3' uib-popover="{{'IngreseSeguridadDeLaTarjeta_' | translate}}" popover-trigger="'mouseenter'">
+                <label for='cc-expiration' translate>CodigoSeguridadDeLaTarjeta_</label>
+                <input type='text' class='form-control' id='cc-cvv' placeholder='' required ng-model="securityCode"
+                ng-change="verificarSecurityCode(securityCode)">
                 <div class='invalid-feedback'>
-                  Expiration date required
-                </div>
-              </div>
-              <div class='col-md-3 mb-3'>
-                <label for='cc-expiration'>CVV</label>
-                <input type='text' class='form-control' id='cc-cvv' placeholder='' required>
-                <div class='invalid-feedback'>
-                  Security code required
+                <small class="form-text text-muted mensajeError" translate>{{ErrorSecurityCode}}</small>
+
                 </div>
               </div>
             </div>
-            <hr class='mb-4'>
-            <button class='btn btn-primary btn-lg btn-block' type='submit'>Continue to checkout</button>
-          </form>
+         <!--    <hr class='mb-4'> -->
+
+            <!-- Imagen de la tarjeta Seleccionada y Propuesta de Cuotas -->
+            <div class='row '>
+            <div  ng-repeat="cuota in cuotas" ng-show="tiposDeMetodosDePagoSeleccionado=='credit_card'||tiposDeMetodosDePagoSeleccionado=='debit_card'">
+          <!-- Imagen de la tarjeta Seleccionada y Propuesta de Cuotas -->
+              <div class='col-md-3 mt-5' style="margin-top: 25px; ">
+              <div class='mt-5'></div>
+                  <img class="secure_thumbnailSize " id="MetodoDePago_" ng-src='{{cuota.issuer
+.secure_thumbnail}}'  />
+              </div>
+
+              <!-- Cuotas -->
+              <div class='col-md-3 ' uib-popover="{{'IngreseCuotasDeLaTarjeta_' | translate}}" popover-trigger="'mouseenter'">
+                <label for='cuotas_' translate>Cuotas_</label>
+                  <select class='form-control' id='cuotas_' required  ng-model='coutaSeleccionada' ng-click="setCuotaSeleccionada(cuota,coutaSeleccionada)">
+                    <option selected translate ng-repeat="cuotaDetalle in cuota.payer_costs">{{cuotaDetalle.recommended_message}}</option>
+                  </select>
+                <div class='invalid-feedback'>
+                   <small class="form-text text-muted mensajeError" translate>{{ErrorCuotas}}</small>
+                </div>
+                </div>
+                </div>
+
+
+        <!-- Boton Check Out -->
+              <div class='col-md-3 mb-3 ' style="margin-top: 25px;">
+
+                  <button class='btn btn-primary btn-lg btn-block' ng-click="checkOut()" >Continue to checkout</button>
+             </div>
+  </div>
+            <div class='col-md-3 mt-5' ></div>
+            <label for='cuotas_' translate> </label>
+
+            <button class='btn btn-primary btn-lg btn-block' ng-click="verificarFormularioPago()" >Verificar</button>
+
         </div>
-      </div>
 
-    <!--   <footer class='my-5 pt-5 text-muted text-center text-small'>
-        <p class='mb-1'>&copy; 2017-2018 Company Name</p>
-        <ul class='list-inline'>
-          <li class='list-inline-item'><a href='#'>Privacy</a></li>
-          <li class='list-inline-item'><a href='#'>Terms</a></li>
-          <li class='list-inline-item'><a href='#'>Support</a></li>
-        </ul>
-      </footer> -->
-    </div>
+
+</div>
+</div>
+
+
+
+
+
+
+

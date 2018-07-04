@@ -102,6 +102,7 @@ $scope.logOut=function(){
     .then(function() {
         console.log('logOut exitoso');
            localStorage.user=user;
+           $scope.user=null;
   // $state.go('home');
     })
     .catch(function(error) {
@@ -148,5 +149,9 @@ $scope.buscarUsuario=function(mail){
     return existeElMail;
 };
 
-
+$(window).resize(function() {
+  $scope.windowWidth = $( window ).width();
+  $scope.windowH = $( window ).height();
+  console.log( 'window: '+$scope.windowWidth+" - "+$scope.windowH);
+});
   }]);

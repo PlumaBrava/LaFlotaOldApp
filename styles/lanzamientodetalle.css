@@ -1,15 +1,23 @@
+.btn-spotify{
+/*  background:#1EA62A;
+  border-color: #1EA62A;*/
+   /*margin: auto;*/
+   width:48px;
+  height:48px;
+}
 
 .consulta{
    /*float:right;*/
    display: inline-block;
    /*background-color: red;*/
    text-align: right;
-    padding-right: 8px;
+    padding-right: 16px;
    /*background-color: blue;*/
      color: #4CAF50;
   text-align: center;
-
+  font-size:20px;
 }
+
 
 .lanzamientoRotulo{
    /*float:left;*/
@@ -17,4 +25,48 @@
    text-align: left;
     padding-right: 8px;
 
+}
+
+.ArteAlbum{
+  margin-top: 16px;
+  /*border: solid;*/
+  border-radius: 8px;
+  border-width: 2px;
+   /*height:auto; ;*/
+   width:200px ;
+    /*display: inline-block;*/
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.pintoRed{
+  background: red;
+}
+.tackblock{
+  margin-top: 16px;
+  /*border: solid;*/
+  background-color: #D4542AA3;
+  border-radius: 16px;
+  border-width: 2px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+     box-shadow: 1px 4px 8px 1px rgba(100, 0, 0, 0.2);
+     padding: 16px;
+}
+.tackblockOK{
+  margin-top: 16px;
+  /*border: solid;*/
+  background-color: #4CAF50;
+  border-radius: 16px;
+  border-width: 2px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+     box-shadow: 1px 4px 8px 1px rgba(100, 0, 0, 0.2);
+     padding: 16px;
+}
+.mensajeError{
+  color: red;
 }

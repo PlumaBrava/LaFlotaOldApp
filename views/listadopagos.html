@@ -1,0 +1,35 @@
+<p>This is the listadoPagos view.</p>
+
+ <ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="5" class="pagination-sm" boundary-links="true" rotate="true" force-ellipses="true" items-per-page="maxSize"  ng-change="listadoPagos()"></ul>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col" translate>ListadoPagoFecha_</th>
+      <th scope="col" translate>ListadoPagoRedExterna_</th>
+      <th scope="col" translate>ListadoPagoMetodoPago_</th>
+      <th scope="col" translate>ListadoPagoMail_</th>
+      <th scope="col" translate>ListadoPagoMoneda_</th>
+      <th scope="col" translate>ListadoPagoMontoTransaccion_</th>
+      <th scope="col" translate>ListadoPagoStatus_</th>
+      <th scope="col" translate>ListadoPagoStatusDetalle_</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="pago in pagos">
+      <th scope="row">1</th>
+      <td>{{pago.date_created | date:'dd-MM-yyyy hh:mm'}}</td>
+      <td>{{pago.external_reference}}</td>
+      <td>{{pago.payment_method_id}}</td>
+      <td>{{pago.payer.email}}</td>
+      <td>{{pago.currency_id}}</td>
+      <td>{{pago.transaction_amount}}</td>
+      <td>{{pago.status}}</td>
+      <td>{{pago.status_detail}}</td>
+
+    </tr>
+
+  </tbody>
+</table>
